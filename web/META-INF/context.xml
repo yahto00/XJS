@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	<Resource name="jdbc/DB" auth="Container"
+		type="com.mchange.v2.c3p0.ComboPooledDataSource"  
+		maxPoolSize="300" minPoolSize="10" initialPoolSize="10" acquireIncrement="10"
+		testConnectionOnCheckin = "true" testConnectionOnCheckout = "true" idleConnectionTestPeriod = "100"
+		maxIdleTime="120"
+		user="root" password="123456"
+		factory="org.apache.naming.factory.BeanFactory"
+		driverClass="com.mysql.jdbc.Driver"
+		jdbcUrl="jdbc:mysql://localhost:3306/XGS?useUnicodex=true&amp;characterEncoding=utf8" />
+</Context>

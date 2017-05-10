@@ -1,0 +1,15 @@
+package com.pipi.service;
+
+import com.pipi.entity.Customer;
+
+import java.util.List;
+
+/**
+ * Created by yahto on 07/05/2017.
+ */
+public interface ICustomerService extends IBaseService{
+    /** 查询所有客户*/
+    List<Customer> getAllCustomer();
+    /** 根据id查询客户*/
+    Customer getCustomerById(Integer id);
+}

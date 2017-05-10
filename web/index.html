@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>成都今日达技术有限公司</title>
+    <link rel="bookmark"  type="image/x-icon"  href="img/gluxen.ico"/>
+    <link rel="shortcut icon" href="img/jrdlogo.jpg">
+
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <!--<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/file.css">
+    <link rel="stylesheet" href="Font-Awesome-3.2.1/css/font-awesome.min.css">
+    <style type="text/css">
+        *{
+            magin:0;
+            padding: 0;
+            font-family: "Microsoft YaHei", "宋体", "Segoe UI", "Lucida Grande", Helvetica, Arial, sans-serif, FreeSans, Arimo;
+        }
+    </style>
+    <script>
+        $(window).scroll(function() {
+            if ($(document).scrollTop() > 75) {
+                $('.navbar').addClass('navbarFix ');
+            }
+            else {
+                $('.navbar').removeClass('navbarFix ');
+            }
+        });
+
+        $(function() {
+            $('a[href*=#]:not([href=#])').click(function() {
+                if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+                    var target = $(this.hash);
+                    target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+                    if (target.length) {
+                        $('html,body').animate({
+                            scrollTop: target.offset().top
+                        }, 1000);
+                        return false;
+                    }
+                }
+            });
+        });
+
+        $('.navbar-collapse ul li a').click(function() {
+            $('.navbar-toggle:visible').click();
+        });
+        $(function(){
+            $('#myCarousel').carousel({
+                interval: 3500
+            });
+
+        });
+    </script>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="#" class="navbar-brand"><img src="img/jrdlogo.jpg" style="width: 100%;height:100%;"/></a>
+            <span style="color: #9d9d9d;font-size: 18px;position:absolute;margin-top: 22px;">今日达</span>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!--<a href="#" class="navbar-brand" style="background-image: url(pipiuxen.jpeg);"></a>-->
+        </div>
+        <div class="navbar-collapse collapse pull-right">
+
+            <!--<ul class="nav navbar-nav navbar-left">-->
+                <!--<li><a href="/Account/Login" class="login btn btn-default" style="margin-bottom: 10px;">发现</a></li>-->
+            <!--</ul>-->
+
+            <ul class="nav navbar-nav ">
+                <li><a href="#">首页</a></li>
+                <li><a href="#us">关于今日达</a></li>
+                <!-- <li><a href="#cooperation">合作伙伴</a></li> -->
+                <li><a href="#contact_us">联系我们</a></li>
+                <li><a href="index.jsp">登录注册</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<header>
+    <div id="myCarousel" class="carousel slide">
+        <!-- 轮播（Carousel）指标 -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+<!--             <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li> -->
+        </ol>
+        <!-- 轮播（Carousel）项目 -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="img/lunbo.jpg" alt="First slide">
+                <div class="carousel-caption">
+<!--                     <h1>今天件，今日达</h1>
+                    <p>今日达是国内第一家从事整个快递业务环节的互联网公司</p>
+                    <p>今日达愿景打造“今日达----就是今天到”我们完全利用社会闲置资源，以门店为点，车辆为线的经营思路，拓展出一张布局全川的配送网络。</p> -->
+                </div>
+            </div>
+<!--             <div class="item">
+                <img src="img/back1.jpg" alt="Second slide">
+                <div class="carousel-caption">
+                    <h1>信息</h1>
+                    <p>成都光尘信息技术有限公司致力于为各行业客户提供专业的信息化建设咨询与解决方案。
+                    </p>
+                </div>
+            </div> -->
+<!--             <div class="item">
+                <img src="img/back2.jpg" alt="Third slide">
+                <div class="carousel-caption">
+                    <h1>可靠</h1>
+                    <p>公司业务涉及市政、农业、金融、旅游、生产制造等多个行业，皆为客户提供了高效、稳定、安全的服务。
+                    </p>
+                </div>
+            </div> -->
+        </div>
+        <!-- 轮播（Carousel）导航 -->
+        <!-- 轮播（Carousel）导航 -->
+        <a class="carousel-control left" href="#myCarousel"
+           data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#myCarousel"
+           data-slide="next">&rsaquo;</a>
+    </div>
+</header>
+
+
+<section id="about" class="light-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="section-title" id='textShadow'>
+                    <h2>活动促销</h2>
+                    <!--<p><br><strong></strong></p>-->
+                </div>
+            </div>
+        </div>
+        <div class="row" id='product-active'>
+            <div class="col-md-12 text-center">
+                <div class="mz-module">
+                    <div class="mz-module-about">
+                        <img src="img/wuliu2.jpg" alt="">
+                        <!-- <h3>微信合作运营</h3> -->
+                        <p>各网点每日可发送5单，发一件送一张快递单的活动，每个网点最多免费领取100份快递单。</p>
+                        <p>活动时间：2016.12-2017.02</p>
+                    </div>
+                    <!-- <a href="#" class="mz-module-button">点击参与</a> -->
+                </div>
+            </div>
+            <!-- end about module -->
+        </div>
+    </div>
+    <!-- /.container -->
+</section>
+
+
+<section id="us" class="section-features">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="section-title">
+                    <h2>关于今日达</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row row-gutter">
+            <div class="col-md-12 col-gutter">
+  <!--               <div class="featured-item">
+                    <div class="featured-icon" style="background-color: #d1c9b3;color: #ffffff ">1</div>
+                    <div class="featured-text">
+                        <h4>真诚</h4>
+                        <p>企业取得发展的第一要素，与所有合作伙伴及客户的用心沟通</p>
+                    </div>
+                </div> -->
+                <div class="featured-item">
+                    <div class="featured-icon" style="background-color: #d1c9b3;color: #ffffff ">1</div>
+                    <div class="featured-text">
+                        <h4>概况</h4>
+                        <p>今日达快递项目于2015年开始立项并进行行业调查，经过一年多时间的调研，今日达公司于2016年9月成立，为响应国家关于“互联网+快递”的召唤，今日达瞄准同省快件及同城快件做当日达业务，为保证从揽件、分拣、运输、派送等环节符合今日达的业务流程，公司自行研发系统软件，保证快件在各个环节都能被轻松查到</p>
+                    </div>
+                </div>
+                <div class="featured-item">
+                    <div class="featured-icon" style="background-color: #d1c9b3;color: #ffffff ">2</div>
+                    <div class="featured-text">
+                        <h4>宗旨</h4>
+                        <p>今日达以社会车辆为载体，与客运站、私家车及高铁深度合作，在每个城市及乡镇之间建立起了当天到达的运输线路，今日达也积极布局各个城市、乡镇村内的配送，形成市区内的网状配送，现已完成四川省内多个城市的当天揽派件业务，当天完成送达的目标。</p>
+                    </div>
+                </div>
+                <div class="featured-item">
+                    <div class="featured-icon" style="background-color: #d1c9b3;color: #ffffff ">3</div>
+                    <div class="featured-text">
+                        <h4>理念</h4>
+                        <p>今日达秉着“今天事，今天毕”的理念，从成立之初就确定“今天件，今日达”战略目标，今天件，今天必达，由此，我们将同城快递及同省快递在整个快递链环节进行了重新布局，让同城件能在1-4小时内到达，同省件能在2-12时内到达。</p>
+                    </div>
+                </div>   
+            </div>
+            <div class="col-md-12 col-gutter">
+                <div class="featured-item">
+                    <div class="featured-icon" style="background-color: #d1c9b3;color: #ffffff ">4</div>
+                    <div class="featured-text">
+                        <h4>服务网络</h4>
+                        <p>目前已经覆盖； </p>
+                        <p>城市：成都市三环路内，绵阳市、德阳市、广汉市、达州市、什邡市、广元市、宜宾市、泸州市、资阳市、江油市等</p>
+                        <p>县城：金堂、罗江、青川、旺苍、射洪、梓潼等</p>
+                    </div>
+                </div>
+ <!--                <div class="featured-item">
+                    <div class="featured-icon" style="background-color: #d1c9b3;color: #ffffff ">B</div>
+                    <div class="featured-text">
+                        <h4>立业之本</h4>
+                        <p>创始之初，我们带着竭诚为客户服务的理念潜心经营</p>
+                    </div>
+                </div>
+                <div class="featured-item">
+                    <div class="featured-icon" style="background-color: #d1c9b3;color: #ffffff ">C</div>
+                    <div class="featured-text">
+                        <h4>不忘初衷</h4>
+                        <p>如今，我们不忘初衷，将客户需求完美体现是我们最大的成就！</p>
+                    </div>
+                </div> -->
+            </div>
+            <div class="col-md-12 col-gutter">
+                <div class="featured-item">
+                    <div class="featured-icon" style="background-color: #d1c9b3;color: #ffffff ">5</div>
+                    <div class="featured-text">
+                        <h4>品牌理念</h4>
+                        <p>真诚—企业取得发展的第一要素，与所有合作伙伴及客户的用心沟通</p>
+                        <p>速度—做事效率、快递速度</p>
+                        <p>诚信—今日达的根基</p>
+                        <p>让利—让合作伙伴盈利、让客户赢得时间</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-gutter">
+                <div class="featured-item">
+                    <div class="featured-icon" style="background-color: #d1c9b3;color: #ffffff ">6</div>
+                    <div class="featured-text">
+                        <h4>诚信底线</h4>
+                        <p>不作假、不欺瞒 ；不损害客户及公司利益；不损人利己、不以公谋私；不轻言毁诺，不失信于人</p>
+<!--                         <p>速度—做事效率、快递速度</p>
+                        <p>诚信—今日达的根基</p>
+                        <p>让利—让合作伙伴盈利、让客户赢得时间</p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="contact_us" class="section-features">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="section-title">
+                    <h2>联系我们</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row row-gutter phone">
+            <div class="col-md-12 col-gutter">
+                <div class="featured-item jjj">
+                    <div class="featured-icon" style="display: inline-block;
+    vertical-align: top;float: none"><i class="icon-phone-sign"></i></div>
+                    <div class="featured-text" style="display: inline-block;
+    margin: 0;">
+                        <h4>运营部-朱凯琦</h4>
+                        <p>181 0904 3572</p>
+                    </div>
+                </div>
+            </div>
+<!--             <div class="col-md-4 col-gutter">
+                <div class="featured-item">
+                    <div class="featured-icon"><i class="icon-envelope"></i></div>
+                    <div class="featured-text">
+                        <h4>邮箱</h4>
+                        <p>sunqipipiuxen.com</p>
+                    </div>
+                </div>
+            </div> -->
+<!--             <div class="col-md-4 col-gutter">
+                <div class="featured-item">
+                    <div class="featured-icon"><i class="icon-comments"></i></div>
+                    <div class="featured-text">
+                        <h4>微信</h4>
+                        <p>gluxenco</p>
+                    </div>
+                </div>
+            </div>
+ -->        </div>
+    </div>
+</section>
+<script>
+$(function(){
+    $(window).on("mousewheel",function(){
+        // alert(1)
+        var offsetTop=$("#product-active").offset().top;
+        // console.log(offsetTop)
+        var scroolY=$(window).scrollTop();
+        var innerHeight=$(window)[0].innerHeight;
+        // console.log(innerHeight+scroolY)
+        // console.log(offsetTop);
+
+        // console.log("______")
+        if(innerHeight+scroolY>=offsetTop){
+            $("#product-active").css({"transform":"translateX(0%)","opacity":"1"})
+            // alert(2)
+        }
+    })
+
+    $("#textShadow").on("mousemove",function(e){
+        var walk=20;
+        // console.log(e.target==this)
+        // console.log(e.offsetX)
+        // console.log(e.clientX)
+    const { offsetWidth: width, offsetHeight: height } = $(this)[0];
+    let { offsetX: x, offsetY: y } = e;     
+        if (this !== e.target) {
+          x = x + e.target.offsetLeft;
+          y = y + e.target.offsetTop;
+    }
+
+    const xWalk = Math.round((x / width * walk) - (walk / 2));
+    const yWalk = Math.round((y / height * walk) - (walk / 2));
+     $("h2")[0].style.textShadow = `
+      ${xWalk}px ${yWalk}px 4px rgba(0,0,0,0.1)
+    `;
+    // $("h1").css("textShadow",xWalk+"px" yWalk+"px" 0 rgba(255,0,255,0.7))
+
+        // console.log(e.target.offsetY==e.clientX)
+
+        // console.log(e.clientX,e.clientY)
+        
+        // console.log(e.target.offsetLeft,e.target.offsetTop)
+    })
+})
+</script>
+
+</body>
+</html>

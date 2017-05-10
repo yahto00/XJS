@@ -1,0 +1,1 @@
+<% request.getRequestDispatcher("/WEB-INF/pages/login.do").forward(request, response); %>
