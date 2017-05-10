@@ -38,7 +38,7 @@ public class DictionaryController extends BaseController {
 	 * 获取字典类型列表
 	 * @return List<Map<String, Object>> 
 	 */
-	@RequestMapping("dictionary_list_type.json")
+	@RequestMapping("dictionary_list_type.ajax")
 	@ResponseBody
 	public List<Map<String, Object>> getDictionaryTypeList(){
 		List<Map<String,Object>> dictionaryTypeList = XMLUtil.getDictionaryTypeList();
@@ -55,7 +55,7 @@ public class DictionaryController extends BaseController {
 	 * @return ListVo<Dictionary>
 	 * @throws Exception
 	 */
-	@RequestMapping("dictionary_list.json")
+	@RequestMapping("dictionary_list.ajax")
 	@ResponseBody
 	public ListVo<Dictionary> getDictionaryList(HttpServletRequest request, Integer start, Integer limit, String code, String name) throws Exception{
 		if(start == null)
@@ -77,11 +77,9 @@ public class DictionaryController extends BaseController {
 
 	/**
 	 * 更新user
-	 * 
-	 * @param user
 	 * @return map 返回的更新后的信息
 	 */
-	@RequestMapping("dictionary_get.json")
+	@RequestMapping("dictionary_get.ajax")
 	@ResponseBody
 	public Map<String, Object> getDictionary(Integer id, HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -109,7 +107,7 @@ public class DictionaryController extends BaseController {
 	 * @param modelMap
 	 * @return Map 添加成功与否的状态
 	 */
-	@RequestMapping("dictionary_add.json")
+	@RequestMapping("dictionary_add.ajax")
 	@ResponseBody
 	public Map<String, Object> addDictionary(Dictionary dictionary, ModelMap modelMap){
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -135,7 +133,7 @@ public class DictionaryController extends BaseController {
 	 * @param modelMap
 	 * @return Map 修改成功与否
 	 */
-	@RequestMapping("dictionary_update.json")
+	@RequestMapping("dictionary_update.ajax")
 	@ResponseBody
 	public Map<String, Object> updateDictionary(HttpServletRequest request, Dictionary dic, ModelMap modelMap) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -157,7 +155,7 @@ public class DictionaryController extends BaseController {
 	 * @param ids id组成的字符串，如果有多个id则用逗号隔开
 	 * @return Map 删除成功与否的状态
 	 */
-	@RequestMapping("dictionary_delete.json")
+	@RequestMapping("dictionary_delete.ajax")
 	@ResponseBody
 	public Map<String, Object> deleteDictionary(String ids){
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -179,7 +177,7 @@ public class DictionaryController extends BaseController {
 	 * @param dictionary
 	 * @return map 返回验证成功的
 	 */
-	@RequestMapping("dictionary_validate.json")
+	@RequestMapping("dictionary_validate.ajax")
 	@ResponseBody
 	public Map<String, Object> validateDictionary(HttpServletRequest request, Dictionary dictionary) {
 		Map<String, Object> vaildator = new HashMap<String, Object>();

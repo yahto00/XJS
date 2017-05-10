@@ -47,7 +47,7 @@ public class LogController extends BaseController {
 	 * @return ListVo<Log>
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping("log_list.json")
+	@RequestMapping("log_list.ajax")
 	@ResponseBody
 	public ListVo<Log> getLogs(
 			Integer start,
