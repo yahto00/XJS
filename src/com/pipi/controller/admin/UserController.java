@@ -83,8 +83,8 @@ public class UserController extends BaseController {
 	}
 
 	/**
-	 * 查询所有用户
-	 * @author
+	 * 查询所有用户功能
+	 * @author yahto
 	 * @return
 	 */
 	@RequestMapping("user_queryAllUsers.ajax")
@@ -94,6 +94,7 @@ public class UserController extends BaseController {
 		map.put("data",false);
 		try {
 			List<User> list = (List<User>) userService.queryAll(User.class);
+			map.put("list",list);
 			map.put("data",true);
 			map.put("msg","操作成功");
 		}catch (BusinessException e){
@@ -103,7 +104,7 @@ public class UserController extends BaseController {
 	}
 
 	/**
-	 * 批量删除用户 假删除
+	 * 批量删除用户功能 假删除
 	 * @author yahto
 	 * @param ids
 	 * @return
