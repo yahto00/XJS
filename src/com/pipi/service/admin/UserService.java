@@ -26,6 +26,12 @@ public class UserService extends BaseService implements IUserService {
 
     @Override
     public void queryUserForLogin(String loginName, String password, HttpServletRequest request) {
+        if (loginName == null || loginName.length() == 0){
+            throw new BusinessException("用户名不能为空");
+        }
+        if (password == null || password.length() == 0){
+            throw new BusinessException("密码不能为空");
+        }
         String hql = "from User where loginName='" + loginName + "'";
         List<User> list = (List<User>) baseDao.getObjectListByNativeHql(hql);
         if (list == null || list.size() == 0) {
