@@ -12,7 +12,7 @@ import com.pipi.entity.BaseEntity;
 
 
 /**
- * 角色实体类
+ * Created by yahto on 07/05/2017.
  */
 @Entity
 @Table(name = "T_ROLE")

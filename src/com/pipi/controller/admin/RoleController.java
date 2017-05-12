@@ -18,9 +18,9 @@ import com.pipi.service.admin.IRoleService;
 import com.pipi.util.Ufn;
 import com.pipi.vo.ListVo;
 
+
 /**
- * 角色业务逻辑转发类
- * @author liuyang
+ * Created by yahto on 07/05/2017.
  */
 @Controller
 public class RoleController extends BaseController {
@@ -36,7 +36,7 @@ public class RoleController extends BaseController {
 	 * @return ListVo<Role>
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping("role_list.json")
+	@RequestMapping("role_list.ajax")
 	@ResponseBody
 	public ListVo<Role> getRoleList(String roleName,Integer start,Integer limit) {
 		if(start == null)
@@ -79,7 +79,7 @@ public class RoleController extends BaseController {
 	 * @param role
 	 * @return map
 	 */
-	@RequestMapping("role_add.json")
+	@RequestMapping("role_add.ajax")
 	@ResponseBody
 	public Map<String, Object> addRole(Role role) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -101,7 +101,7 @@ public class RoleController extends BaseController {
 	 * @param role
 	 * @return map
 	 */
-	@RequestMapping("role_update.json")
+	@RequestMapping("role_update.ajax")
 	@ResponseBody
 	public Map<String, Object> updateRole(Role role) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -124,7 +124,7 @@ public class RoleController extends BaseController {
 	 *            待删除角色的id数组
 	 * @return map
 	 */
-	@RequestMapping("role_delete.json")
+	@RequestMapping("role_delete.ajax")
 	@ResponseBody
 	public Map<String, Object> deleteRoles(String[] ids) {
 		Map<String, Object> map = new HashMap<String, Object>();

@@ -4,7 +4,10 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-/** 系统公共字段实体类 */
+
+/**
+ * Created by yahto on 07/05/2017.
+ */
 @MappedSuperclass
 public class BaseEntity implements Serializable {
 

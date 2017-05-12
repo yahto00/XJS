@@ -22,9 +22,7 @@ import com.pipi.util.DateUtil;
 import com.pipi.vo.ListVo;
 
 /**
- * 日志管理类
- * 
- * @author liuyang
+ * Created by yahto on 07/05/2017.
  */
 @Controller
 public class LogController extends BaseController {
@@ -38,8 +36,6 @@ public class LogController extends BaseController {
 	 *            开始的条数（需要计算开始页数）
 	 * @param limit
 	 *            每页条数
-	 * @param modelMap
-	 *            模型数据
 	 * @param startTime
 	 *            开始时间
 	 * @param endTime

@@ -1,7 +1,9 @@
 package com.pipi.common.exception;
 
+
 /**
- * @author liuyang
+ * 自定义异常
+ * Created by yahto on 07/05/2017.
  */
 public class BusinessException extends RuntimeException {
 	private static final long serialVersionUID = -8332364897978441217L;

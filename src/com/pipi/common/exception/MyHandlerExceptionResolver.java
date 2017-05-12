@@ -11,9 +11,7 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * 控制类或者系统抛异常后的处理
- * @author liuyang
- *
+ * Created by yahto on 07/05/2017.
  */
 @Component
 public class MyHandlerExceptionResolver implements HandlerExceptionResolver {

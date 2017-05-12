@@ -25,7 +25,7 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.ss.util.CellRangeAddress;
 
 /**
- * @author liuyang
+ * Created by yahto on 07/05/2017.
  */
 public class ExcelUtil {
 	private static Logger log = Logger.getLogger(ExcelUtil.class);

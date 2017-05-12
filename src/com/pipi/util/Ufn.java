@@ -26,7 +26,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * @author liuyang
+ * Created by yahto on 07/05/2017.
  */
 public class Ufn extends Properties {
 	

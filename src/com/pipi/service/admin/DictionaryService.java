@@ -14,7 +14,7 @@ import com.pipi.service.BaseService;
 import com.pipi.vo.ListVo;
 
 /**
- * @author liuyang
+ * Created by yahto on 07/05/2017.
  */
 @Service(value = "dictionaryService")
 public class DictionaryService extends BaseService implements IDictionaryService {

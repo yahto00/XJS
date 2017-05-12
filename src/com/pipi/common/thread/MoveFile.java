@@ -6,7 +6,7 @@ import org.apache.commons.io.FileUtils;
 
 /**
  * 移动文件线程
- * @author liuyang
+ * Created by yahto on 07/05/2017.
  */
 public class MoveFile extends Thread{
 

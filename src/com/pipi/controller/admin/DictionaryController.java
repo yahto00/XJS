@@ -22,9 +22,9 @@ import com.pipi.service.admin.IDictionaryService;
 import com.pipi.util.XMLUtil;
 import com.pipi.vo.ListVo;
 
+
 /**
- * 字典逻辑转发类
- * @author liuyang
+ * Created by yahto on 07/05/2017.
  */
 @Controller
 @SessionAttributes({SystemConstant.CURRENT_USER})

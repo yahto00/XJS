@@ -5,8 +5,8 @@ import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 
 /**
- * session容器，方便管理session
- * @author liuyang
+ * session容器
+ * Created by yahto on 07/05/2017.
  */
 public class MySessionContext {
 	private static HashMap<String, HttpSession> mymap = new HashMap<String, HttpSession>();

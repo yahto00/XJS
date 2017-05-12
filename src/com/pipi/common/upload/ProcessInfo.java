@@ -1,8 +1,8 @@
 package com.pipi.common.upload;
 
 /**
- * 实现进度条的相应属性
- * @author liuyang
+ * 进度条相关属性
+ * Created by yahto on 07/05/2017.
  */
 public class ProcessInfo {
 	public long totalSize = 1;

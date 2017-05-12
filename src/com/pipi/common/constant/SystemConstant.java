@@ -1,8 +1,9 @@
 package com.pipi.common.constant;
 
-/** 
- * 系统模块常量文件
- * @author liuyang
+
+/**
+ * 系统常量
+ * Created by yahto on 07/05/2017.
  */
 public class SystemConstant {
 

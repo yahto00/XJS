@@ -17,11 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 
+
 /**
- * 通过Spring AOP来实现注解添加系统日志
- * 
- * @author liuyang
- * 
+ * 系统日志AOP
+ * Created by yahto on 07/05/2017.
  */
 @Aspect
 @Component

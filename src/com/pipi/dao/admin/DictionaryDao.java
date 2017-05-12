@@ -11,8 +11,9 @@ import com.pipi.dao.BaseDao;
 import com.pipi.entity.admin.Dictionary;
 import com.pipi.vo.ListVo;
 
+
 /**
- * @author liuyang
+ * Created by yahto on 07/05/2017.
  */
 @Repository(value="dictionaryDao")
 public class DictionaryDao extends BaseDao implements IDictionaryDao {

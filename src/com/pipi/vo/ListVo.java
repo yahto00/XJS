@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * 封装List数据
- * @author liuyang
+ * Created by yahto on 07/05/2017.
  */
 public class ListVo<T> {
 	

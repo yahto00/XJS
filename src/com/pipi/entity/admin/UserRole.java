@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- *	用户角色实体类
+ * Created by yahto on 07/05/2017.
  */
 @Entity
 @Table(name = "T_USER_ROLE")

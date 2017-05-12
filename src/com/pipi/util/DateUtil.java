@@ -9,7 +9,7 @@ import com.pipi.common.constant.SystemConstant;
 
 /**
  * 日期工具类，Locale默认为cn，pattern默认为"yyyy-MM-dd HH:mm:ss"
- * @author liuyang
+ * Created by yahto on 07/05/2017.
  */
 public class DateUtil {
 	/** 用于显示日期的默认字符串格式 */

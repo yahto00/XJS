@@ -14,9 +14,9 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pipi.entity.BaseEntity;
 
+
 /**
- *用户实体表
- *已实现org.jbpm.api.identity.User接口，与JBPM公用用户对象
+ * Created by yahto on 07/05/2017.
  */
 @Entity
 @Table(name = "T_USER")

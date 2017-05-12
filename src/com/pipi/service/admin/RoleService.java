@@ -7,7 +7,7 @@ import com.pipi.entity.admin.Role;
 import com.pipi.service.BaseService;
 
 /**
- * @author liuyang
+ * Created by yahto on 07/05/2017.
  */
 @Service
 public class RoleService extends BaseService implements IRoleService {

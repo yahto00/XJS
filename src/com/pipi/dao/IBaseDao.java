@@ -6,8 +6,9 @@ import java.util.Map;
 
 import org.hibernate.Session;
 
+
 /**
- * @author liuyang
+ * Created by yahto on 07/05/2017.
  */
 public interface IBaseDao {
 	/** 获取hibernate的Session */

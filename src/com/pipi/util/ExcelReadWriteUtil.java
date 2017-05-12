@@ -21,7 +21,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 /**
- * @author liuyang
+ * Created by yahto on 07/05/2017.
  */
 public class ExcelReadWriteUtil {
 	
@@ -79,7 +79,6 @@ public class ExcelReadWriteUtil {
 
 	/**
 	 * 写入并关闭文档
-	 * @param out
 	 */
 	public void writeClose(){
 	    try {
@@ -165,7 +164,6 @@ public class ExcelReadWriteUtil {
 	
 	/**
 	 * 读取Excel数据
-	 * @param columns代表读的总列数
 	 * @return
 	 */
 	public Map<String,String[]> read(int columns, int keyColumn){

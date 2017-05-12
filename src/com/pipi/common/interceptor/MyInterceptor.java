@@ -7,7 +7,8 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * @author liuyang
+ * 自定拦截器 暂未使用
+ * Created by yahto on 07/05/2017.
  */
 public class MyInterceptor implements HandlerInterceptor {
 

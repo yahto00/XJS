@@ -15,8 +15,9 @@ import com.pipi.common.constant.SystemConstant;
 import com.pipi.entity.BaseEntity;
 
 
+
 /**
- * 字典表
+ * Created by yahto on 07/05/2017.
  */
 @Entity
 @Table(name = "T_DICTIONARY")

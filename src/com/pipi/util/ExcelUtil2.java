@@ -25,7 +25,7 @@ import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
 /**
- * @author liuyang
+ * Created by yahto on 07/05/2017.
  */
 public class ExcelUtil2 {
 	

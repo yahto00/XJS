@@ -1,7 +1,7 @@
 package com.pipi.vo;
 /**
  * 封装消息内容用于前台展示
- * @author xihashao-pc
+ * Created by yahto on 07/05/2017.
  *
  */
 public class NoticeVo {

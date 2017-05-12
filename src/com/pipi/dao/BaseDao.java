@@ -22,7 +22,7 @@ import org.springframework.stereotype.Repository;
 import com.pipi.common.constant.SystemConstant;
 
 /**
- * @author liuyang
+ * Created by yahto on 07/05/2017.
  */
 @Repository
 public class BaseDao extends HibernateDaoSupport implements IBaseDao {

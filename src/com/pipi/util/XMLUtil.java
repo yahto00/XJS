@@ -13,7 +13,7 @@ import org.dom4j.io.SAXReader;
 
 /**
  * xml解析工具类
- * @author liuyang
+ * Created by yahto on 07/05/2017.
  */
 public class XMLUtil {
 	/**log4j 日志处理对象*/

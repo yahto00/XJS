@@ -5,8 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 业务处理基接口
- * @author liuyang
+ * Created by yahto on 07/05/2017.
  */
 public interface IBaseService {
 

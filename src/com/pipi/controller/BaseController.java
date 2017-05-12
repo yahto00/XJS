@@ -32,9 +32,10 @@ import com.pipi.service.admin.ILogService;
 import com.pipi.service.admin.IUserService;
 import com.pipi.util.JsonUtils;
 
+
 /**
- * 系统逻辑转发处理基类
- * @author liuyang
+ * 系统转发基类处理
+ * Created by yahto on 07/05/2017.
  */
 @Controller
 public class BaseController {

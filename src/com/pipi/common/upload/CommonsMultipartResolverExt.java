@@ -11,10 +11,10 @@ import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+
 /**
- * 重写上传解析器，实现带进度条的上传
- * @author liuyang
- * 
+ * 重写上传解析器 实现进度条功能
+ * Created by yahto on 07/05/2017.
  */
 public class CommonsMultipartResolverExt extends CommonsMultipartResolver {
 

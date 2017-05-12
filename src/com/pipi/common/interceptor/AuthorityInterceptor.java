@@ -17,10 +17,10 @@ import com.pipi.controller.BaseController;
 import com.pipi.entity.admin.User;
 import com.pipi.util.JsonUtils;
 
+
 /**
- * 权限拦截器，只有有超级管理员权限的员工才能进人某些界面处理相应业务工作
- * @author liuyang
- *
+ * 权限拦截器
+ * Created by yahto on 07/05/2017.
  */
 public class AuthorityInterceptor extends HandlerInterceptorAdapter {
 	private static Logger logger = Logger.getLogger(AuthorityInterceptor.class);	// 让打印的日志中带有的类信息，否则不好查找日志

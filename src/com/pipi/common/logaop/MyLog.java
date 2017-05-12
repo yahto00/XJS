@@ -8,11 +8,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+
 /**
- * 
- * 自定义的日志注解，若使用此注解，则注解对应的方法的第一个参数就是Integer、String类型的id值，或是要操作的对象
- * @author liuyang
- *
+ * 自定义MyLog注解
+ * Created by yahto on 07/05/2017.
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

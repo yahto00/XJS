@@ -7,8 +7,9 @@ import com.pipi.dao.IBaseDao;
 import com.pipi.entity.admin.Dictionary;
 import com.pipi.vo.ListVo;
 
+
 /**
- * @author liuyang
+ * Created by yahto on 07/05/2017.
  */
 public interface IDictionaryDao extends IBaseDao {
 	/**

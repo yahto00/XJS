@@ -7,8 +7,9 @@ import com.pipi.entity.admin.Dictionary;
 import com.pipi.service.IBaseService;
 import com.pipi.vo.ListVo;
 
+
 /**
- * @author liuyang
+ * Created by yahto on 07/05/2017.
  */
 public interface IDictionaryService extends IBaseService {
 

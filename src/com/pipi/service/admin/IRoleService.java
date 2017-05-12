@@ -3,8 +3,9 @@ package com.pipi.service.admin;
 import com.pipi.entity.admin.Role;
 import com.pipi.service.IBaseService;
 
+
 /**
- * @author liuyang
+ * Created by yahto on 07/05/2017.
  */
 public interface IRoleService extends IBaseService {
 

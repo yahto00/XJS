@@ -1,8 +1,9 @@
 package com.pipi.common.session;
 
+
 /**
- * 监听session的创建和删除
- * @author liuyang
+ * 监听session的生命周期
+ * Created by yahto on 07/05/2017.
  */
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;

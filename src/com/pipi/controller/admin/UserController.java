@@ -20,10 +20,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 /**
- * 用户管理类
- * 
- * @author yahto
+ * Created by yahto on 07/05/2017.
  */
 @Controller
 public class UserController extends BaseController {

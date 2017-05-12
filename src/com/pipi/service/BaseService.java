@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 import com.pipi.dao.IBaseDao;
 
 /**
- * 业务处理基接口实现
- * @author liuyang
+ * Created by yahto on 07/05/2017.
  */
 @Service
 public class BaseService implements IBaseService {
