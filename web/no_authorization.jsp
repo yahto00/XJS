@@ -14,6 +14,6 @@ $(function(){
 <body style="margin:0px">
 	hello ${current_user.userName }<br/>
 	您没有访问权限
-	<a href="pages/login.do">登录</a>
+	<a href="pages/login.html">登录</a>
 </body>
 </html>
