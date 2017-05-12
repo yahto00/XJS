@@ -12,4 +12,6 @@ public interface ICustomerService extends IBaseService{
     List<Customer> getAllCustomer();
     /** 根据id查询客户*/
     Customer getCustomerById(Integer id);
+    /** 模糊查询客户*/
+    List<Customer> queryCustomerByCondition(String customerName, String phone);
 }

@@ -26,9 +26,9 @@ public class CustomerController extends BaseController{
      * @author yahto
      * @return
      */
-    @RequestMapping("customer_getAllCustomer.ajax")
+    @RequestMapping("customer_queryAllCustomer.ajax")
     @ResponseBody
-    public Map<String,Object> getAllCustomer(){
+    public Map<String,Object> queryAllCustomer(){
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("data",false);
         try {
@@ -48,9 +48,9 @@ public class CustomerController extends BaseController{
      * @param id
      * @return
      */
-    @RequestMapping("customer_getCustomerById.ajax")
+    @RequestMapping("customer_queryCustomerById.ajax")
     @ResponseBody
-    public Map<String,Object> getCustomerById(Integer id){
+    public Map<String,Object> queryCustomerById(Integer id){
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("data",false);
         try {
@@ -60,6 +60,29 @@ public class CustomerController extends BaseController{
             map.put("msg","操作成功");
         }catch (BusinessException e){
             map.put("msg","操作失败");
+        }
+        return map;
+    }
+
+    /**
+     * 按条件查询用户
+     * @author yahto
+     * @param customerName
+     * @param phone
+     * @return
+     */
+    @RequestMapping("customer_queryCustomerByCondition.ajax")
+    @ResponseBody
+    public Map<String,Object> queryCustomerByCondition(String customerName,String phone){
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("data",false);
+        try {
+            List<Customer> list = customerService.queryCustomerByCondition(customerName,phone);
+            map.put("list",list);
+            map.put("data",true);
+            map.put("msg","操作成功");
+        }catch (BusinessException e){
+            map.put("msg",e.getMessage());
         }
         return map;
     }
