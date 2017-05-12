@@ -26,7 +26,7 @@ public class CustomerService extends BaseService implements ICustomerService{
         if (customerName == null && phone == null ){
             throw new BusinessException("输入条件为空");
         }
-        StringBuilder hql =  new StringBuilder("from Customer where 1=1");
+        StringBuilder hql =  new StringBuilder("from Customer where 1=1 and Customer.isDelete=0");
         if (customerName != null && customerName.length() !=0){
             hql.append(" and name like '%" + customerName + "%'");
         }
