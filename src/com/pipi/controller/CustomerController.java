@@ -22,7 +22,7 @@ public class CustomerController extends BaseController{
     private ICustomerService customerService;
 
     /**
-     * 查询所有客户
+     * 查询所有客户功能
      * @author yahto
      * @return
      */
@@ -43,7 +43,7 @@ public class CustomerController extends BaseController{
     }
 
     /**
-     * 根据id查询客户
+     * 根据id查询客户功能
      * @author yahto
      * @param id
      * @return
@@ -65,7 +65,7 @@ public class CustomerController extends BaseController{
     }
 
     /**
-     * 按条件查询用户
+     * 按条件查询用户功能
      * @author yahto
      * @param customerName
      * @param phone
@@ -86,5 +86,25 @@ public class CustomerController extends BaseController{
         }
         return map;
     }
+
+    /**
+     * 添加客户功能
+     * @author yahto
+     * @param customer
+     * @return
+     */
+    @RequestMapping("customer_addCustomer.ajax")
+    @ResponseBody
+    public Map<String,Object> addCustomer(Customer customer){
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("data",false);
+        try {
+            customerService.add(customer);
+        }catch (BusinessException e){
+            map.put("msg",e.getMessage());
+        }
+        return map;
+    }
+
 
 }

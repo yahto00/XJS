@@ -9,12 +9,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface IUserService extends IBaseService{
 
-    /**
-     * 用户登录功能
-     * @author yahto
-     * @param loginName
-     * @param password
-     * @param request
-     */
+    /** 用户登录功能*/
     void queryUserForLogin(String loginName, String password, HttpServletRequest request);
+    /** 批量删除用户*/
+    void deleteUserByIds(Integer[] ids);
 }

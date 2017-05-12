@@ -12,7 +12,7 @@ public class DSUtil {
      * @param list2
      * @return
      */
-    private boolean isSubset(List<Integer> list1, List<Integer> list2){
+    private static boolean isSubset(List<Integer> list1, List<Integer> list2){
         boolean isMatched = true;
         for(Integer num: list2){
             if(!list1.contains(num)){
@@ -21,6 +21,20 @@ public class DSUtil {
             }
         }
         return isMatched;
+    }
+
+    /**
+     * 将Integer数组转为字符串
+     * @param integers
+     * @return
+     */
+    public static String parseIntegerArr(Integer[] integers){
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < integers.length-1; i++) {
+            stringBuilder.append(integers[i]+",");
+        }
+        stringBuilder.append(integers[integers.length-1]);
+        return stringBuilder.toString();
     }
 
 }

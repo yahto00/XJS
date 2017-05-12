@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.pipi.common.constant.SystemConstant;
 import com.pipi.common.exception.BusinessException;
 import com.pipi.entity.admin.User;
+import com.pipi.util.DSUtil;
 import com.pipi.util.Ufn;
 import org.springframework.stereotype.Service;
 
@@ -56,5 +57,14 @@ public class UserService extends BaseService implements IUserService {
                 request.getSession().setAttribute(SystemConstant.CURRENT_USER, user);
             }
         }
+    }
+
+    @Override
+    public void deleteUserByIds(Integer[] ids) {
+        if (ids == null || ids.length == 0){
+            throw new BusinessException("未指定要删除的用户");
+        }
+        String hql = "update User u set u.isDelete=1 where u.id in (" + DSUtil.parseIntegerArr(ids) + ")";
+        updateByHql(hql);
     }
 }

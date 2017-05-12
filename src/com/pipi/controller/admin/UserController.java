@@ -102,6 +102,53 @@ public class UserController extends BaseController {
 		}
 		return map;
 	}
+
+	/**
+	 * 批量删除用户 假删除
+	 * @author yahto
+	 * @param ids
+	 * @return
+	 */
+	@RequestMapping("user_deleteUserByIds.ajax")
+	@ResponseBody
+	public Map<String,Object> deleteUserByIds(Integer[] ids){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("data",false);
+		try {
+			userService.deleteUserByIds(ids);
+			map.put("data",true);
+			map.put("msg","操作成功");
+		}catch (BusinessException e){
+			map.put("msg",e.getMessage());
+		}
+		return map;
+	}
+
+	/**
+	 * 编辑用户功能
+	 * @author yahto
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping("user_editUserById.ajax")
+	@ResponseBody
+	public Map<String,Object> editUser(User user){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("data",false);
+		try {
+			if (user.getId() == null || !(user.getId()instanceof Integer)){
+				throw new BusinessException("未指定用户");
+			}
+			User existUser = (User) userService.queryObjectByID(User.class,user.getId());
+			existUser.setLoginName(user.getLoginName());
+			existUser.setPassword(user.getPassword());
+			existUser.setUserName(user.getUserName());
+			userService.update(existUser);
+		}catch (BusinessException e){
+			map.put("msg",e.getMessage());
+		}
+		return map;
+	}
 	/**
 	 * 其他页面直接返回
 	 * @param path
