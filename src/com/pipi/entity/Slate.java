@@ -36,12 +36,12 @@ public class Slate extends BaseEntity{
     /** 关联所属的扎*/
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "FK_STAB_KIND",foreignKey = @ForeignKey(name = "FK_STAB_KIND"))
-    private StabKind stabKind;
+    private Integer stabKindId;
 
     /** 关联所属的种类*/
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "FK_KIND",foreignKey = @ForeignKey(name = "FK_KIND"))
-    private Kind kind;
+    private Integer kindId;
 
 
     public Integer getId() {
@@ -84,19 +84,19 @@ public class Slate extends BaseEntity{
         this.height = height;
     }
 
-    public StabKind getStabKind() {
-        return stabKind;
+    public Integer getStabKindId() {
+        return stabKindId;
     }
 
-    public void setStabKind(StabKind stabKind) {
-        this.stabKind = stabKind;
+    public void setStabKindId(Integer stabKindId) {
+        this.stabKindId = stabKindId;
     }
 
-    public Kind getKind() {
-        return kind;
+    public Integer getKindId() {
+        return kindId;
     }
 
-    public void setKind(Kind kind) {
-        this.kind = kind;
+    public void setKindId(Integer kindId) {
+        this.kindId = kindId;
     }
 }
