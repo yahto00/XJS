@@ -93,4 +93,25 @@ public class KindController extends BaseController {
         return map;
     }
 
+    /**
+     * 批量删除种类
+     * @author yahto
+     * @param ids
+     * @return
+     */
+    @RequestMapping("kind_deleteKindByIds.ajax")
+    @ResponseBody
+    public Map<String,Object> deleteKindByIds(Integer[] ids){
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("data",false);
+        try {
+            kindService.deleteKindByIds(ids);
+            map.put("msg","操作成功");
+            map.put("data",true);
+        }catch (BusinessException e){
+            map.put("msg",e.getMessage());
+        }
+        return map;
+    }
+
 }
