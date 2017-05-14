@@ -29,8 +29,46 @@ public class OrderItem extends BaseEntity{
 
     /** 条目所属订单*/
     /** 关联所属的种类*/
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "FK_ORDER",foreignKey = @ForeignKey(name = "FK_ORDER"))
-    private Order order;
+    @Column(name = "FK_ORDER_ID")
+    private Integer orderId;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getSlateName() {
+        return slateName;
+    }
+
+    public void setSlateName(String slateName) {
+        this.slateName = slateName;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
+    }
 }

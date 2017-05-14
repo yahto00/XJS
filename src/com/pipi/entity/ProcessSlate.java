@@ -33,14 +33,12 @@ public class ProcessSlate extends BaseEntity{
     private float height;
 
     /** 关联所属的扎*/
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "FK_STAB_KIND",foreignKey = @ForeignKey(name = "FK_STAB_KIND"))
-    private StabKind stabKind;
+    @Column(name = "FK_STAB_KIND_ID")
+    private StabKind stabKindId;
 
     /** 关联所属的种类*/
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "FK_KIND",foreignKey = @ForeignKey(name = "FK_KIND"))
-    private Kind kind;
+    @Column(name = "FK_KIDN_ID")
+    private Kind kindId;
 
     public Integer getId() {
         return id;
@@ -82,19 +80,19 @@ public class ProcessSlate extends BaseEntity{
         this.height = height;
     }
 
-    public StabKind getStabKind() {
-        return stabKind;
+    public StabKind getStabKindId() {
+        return stabKindId;
     }
 
-    public void setStabKind(StabKind stabKind) {
-        this.stabKind = stabKind;
+    public void setStabKindId(StabKind stabKindId) {
+        this.stabKindId = stabKindId;
     }
 
-    public Kind getKind() {
-        return kind;
+    public Kind getKindId() {
+        return kindId;
     }
 
-    public void setKind(Kind kind) {
-        this.kind = kind;
+    public void setKindId(Kind kindId) {
+        this.kindId = kindId;
     }
 }

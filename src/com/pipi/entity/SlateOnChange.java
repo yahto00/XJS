@@ -28,7 +28,7 @@ public class SlateOnChange extends BaseEntity{
 
     /** 操作人*/
     @Column(name = "FK_USER_ID")
-    private Integer user;
+    private Integer userId;
 
     public Integer getId() {
         return id;
@@ -54,11 +54,11 @@ public class SlateOnChange extends BaseEntity{
         this.op_time = op_time;
     }
 
-    public Integer getUser() {
-        return user;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser(Integer user) {
-        this.user = user;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }
