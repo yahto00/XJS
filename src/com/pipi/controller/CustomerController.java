@@ -149,6 +149,7 @@ public class CustomerController extends BaseController{
             Customer existCustomer = customerService.getCustomerById(customer.getId());
             existCustomer.setName(customer.getName());
             existCustomer.setPhone(customer.getPhone());
+            customerService.update(existCustomer);
             map.put("msg","操作成功");
             map.put("data",true);
         }catch (BusinessException e){
