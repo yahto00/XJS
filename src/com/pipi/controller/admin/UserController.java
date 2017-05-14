@@ -30,7 +30,6 @@ public class UserController extends BaseController {
 	@Autowired
 	private IUserService userService;
 
-
 	/**
 	 * 用户登录功能
 	 * @author yahto
