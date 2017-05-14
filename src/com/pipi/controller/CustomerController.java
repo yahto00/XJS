@@ -100,11 +100,59 @@ public class CustomerController extends BaseController{
         map.put("data",false);
         try {
             customerService.add(customer);
+            map.put("msg","操作成功");
+            map.put("data",true);
         }catch (BusinessException e){
             map.put("msg",e.getMessage());
         }
         return map;
     }
 
+    /**
+     * 批量删除客户功能
+     * @aothor yahto
+     * @param ids
+     * @return
+     */
+    @RequestMapping("customer_deleteCustomerByIds.ajax")
+    @ResponseBody
+    public Map<String,Object> deleteCustomerByIds(Integer[] ids){
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("data",false);
+        try {
+            customerService.deleteCustomersByIds(ids);
+            map.put("msg","操作成功");
+            map.put("data",true);
+        }catch (BusinessException e){
+            map.put("msg",e.getMessage());
+        }
+        return map;
+    }
+
+    /**
+     * 编辑客户功能
+     * @author yahto
+     * @param customer
+     * @return
+     */
+    @RequestMapping("customer_editCustomer.ajax")
+    @ResponseBody
+    public Map<String,Object> editCustomer(Customer customer){
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("data",false);
+        try {
+            if (customer == null || customer.getId() == null){
+                throw new BusinessException("未指定要编辑的客户");
+            }
+            Customer existCustomer = customerService.getCustomerById(customer.getId());
+            existCustomer.setName(customer.getName());
+            existCustomer.setPhone(customer.getPhone());
+            map.put("msg","操作成功");
+            map.put("data",true);
+        }catch (BusinessException e){
+            map.put("msg",e.getMessage());
+        }
+        return map;
+    }
 
 }

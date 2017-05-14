@@ -14,4 +14,6 @@ public interface ICustomerService extends IBaseService{
     Customer getCustomerById(Integer id);
     /** 模糊查询客户*/
     List<Customer> queryCustomerByCondition(String customerName, String phone);
+    /** 批量删除客户*/
+    void deleteCustomersByIds(Integer[] ids);
 }

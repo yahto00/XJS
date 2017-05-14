@@ -2,6 +2,7 @@ package com.pipi.service;
 
 import com.pipi.common.exception.BusinessException;
 import com.pipi.entity.Customer;
+import com.pipi.util.DSUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,5 +35,13 @@ public class CustomerService extends BaseService implements ICustomerService{
             hql.append(" and phone like '%" + phone + "%'");
         }
         return (List<Customer>) queryObjectList(hql.toString());
+    }
+
+    @Override
+    public void deleteCustomersByIds(Integer[] ids) {
+        if (ids == null || ids.length == 0){
+            throw new BusinessException("未指定要删除的客户");
+        }
+        delete(Customer.class, DSUtil.parseIntegerArr(ids));
     }
 }
