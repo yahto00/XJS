@@ -144,6 +144,8 @@ public class UserController extends BaseController {
 			existUser.setPassword(user.getPassword());
 			existUser.setUserName(user.getUserName());
 			userService.update(existUser);
+			map.put("data",true);
+			map.put("msg","操作成功");
 		}catch (BusinessException e){
 			map.put("msg",e.getMessage());
 		}
