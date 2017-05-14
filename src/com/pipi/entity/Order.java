@@ -28,10 +28,16 @@ public class Order extends BaseEntity{
     private float price;
 
     /** 关联客户信息*/
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "FK_CUS",foreignKey = @ForeignKey(name = "FK_CUS"))
-    private Customer customer;
+    @Column(name = "FK_CUSTOMER_ID")
+    private Integer customerId;
 
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
 
     public Integer getId() {
         return id;
