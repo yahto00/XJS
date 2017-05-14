@@ -14,7 +14,7 @@ public class BaseEntity implements Serializable {
 	private static final long serialVersionUID = -1730442499015839066L;
 
 	/**  是否删除: 0 不删除，1 删除 */
-	@Column(name = "ISDELETE", length = 2)
+	@Column(name = "ISDELETE", length = 2,columnDefinition = "0")
 	private int isDelete = 0;
 
 	public int getIsDelete() {
