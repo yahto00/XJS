@@ -5,7 +5,7 @@
 		maxPoolSize="300" minPoolSize="10" initialPoolSize="10" acquireIncrement="10"
 		testConnectionOnCheckin = "true" testConnectionOnCheckout = "true" idleConnectionTestPeriod = "100"
 		maxIdleTime="120"
-		user="root" password="123456"
+		user="root" password=""
 		factory="org.apache.naming.factory.BeanFactory"
 		driverClass="com.mysql.jdbc.Driver"
 		jdbcUrl="jdbc:mysql://localhost:3306/XGS?useUnicodex=true&amp;characterEncoding=utf8" />
