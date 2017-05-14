@@ -34,13 +34,11 @@ public class Slate extends BaseEntity{
     private float height;
 
     /** 关联所属的扎*/
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "FK_STAB_KIND",foreignKey = @ForeignKey(name = "FK_STAB_KIND"))
+    @Column(name = "FK_STAB_KIND_ID")
     private Integer stabKindId;
 
     /** 关联所属的种类*/
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "FK_KIND",foreignKey = @ForeignKey(name = "FK_KIND"))
+    @Column(name = "FK_KIND_ID")
     private Integer kindId;
 
 

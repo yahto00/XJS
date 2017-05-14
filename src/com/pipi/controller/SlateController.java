@@ -1,4 +1,4 @@
-package com.pipi.controller.admin;
+package com.pipi.controller;
 
 import com.pipi.common.exception.BusinessException;
 import com.pipi.controller.BaseController;

@@ -11,67 +11,92 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "T_STAB_KIND")
-public class StabKind extends BaseEntity{
+public class StabKind extends BaseEntity {
 
     private static final long serialVersionUID = -8307364884116870179L;
-    /** 扎主键*/
+    /**
+     * 扎主键
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "PK_STAB_KIND_ID")
     private Integer id;
 
-    /** 扎编号*/
+    /**
+     * 扎编号
+     */
     @Column(name = "STAB_KIND_NUM")
     private String num;
 
-    /** 扎的入库时间*/
+    /**
+     * 扎的入库时间
+     */
     @Temporal(TemporalType.DATE)
     @Column(name = "IN_TIME")
-    @DateTimeFormat(pattern= SystemConstant.DATE_PATTEN)
+    @DateTimeFormat(pattern = SystemConstant.DATE_PATTEN)
     private Date in_time = new Date();
 
-    /** 扎入库的片数*/
+    /**
+     * 扎入库的片数
+     */
     @Column(name = "ORIGINAL_COUNT")
     private Integer originalCount;
 
-    /** 扎入库的总面积*/
+    /**
+     * 扎入库的总面积
+     */
     @Column(name = "ORIGINAL_ACREAGE")
     private Float originalAcreage;
 
-    /** 扎在库的片数*/
+    /**
+     * 扎在库的片数
+     */
     @Column(name = "CURRENT_COUNT")
     private Integer currentCount;
 
-    /** 扎在库的总面积*/
+    /**
+     * 扎在库的总面积
+     */
     @Column(name = "CURRENT_ACREAGE")
     private Float currentAcreage;
 
-    /** 备注*/
+    /**
+     * 备注
+     */
     @Column(name = "DESCRIPTION")
     private String description;
 
-    /** 出库时间 某一片出库后会动态更新 需要提供set方法*/
+    /**
+     * 出库时间 某一片出库后会动态更新 需要提供set方法
+     */
     @Temporal(TemporalType.DATE)
     @Column(name = "OUT_TIME")
     @DateTimeFormat(pattern = SystemConstant.DATE_PATTEN)
     private Date out_time;
 
-    /** 出库片数*/
+    /**
+     * 出库片数
+     */
     @Column(name = "OUT_COUNT")
     private Integer outCount;
 
-    /** 返库片数*/
+    /**
+     * 返库片数
+     */
     @Column(name = "BACK_COUNT")
     private Integer backCount;
 
-    /** 出库平方数*/
+    /**
+     * 出库平方数
+     */
     @Column(name = "OUT_ACREAGE")
     private Float outAcreage;
 
-    /** 关联所属的种类*/
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "FK_KIND",foreignKey = @ForeignKey(name = "FK_KIND"))
-    private Kind kind;
+    /**
+     * 关联所属的种类
+     */
+    @Column(name = "FK_KIND_ID")
+    private Integer kindId;
 
     public Integer getId() {
         return id;
@@ -165,11 +190,11 @@ public class StabKind extends BaseEntity{
         return in_time;
     }
 
-    public Kind getKind() {
-        return kind;
+    public Integer getKindId() {
+        return kindId;
     }
 
-    public void setKind(Kind kind) {
-        this.kind = kind;
+    public void setKindId(Integer kindId) {
+        this.kindId = kindId;
     }
 }
