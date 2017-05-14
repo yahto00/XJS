@@ -33,7 +33,7 @@ public class UserService extends BaseService implements IUserService {
         if (password == null || password.length() == 0){
             throw new BusinessException("密码不能为空");
         }
-        String hql = "from User where User.isDelete=0 and loginName='" + loginName + "'";
+        String hql = "from User u where u.isDelete=0 and loginName='" + loginName + "'";
         List<User> list = (List<User>) baseDao.getObjectListByNativeHql(hql);
         if (list == null || list.size() == 0) {
             throw new BusinessException("该用户不存在");

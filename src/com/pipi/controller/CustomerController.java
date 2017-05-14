@@ -101,7 +101,7 @@ public class CustomerController extends BaseController{
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("data",false);
         try {
-            customerService.add(customer);
+            customerService.save(customer);
             map.put("msg","操作成功");
             map.put("data",true);
         }catch (BusinessException e){
