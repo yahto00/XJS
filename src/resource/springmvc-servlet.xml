@@ -93,7 +93,7 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">
-					org.hibernate.dialect.MySQLDialect
+					org.hibernate.dialect.MySQL5InnoDBDialect
 				</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
@@ -160,7 +160,7 @@
 	    class="com.pipi.common.upload.CommonsMultipartResolverExt">  
 	    <property name="defaultEncoding" value="utf-8"/> <!-- 默认编码 (ISO-8859-1) -->
 	    <property name="maxInMemorySize" value="10240"/> <!-- 最大内存大小 (10240B) -->
-	    <property name="uploadTempDir" value="/tmp/"/> <!-- 上传时的临时目录名 (WebUtils#TEMP_DIR_CONTEXT_ATTRIBUTE) -->
+	    <property name="uploadTempDir" value="/tmp"/> <!-- 上传时的临时目录名 (WebUtils#TEMP_DIR_CONTEXT_ATTRIBUTE) -->
 	    <property name="maxUploadSize" value="-1"/> <!-- 104857600最大文件大小，-1为无限止(-1) -->
 	</bean>
 	
@@ -171,9 +171,9 @@
 	    <!-- 端口 -->
 	    <property name="port" value="25"></property>
 	    <!-- 邮件地址 -->
-	    <property name="username" value="youdada1222@163.com"></property>
+	    <property name="username" value="tommy__yan@163.com"></property>
 	    <!-- 密码 -->
-	    <property name="password" value="YDD1222"></property>
+	    <property name="password" value="youxiang.."></property>
 	    <!-- 发送邮件时使用的字符集 -->
 	    <property name="defaultEncoding" value="UTF-8"></property>
 	    <!-- javaMail相关参数设置 -->
