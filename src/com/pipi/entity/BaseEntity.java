@@ -1,5 +1,7 @@
 package com.pipi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
@@ -15,6 +17,7 @@ public class BaseEntity implements Serializable {
 
 	/**  是否删除: 0 不删除，1 删除 */
 	@Column(name = "ISDELETE", length = 2,nullable=false,columnDefinition="INT default 0")
+	@JsonIgnore
 	private int isDelete = 0;
 
 	public int getIsDelete() {
