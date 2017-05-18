@@ -164,7 +164,7 @@ public class UserController extends BaseController {
 		try {
 			User user = (User) request.getSession().getAttribute(SystemConstant.CURRENT_USER);
 			if (user == null){
-				throw new BusinessException("未登录,请先重试");
+				throw new BusinessException("未登录,请先登陆");
 			}else {
 				map.put("current_user",user);
 			}

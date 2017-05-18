@@ -57,7 +57,6 @@ public class User extends BaseEntity {
     private Set<Integer> roles;    // 角色表
 
     @Transient
-    @JsonIgnore
     private Set<Integer> privs;    // 权限表
 
     public Set<Integer> getPrivs() {
