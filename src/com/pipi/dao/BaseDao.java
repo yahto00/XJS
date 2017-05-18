@@ -11,6 +11,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.pipi.vo.Page;
+import org.apache.poi.ss.formula.functions.T;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -169,6 +171,36 @@ public class BaseDao extends HibernateDaoSupport implements IBaseDao {
 	@Override
 	public List<?> getObjectListByNativeHql(String hql) {
 		return (List<?>) this.getHibernateTemplate().find(hql);
+	}
+
+	@Override
+	public List<?> getAllObjectByPage(Class<?> clazz,Page page) {
+		String hql = "from " + clazz.getName();
+		Query query = getHBSession().createQuery(hql);
+		query.setFirstResult((page.getStartPage() - 1) * page.getPageSize());
+		query.setMaxResults(page.getPageSize());
+		return (List<?>) query.list();
+	}
+
+	@Override
+	public Integer getObjectCount(Class<?> clazz) {
+		String hql = "select count (*) from " + clazz.getName();
+		Query query = getHBSession().createQuery(hql);
+		return Integer.valueOf(((Long)query.uniqueResult()).intValue());
+	}
+
+	@Override
+	public List<?> getAllObjectByPageHql(String hql, Page page) {
+		Query query = getHBSession().createQuery(hql);
+		query.setFirstResult((page.getStartPage() - 1) * page.getPageSize());
+		query.setMaxResults(page.getPageSize());
+		return (List<?>) query.list();
+	}
+
+	@Override
+	public Integer getObjectCountByHql(String hql) {
+		Query query = getHBSession().createQuery(hql);
+		return ((Long)query.uniqueResult()).intValue();
 	}
 
 	/** 执行本地sql语句，可以执行update，delete，insert等操作 */

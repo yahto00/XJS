@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import com.pipi.vo.Page;
+import org.apache.poi.ss.formula.functions.T;
 import org.hibernate.Session;
 
 
@@ -105,4 +107,15 @@ public interface IBaseDao {
 
 	public List<?> getObjectListByNativeHql(String hql);
 
+	/** 分页查询当前数据库中实体类*/
+	public List<?> getAllObjectByPage(Class<?> clazz, Page page);
+
+	/** 分页查询之前查询该记录的总条数*/
+	public Integer getObjectCount(Class<?> clazz);
+
+	/** 自定义hql分页查询*/
+	public List<?> getAllObjectByPageHql(String hql,Page page);
+
+	/** 自定义hql查询记录数*/
+	public Integer getObjectCountByHql(String hql);
 }
