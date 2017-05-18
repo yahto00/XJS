@@ -3,8 +3,12 @@ package com.pipi.service;
 import com.pipi.common.exception.BusinessException;
 import com.pipi.common.logaop.MyLog;
 import com.pipi.entity.Kind;
+import com.pipi.entity.Slate;
+import com.pipi.entity.StabKind;
 import com.pipi.util.DSUtil;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by yahto on 14/05/2017.
@@ -17,6 +21,14 @@ public class KindService extends BaseService implements IKindService {
         if (ids == null || ids.length == 0){
             throw new BusinessException("未指定要删除的种类");
         }
-        delete(Kind.class, DSUtil.parseIntegerArr(ids));
+        //先去查找板材表里面是否有属于当前扎的 若有 直接返回失败
+        String hql = "from StabKind s where kindId in (" +
+                DSUtil.parseIntegerArr(ids) + ")";
+        List<StabKind> slateList = (List<StabKind>) baseDao.getObjectList(hql);
+        if (slateList.size() != 0){
+            throw new BusinessException("当前种类下面还有扎 不能删除");
+        }else {
+            delete(Kind.class,DSUtil.parseIntegerArr(ids));
+        }
     }
 }

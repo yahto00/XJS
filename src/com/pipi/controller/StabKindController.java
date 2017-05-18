@@ -39,4 +39,25 @@ public class StabKindController extends BaseController{
         }
         return map;
     }
+
+    /**
+     * 批量删除扎功能
+     * @author yahto
+     * @param ids
+     * @return
+     */
+    @RequestMapping("stabKind_deleteStabKindByIds.ajax")
+    @ResponseBody
+    public Map<String,Object> deleteStabKindByIds(Integer[] ids){
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("data",false);
+        try {
+            stabKindService.deleteStabKindByIds(ids);
+            map.put("msg","操作成功");
+            map.put("data",true);
+        }catch (BusinessException e){
+            map.put("msg",e.getMessage());
+        }
+        return map;
+    }
 }

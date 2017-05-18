@@ -8,4 +8,6 @@ import com.pipi.entity.StabKind;
 public interface IStabKindService extends IBaseService{
     /** 添加扎*/
     void addStabKind(StabKind stabKind);
+    /** 批量删除扎*/
+    void deleteStabKindByIds(Integer[] ids);
 }
