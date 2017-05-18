@@ -50,6 +50,7 @@ public class UserService extends BaseService implements IUserService {
                 Set<Integer> roles = user.getRoles();
 				List<Integer> privList = (List<Integer>) queryListByNavtiveSql("select PRIV_ID from t_role_priv where FK_ROLE_ID in (" + Ufn.join(roles.toArray()) + ")");
 				Set<Integer> privs = new HashSet<Integer>(privList);
+				user.setPrivs(privs);
                 request.getSession().setAttribute(SystemConstant.CURRENT_USER, user);
             }
         }

@@ -22,86 +22,94 @@ import com.pipi.entity.BaseEntity;
 @Table(name = "T_USER")
 public class User extends BaseEntity {
 
-	private static final long serialVersionUID = 487092737452798527L;
+    private static final long serialVersionUID = 487092737452798527L;
 
-	/** 用户主键 */
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "PK_USER_ID")
-	private Integer id;
+    /**
+     * 用户主键
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "PK_USER_ID")
+    private Integer id;
 
-	/** 用户名 */
-	@Column(name = "USER_NAME", length = 100)
-	private String userName;
+    /**
+     * 用户名
+     */
+    @Column(name = "USER_NAME", length = 100)
+    private String userName;
 
-	/** 登录名 */
-	@Column(name = "LOGIN_NAME", length = 50, nullable = false, unique = true)
-	private String loginName;
-
-
-	/** 密码 */
-	@Column(name = "PASSWORD", length = 50, nullable = false)
-	@JsonIgnore
-	//@Size(min=5,max=16,message="密码长度为5到16位")
-	private String password;
-
-	@Transient @JsonIgnore
-	private Set<Integer> privs;	// 权限表
-
-	public Set<Integer> getPrivs() {
-		return privs;
-	}
-
-	public void setPrivs(Set<Integer> privs) {
-		this.privs = privs;
-	}
-
-	public Set<Integer> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Integer> roles) {
-		this.roles = roles;
-	}
-
-	@Transient
-	private Set<Integer> roles;	// 角色表
+    /**
+     * 登录名
+     */
+    @Column(name = "LOGIN_NAME", length = 50, nullable = false, unique = true)
+    private String loginName;
 
 
-	public Integer getId() {
-		return id;
-	}
+    /**
+     * 密码
+     */
+    @Column(name = "PASSWORD", length = 50, nullable = false)
+    @JsonIgnore
+    //@Size(min=5,max=16,message="密码长度为5到16位")
+    private String password;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    @Transient
+    private Set<Integer> roles;    // 角色表
 
-	public String getUserName() {
-		return userName;
-	}
+    @Transient
+    @JsonIgnore
+    private Set<Integer> privs;    // 权限表
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+    public Set<Integer> getPrivs() {
+        return privs;
+    }
 
-	public String getLoginName() {
-		return loginName;
-	}
+    public void setPrivs(Set<Integer> privs) {
+        this.privs = privs;
+    }
 
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
-	}
+    public Set<Integer> getRoles() {
+        return roles;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setRoles(Set<Integer> roles) {
+        this.roles = roles;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	@Override
-	public boolean equals(Object user) {
-		return user instanceof User && ((User)user).getId().equals(getId());
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getLoginName() {
+        return loginName;
+    }
+
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object user) {
+        return user instanceof User && ((User) user).getId().equals(getId());
+    }
 }
