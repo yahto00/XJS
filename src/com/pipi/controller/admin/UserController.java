@@ -5,7 +5,6 @@ import com.pipi.common.constant.SystemConstant;
 import com.pipi.common.exception.BusinessException;
 import com.pipi.entity.admin.User;
 import com.pipi.service.admin.IUserService;
-import com.pipi.service.admin.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import com.pipi.controller.BaseController;
@@ -145,6 +144,32 @@ public class UserController extends BaseController {
 			userService.update(existUser);
 			map.put("data",true);
 			map.put("msg","操作成功");
+		}catch (BusinessException e){
+			map.put("msg",e.getMessage());
+		}
+		return map;
+	}
+
+	/**
+	 * 检测当前浏览器是否有用户已经登陆功能
+	 * @arthor yahto
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("user_queryCurrentUser.ajax")
+	@ResponseBody
+	public Map<String,Object> queryCurrentUser(HttpServletRequest request){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("data",false);
+		try {
+			User user = (User) request.getSession().getAttribute(SystemConstant.CURRENT_USER);
+			if (user == null){
+				throw new BusinessException("未登录,请先重试");
+			}else {
+				map.put("current_user",user);
+			}
+			map.put("msg","操作成功");
+			map.put("data",true);
 		}catch (BusinessException e){
 			map.put("msg",e.getMessage());
 		}
