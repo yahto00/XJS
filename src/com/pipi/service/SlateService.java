@@ -1,6 +1,7 @@
 package com.pipi.service;
 
 import com.pipi.common.exception.BusinessException;
+import com.pipi.common.logaop.MyLog;
 import com.pipi.entity.Slate;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SlateService extends BaseService implements ISlateService{
     @Override
+    @MyLog(operationName = "添加板材",operationType = "add")
     public void addSlate(Slate slate, Integer kindId, Integer stabKindId) {
         if (slate == null){
             throw new BusinessException("未填写板材信息");

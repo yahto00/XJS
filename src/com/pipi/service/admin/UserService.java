@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.pipi.common.constant.SystemConstant;
 import com.pipi.common.exception.BusinessException;
+import com.pipi.common.logaop.MyLog;
 import com.pipi.entity.admin.User;
 import com.pipi.util.DSUtil;
 import com.pipi.util.Ufn;
@@ -60,6 +61,7 @@ public class UserService extends BaseService implements IUserService {
     }
 
     @Override
+    @MyLog(operationName = "批量删除客户",operationType = "delete")
     public void deleteUserByIds(Integer[] ids) {
         if (ids == null || ids.length == 0){
             throw new BusinessException("未指定要删除的用户");
