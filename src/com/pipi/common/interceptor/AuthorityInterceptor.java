@@ -39,7 +39,7 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
 		if (!(bean instanceof BaseController))
 			return true;	// 非本系统的Action
 		Integer actionId = BaseController.getActionId(BaseController.getActionPath(servletPath));
-		if (actionId == null || actionId == -1)
+		if (actionId == null || actionId == 0)
 			return true;	// 该方法不需要登录
 		//BaseController controller = (BaseController)bean;
 		Object userO = request.getSession().getAttribute(SystemConstant.CURRENT_USER);
@@ -71,7 +71,7 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
 			        }  
 			    }  
 			} else if(userO == null){
-				response.sendRedirect(contextPath + "/pages/login.ajax");//登录页面
+				response.sendRedirect(contextPath + "/pages/login.html");//登录页面
 			} else
 				response.sendRedirect(contextPath + "/no_authorization.jsp");
 		}

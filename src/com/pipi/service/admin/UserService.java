@@ -43,18 +43,13 @@ public class UserService extends BaseService implements IUserService {
                 throw new BusinessException("密码错误，请重试");
             } else {
                 User user = list.get(0);
-//                List<Integer> roleIdList = (List<Integer>) queryListByNavtiveSql("select FK_ROLE_ID from t_user_role where FK_USER_ID=" + user.getId());
-//                if (roleIdList == null || roleIdList.size() == 0)
-//                    throw new BusinessException("该用户未分配角色，暂时不能访问本系统！");
-//                list.get(0).setRoles(new HashSet<Integer>(roleIdList));
-//				Set<Integer> roles = new HashSet<Integer>();
-//				roles.add(3);
-//				user.setRoles(roles);
-//
-//				List<Integer> privList = (List<Integer>) queryListByNavtiveSql("select PRIV_ID from t_role_priv where FK_ROLE_ID in (" + Ufn.join(roles.toArray()) + ")");
-//				Set<Integer> privs = new HashSet<Integer>(privList);
-//				privs.add(0);
-//				user.setPrivs(privs);
+                List<Integer> roleIdList = (List<Integer>) queryListByNavtiveSql("select FK_ROLE_ID from t_user_role where FK_USER_ID=" + user.getId());
+                if (roleIdList == null || roleIdList.size() == 0)
+                    throw new BusinessException("该用户未分配角色，暂时不能访问本系统！");
+                user.setRoles(new HashSet<Integer>(roleIdList));
+                Set<Integer> roles = user.getRoles();
+				List<Integer> privList = (List<Integer>) queryListByNavtiveSql("select PRIV_ID from t_role_priv where FK_ROLE_ID in (" + Ufn.join(roles.toArray()) + ")");
+				Set<Integer> privs = new HashSet<Integer>(privList);
                 request.getSession().setAttribute(SystemConstant.CURRENT_USER, user);
             }
         }
