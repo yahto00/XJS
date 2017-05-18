@@ -167,6 +167,8 @@ public class UserController extends BaseController {
 				throw new BusinessException("未登录,请先登陆");
 			}else {
 				map.put("current_user",user);
+				map.put("roles",user.getRoles());
+				map.put("privs",user.getPrivs());
 			}
 			map.put("msg","操作成功");
 			map.put("data",true);
