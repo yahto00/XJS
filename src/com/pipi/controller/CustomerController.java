@@ -123,6 +123,7 @@ public class CustomerController extends BaseController {
     @RequestMapping("customer_deleteCustomerByIds.ajax")
     @ResponseBody
     public Map<String, Object> deleteCustomerByIds(Integer[] ids) {
+
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
