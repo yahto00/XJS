@@ -187,17 +187,18 @@ public class UserController extends BaseController {
     /**
      * 修改用户角色功能
      * author yahto
+     *
      * @param userId
      * @param roleIds
      * @return
      */
     @RequestMapping("user_updateUserRoleById.ajax")
     @ResponseBody
-    public Map<String, Object> updateUserRoleById(Integer userId,Integer[] roleIds) {
+    public Map<String, Object> updateUserRoleById(Integer userId, Integer[] roleIds) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            userService.updateUser(userId,roleIds);
+            userService.updateUser(userId, roleIds);
             map.put("msg", "操作成功");
             map.put("data", true);
         } catch (BusinessException e) {
