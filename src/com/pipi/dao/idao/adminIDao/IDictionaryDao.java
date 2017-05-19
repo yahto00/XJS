@@ -1,9 +1,9 @@
-package com.pipi.dao.admin;
+package com.pipi.dao.idao.adminIDao;
 
 import java.util.List;
 import java.util.Map;
 
-import com.pipi.dao.IBaseDao;
+import com.pipi.dao.idao.IBaseDao;
 import com.pipi.entity.admin.Dictionary;
 import com.pipi.vo.ListVo;
 

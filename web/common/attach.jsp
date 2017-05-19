@@ -25,7 +25,7 @@
 	}
 	function refreshAttachGrid(attachGroupId){
 		Ext.Ajax.request({ 
- 	 		url:'${base}/admin/getAttachList.do',
+ 	 		url:'${base}/adminSerivce/getAttachList.do',
  	 		params:{attachGroupId : attachGroupId},
  	        success : function(res ,options) {
  	 			var objs= Ext.decode(res.responseText);
@@ -209,7 +209,7 @@
      	 	}]
      	});
        	Ext.Ajax.request({ 
- 	 		url:'${base}/admin/getAttachList.do',
+ 	 		url:'${base}/adminSerivce/getAttachList.do',
  	 		params:{attachGroupId:attachGroupId},
  	        success : function(res ,options) {
  	 			var objs= Ext.decode(res.responseText);
@@ -340,7 +340,7 @@
 			     		url = txtNewsManageAttach.value;
 			     	}
 		    		addAttachForm.getForm().submit({
-		            	url:'${base}/admin/uploadAttach.do',
+		            	url:'${base}/adminSerivce/uploadAttach.do',
 		                success:function(form,action){
 				            Ext.getCmp("waitUploadWin").close();
 		                	var message = action.result.msg; 
@@ -451,7 +451,7 @@
 	        	    	return;
 	        	    }
 		    		updateAttachForm.getForm().submit({
-		            	url:'${base}/admin/updateAttach.do',
+		            	url:'${base}/adminSerivce/updateAttach.do',
 		                success:function(form,action){
 		                	Ext.tooltip.msg('yes', action.result.msg);
 		                	updateAttachWin.close();
@@ -486,7 +486,7 @@
 	 		Ext.MessageBox.confirm('信息提示：', '确定要删除这'+attachGrid.getSelectionModel().getSelections().length+'条数据?', function(btn){
      			if(btn == 'yes'){
      	    		Ext.Ajax.request({
-	       				url: '${base}/admin/deleteAttach.do',
+	       				url: '${base}/adminSerivce/deleteAttach.do',
 	       	    		params: { ids: ids},
 	       	    		success: function(response, opts) {
 	  	       	    		var result = Ext.decode(response.responseText);
@@ -546,7 +546,7 @@
 	    		text:'取消',
 	    	    handler:function(){
 	    			Ext.Ajax.request({ 
-	    	 	 		url:'${base}/admin/cancelUpload.do',
+	    	 	 		url:'${base}/adminSerivce/cancelUpload.do',
 	    	 	        success : function(res ,options) {
 	    	 	        	Ext.tooltip.msg('yes', '已经取消文件上传！');
 	    	 	        	refreshAttachGrid(attachGroupId);
@@ -567,14 +567,14 @@
    function updateProgressBar() {
 		var progress;
 		Ext.Ajax.request({ 
-	 		url:'${base}/admin/updateProgressBar.do',
+	 		url:'${base}/adminSerivce/updateProgressBar.do',
 	        success : function(res ,options) {
 	 			progress = Ext.decode(res.responseText);
 	 			if(progress.msg == 100) {
 	 				pbar.updateProgress(progress.msg/100);
 	 				pbar.updateText("进度:"+progress.msg+"%");
 	 				Ext.Ajax.request({ 
-	 		 	 		url:'${base}/admin/uploadSuccess.do',
+	 		 	 		url:'${base}/adminSerivce/uploadSuccess.do',
 	 		 	        success : function(res ,options) {
 	 		 	        	Ext.getCmp("progressBarWin").close();
 	 		 	        	Ext.tooltip.msg('yes', '上传文件成功！');

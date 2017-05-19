@@ -4,7 +4,7 @@ package com.pipi.controller.admin;
 import com.pipi.common.constant.SystemConstant;
 import com.pipi.common.exception.BusinessException;
 import com.pipi.entity.admin.User;
-import com.pipi.service.admin.IUserService;
+import com.pipi.service.iservice.adminIService.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import com.pipi.controller.BaseController;

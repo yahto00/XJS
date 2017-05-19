@@ -1,4 +1,4 @@
-package com.pipi.service;
+package com.pipi.service.iservice;
 
 import java.io.Serializable;
 import java.util.List;

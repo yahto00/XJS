@@ -27,9 +27,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.pipi.common.constant.SystemConstant;
 import com.pipi.entity.admin.Log;
 import com.pipi.entity.admin.User;
-import com.pipi.service.IBaseService;
-import com.pipi.service.admin.ILogService;
-import com.pipi.service.admin.IUserService;
+import com.pipi.service.iservice.IBaseService;
+import com.pipi.service.iservice.adminIService.ILogService;
+import com.pipi.service.iservice.adminIService.IUserService;
 import com.pipi.util.JsonUtils;
 
 

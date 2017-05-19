@@ -1,6 +1,6 @@
-package com.pipi.dao.admin;
+package com.pipi.dao.idao.adminIDao;
 
-import com.pipi.dao.IBaseDao;
+import com.pipi.dao.idao.IBaseDao;
 
 /**
  * Created by yahto on 07/05/2017.

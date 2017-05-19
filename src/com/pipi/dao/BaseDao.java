@@ -11,8 +11,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.pipi.dao.idao.IBaseDao;
 import com.pipi.vo.Page;
-import org.apache.poi.ss.formula.functions.T;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

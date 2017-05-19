@@ -1,6 +1,6 @@
-package com.pipi.service.admin;
+package com.pipi.service.iservice.adminIService;
 
-import com.pipi.service.IBaseService;
+import com.pipi.service.iservice.IBaseService;
 
 
 /**

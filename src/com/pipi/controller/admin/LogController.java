@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.pipi.common.constant.SystemConstant;
 import com.pipi.controller.BaseController;
 import com.pipi.entity.admin.Log;
-import com.pipi.service.admin.ILogService;
+import com.pipi.service.iservice.adminIService.ILogService;
 import com.pipi.util.DateUtil;
 import com.pipi.vo.ListVo;
 

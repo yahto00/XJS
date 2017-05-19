@@ -1,5 +1,6 @@
 package com.pipi.dao.admin;
 
+import com.pipi.dao.idao.adminIDao.ILogDao;
 import org.springframework.stereotype.Repository;
 
 import com.pipi.dao.BaseDao;

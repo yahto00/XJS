@@ -2,7 +2,7 @@ package com.pipi.controller;
 
 import com.pipi.common.exception.BusinessException;
 import com.pipi.entity.Kind;
-import com.pipi.service.IKindService;
+import com.pipi.service.iservice.IKindService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

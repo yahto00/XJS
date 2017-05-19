@@ -3,6 +3,7 @@ package com.pipi.service;
 import com.pipi.common.exception.BusinessException;
 import com.pipi.common.logaop.MyLog;
 import com.pipi.entity.Customer;
+import com.pipi.service.iservice.ICustomerService;
 import com.pipi.util.DSUtil;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * Created by yahto on 07/05/2017.
  */
 @Service
-public class CustomerService extends BaseService implements ICustomerService{
+public class CustomerService extends BaseService implements ICustomerService {
     @Override
     public List<Customer> getAllCustomer() {
         return baseDao.getAllObjects(Customer.class);

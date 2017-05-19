@@ -4,8 +4,8 @@ import com.pipi.common.exception.BusinessException;
 import com.pipi.common.logaop.MyLog;
 import com.pipi.entity.Slate;
 import com.pipi.entity.StabKind;
+import com.pipi.service.iservice.IStabKindService;
 import com.pipi.util.DSUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.pipi.common.constant.SystemConstant;
 import com.pipi.controller.BaseController;
 import com.pipi.entity.admin.Dictionary;
-import com.pipi.service.admin.IDictionaryService;
+import com.pipi.service.iservice.adminIService.IDictionaryService;
 import com.pipi.util.XMLUtil;
 import com.pipi.vo.ListVo;
 

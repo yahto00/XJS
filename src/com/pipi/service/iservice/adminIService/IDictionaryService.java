@@ -1,10 +1,10 @@
-package com.pipi.service.admin;
+package com.pipi.service.iservice.adminIService;
 
 import java.util.List;
 import java.util.Map;
 
 import com.pipi.entity.admin.Dictionary;
-import com.pipi.service.IBaseService;
+import com.pipi.service.iservice.IBaseService;
 import com.pipi.vo.ListVo;
 
 

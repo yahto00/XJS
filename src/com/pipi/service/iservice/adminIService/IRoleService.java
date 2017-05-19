@@ -1,7 +1,7 @@
-package com.pipi.service.admin;
+package com.pipi.service.iservice.adminIService;
 
 import com.pipi.entity.admin.Role;
-import com.pipi.service.IBaseService;
+import com.pipi.service.iservice.IBaseService;
 
 
 /**

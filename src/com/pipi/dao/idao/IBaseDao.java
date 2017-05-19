@@ -1,4 +1,4 @@
-package com.pipi.dao;
+package com.pipi.dao.idao;
 
 import java.io.Serializable;
 import java.util.List;

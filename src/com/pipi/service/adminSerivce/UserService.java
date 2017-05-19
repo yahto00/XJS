@@ -1,4 +1,4 @@
-package com.pipi.service.admin;
+package com.pipi.service.adminSerivce;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -7,11 +7,12 @@ import com.pipi.common.constant.SystemConstant;
 import com.pipi.common.exception.BusinessException;
 import com.pipi.common.logaop.MyLog;
 import com.pipi.entity.admin.User;
+import com.pipi.service.iservice.adminIService.IUserService;
 import com.pipi.util.DSUtil;
 import com.pipi.util.Ufn;
 import org.springframework.stereotype.Service;
 
-import com.pipi.dao.admin.IUserDao;
+import com.pipi.dao.idao.adminIDao.IUserDao;
 import com.pipi.service.BaseService;
 
 import java.util.HashSet;

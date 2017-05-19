@@ -2,16 +2,16 @@ package com.pipi.service;
 
 import com.pipi.common.exception.BusinessException;
 import com.pipi.common.logaop.MyLog;
-import com.pipi.entity.Kind;
 import com.pipi.entity.Slate;
 import com.pipi.entity.StabKind;
+import com.pipi.service.iservice.ISlateService;
 import org.springframework.stereotype.Service;
 
 /**
  * Created by yahto on 13/05/2017.
  */
 @Service
-public class SlateService extends BaseService implements ISlateService{
+public class SlateService extends BaseService implements ISlateService {
     @Override
     @MyLog(operationName = "添加板材",operationType = "add")
     public void addSlate(Slate slate, Integer kindId, Integer stabKindId) {

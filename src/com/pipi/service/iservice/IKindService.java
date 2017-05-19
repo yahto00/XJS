@@ -1,4 +1,4 @@
-package com.pipi.service;
+package com.pipi.service.iservice;
 
 /**
  * Created by yahto on 14/05/2017.

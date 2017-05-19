@@ -1,14 +1,15 @@
-package com.pipi.service.admin;
+package com.pipi.service.adminSerivce;
 
 import java.util.List;
 import java.util.Map;
 
+import com.pipi.service.iservice.adminIService.IDictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import com.pipi.common.logaop.MyLog;
-import com.pipi.dao.admin.IDictionaryDao;
+import com.pipi.dao.idao.adminIDao.IDictionaryDao;
 import com.pipi.entity.admin.Dictionary;
 import com.pipi.service.BaseService;
 import com.pipi.vo.ListVo;

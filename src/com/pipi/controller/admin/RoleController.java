@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.pipi.common.constant.SystemConstant;
 import com.pipi.controller.BaseController;
 import com.pipi.entity.admin.Role;
-import com.pipi.service.admin.IRoleService;
+import com.pipi.service.iservice.adminIService.IRoleService;
 import com.pipi.util.Ufn;
 import com.pipi.vo.ListVo;
 

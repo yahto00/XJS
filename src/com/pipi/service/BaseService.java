@@ -4,10 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import com.pipi.service.iservice.IBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pipi.dao.IBaseDao;
+import com.pipi.dao.idao.IBaseDao;
 
 /**
  * Created by yahto on 07/05/2017.
