@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,11 +31,11 @@ public class SlateController extends BaseController {
      */
     @RequestMapping("slate_addSlate.ajax")
     @ResponseBody
-    public Map<String, Object> addSlate(Slate slate, Integer kindId, Integer stabKindId, Float loseAcreage) {
+    public Map<String, Object> addSlate(Slate slate, Integer kindId, Integer stabKindId, Float loseAcreage, HttpServletRequest request) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            slateService.addSlate(slate, kindId, stabKindId, loseAcreage);
+            slateService.addSlate(slate, kindId, stabKindId, loseAcreage,request);
             map.put("msg", "操作成功");
             map.put("data", true);
         } catch (BusinessException e) {
@@ -51,11 +52,11 @@ public class SlateController extends BaseController {
      */
     @RequestMapping("slate_deleteSlateByIds")
     @ResponseBody
-    public Map<String, Object> deleteSlateByIds(Integer[] ids,Integer stabKindId) {
+    public Map<String, Object> deleteSlateByIds(Integer[] ids,Integer stabKindId,HttpServletRequest request) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            slateService.deleteSlateByIds(ids,stabKindId);
+            slateService.deleteSlateByIds(ids,stabKindId,request);
             map.put("msg", "操作成功");
             map.put("data", true);
         } catch (BusinessException e) {

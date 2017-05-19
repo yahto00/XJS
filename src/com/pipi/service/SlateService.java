@@ -1,13 +1,17 @@
 package com.pipi.service;
 
+import com.pipi.common.constant.SystemConstant;
 import com.pipi.common.exception.BusinessException;
 import com.pipi.common.logaop.MyLog;
 import com.pipi.entity.Slate;
+import com.pipi.entity.SlateOnChange;
 import com.pipi.entity.StabKind;
+import com.pipi.entity.admin.User;
 import com.pipi.service.iservice.ISlateService;
 import com.pipi.util.DSUtil;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +22,7 @@ import java.util.List;
 public class SlateService extends BaseService implements ISlateService {
     @Override
     @MyLog(operationName = "添加板材", operationType = "add")
-    public void addSlate(Slate slate, Integer kindId, Integer stabKindId, Float loseAcreage) {
+    public void addSlate(Slate slate, Integer kindId, Integer stabKindId, Float loseAcreage, HttpServletRequest request) {
         if (slate == null) {
             throw new BusinessException("未填写板材信息");
         }
@@ -34,11 +38,17 @@ public class SlateService extends BaseService implements ISlateService {
         stabKind.setCurrentAcreage(stabKind.getCurrentAcreage() + slate.getHeight() * slate.getLength() - loseAcreage);//改变在库面积
         slate.setStabKindId(stabKindId);//关联板材
         add(slate);
+        SlateOnChange slateOnChange = new SlateOnChange();
+        slateOnChange.setDescription("增加板材");
+        slateOnChange.setOp_time(new Date());
+        User user = (User)(request.getSession().getAttribute(SystemConstant.CURRENT_USER));
+        slateOnChange.setUserId(user.getId());
+        add(slateOnChange);
     }
 
     @Override
     @MyLog(operationName = "删除板材", operationType = "delete")
-    public void deleteSlateByIds(Integer[] ids, Integer stabKindId) {
+    public void deleteSlateByIds(Integer[] ids, Integer stabKindId,HttpServletRequest request) {
         if (ids == null || ids.length == 0) {
             throw new BusinessException("未填指定板材");
         }
@@ -60,5 +70,11 @@ public class SlateService extends BaseService implements ISlateService {
             stabKind.setCurrentAcreage(stabKind.getCurrentAcreage() - outAcreage);
         }
         delete(Slate.class, DSUtil.parseIntegerArr(ids));
+        SlateOnChange slateOnChange = new SlateOnChange();
+        slateOnChange.setDescription("删除板材");
+        slateOnChange.setOp_time(new Date());
+        User user = (User)(request.getSession().getAttribute(SystemConstant.CURRENT_USER));
+        slateOnChange.setUserId(user.getId());
+        add(slateOnChange);
     }
 }
