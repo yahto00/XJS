@@ -21,28 +21,28 @@ public class CustomerService extends BaseService implements ICustomerService {
 
     @Override
     public Customer getCustomerById(Integer id) {
-        return (Customer) baseDao.getObjectByID(Customer.class,id);
+        return (Customer) baseDao.getObjectByID(Customer.class, id);
     }
 
     @Override
     public List<Customer> queryCustomerByCondition(String customerName, String phone) {
-        if (customerName == null && phone == null ){
+        if (customerName == null && phone == null) {
             throw new BusinessException("输入条件为空");
         }
-        StringBuilder hql =  new StringBuilder("from Customer  c where 1=1 and c.isDelete=0");
-        if (customerName != null && customerName.length() !=0){
+        StringBuilder hql = new StringBuilder("from Customer  c where 1=1 and c.isDelete=0");
+        if (customerName != null && customerName.length() != 0) {
             hql.append(" and name like '%" + customerName + "%'");
         }
-        if (phone != null && phone.length()!=0){
+        if (phone != null && phone.length() != 0) {
             hql.append(" and phone like '%" + phone + "%'");
         }
         return (List<Customer>) queryObjectList(hql.toString());
     }
 
     @Override
-    @MyLog(operationName = "批量删除客户",operationType = "delete")
+    @MyLog(operationName = "批量删除客户", operationType = "delete")
     public void deleteCustomersByIds(Integer[] ids) {
-        if (ids == null || ids.length == 0){
+        if (ids == null || ids.length == 0) {
             throw new BusinessException("未指定要删除的客户");
         }
         delete(Customer.class, DSUtil.parseIntegerArr(ids));

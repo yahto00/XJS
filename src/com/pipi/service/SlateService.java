@@ -40,15 +40,15 @@ public class SlateService extends BaseService implements ISlateService {
         Integer slateId = (Integer) save(slate);
         SlateOnChange slateOnChange = new SlateOnChange();
         slateOnChange.setOp_time(new Date());
-        User user = (User)(request.getSession().getAttribute(SystemConstant.CURRENT_USER));
-        slateOnChange.setDescription("用户：" + user.getUserName() + " 增加板材 " + slate.getSlateName() + " " +slateId);
+        User user = (User) (request.getSession().getAttribute(SystemConstant.CURRENT_USER));
+        slateOnChange.setDescription("用户：" + user.getUserName() + " 增加板材 " + slate.getSlateName() + " " + slateId);
         slateOnChange.setUserId(user.getId());
         add(slateOnChange);
     }
 
     @Override
     @MyLog(operationName = "删除板材", operationType = "delete")
-    public void deleteSlateByIds(Integer[] ids, Integer stabKindId,HttpServletRequest request) {
+    public void deleteSlateByIds(Integer[] ids, Integer stabKindId, HttpServletRequest request) {
         if (ids == null || ids.length == 0) {
             throw new BusinessException("未填指定板材");
         }
@@ -72,7 +72,7 @@ public class SlateService extends BaseService implements ISlateService {
         delete(Slate.class, DSUtil.parseIntegerArr(ids));
         SlateOnChange slateOnChange = new SlateOnChange();
         slateOnChange.setOp_time(new Date());
-        User user = (User)(request.getSession().getAttribute(SystemConstant.CURRENT_USER));
+        User user = (User) (request.getSession().getAttribute(SystemConstant.CURRENT_USER));
         slateOnChange.setDescription("用户：" + user.getUserName() + " 删除板材 " + DSUtil.parseIntegerArr(ids));
         slateOnChange.setUserId(user.getId());
         add(slateOnChange);
