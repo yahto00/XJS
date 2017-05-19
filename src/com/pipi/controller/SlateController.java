@@ -35,7 +35,6 @@ public class SlateController extends BaseController {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-
             slateService.addSlate(slate, kindId, stabKindId, loseAcreage, request);
             map.put("msg", "操作成功");
             map.put("data", true);
