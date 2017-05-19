@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.pipi.dao.idao.adminIDao.IUserDao;
 import com.pipi.service.BaseService;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,10 +31,10 @@ public class UserService extends BaseService implements IUserService {
 
     @Override
     public void queryUserForLogin(String loginName, String password, HttpServletRequest request) {
-        if (loginName == null || loginName.length() == 0){
+        if (loginName == null || loginName.length() == 0) {
             throw new BusinessException("用户名不能为空");
         }
-        if (password == null || password.length() == 0){
+        if (password == null || password.length() == 0) {
             throw new BusinessException("密码不能为空");
         }
         String hql = "from User u where u.isDelete=0 and loginName='" + loginName + "'";
@@ -50,21 +51,39 @@ public class UserService extends BaseService implements IUserService {
                     throw new BusinessException("该用户未分配角色，暂时不能访问本系统！");
                 user.setRoles(new HashSet<Integer>(roleIdList));
                 Set<Integer> roles = user.getRoles();
-				List<Integer> privList = (List<Integer>) queryListByNavtiveSql("select PRIV_ID from t_role_priv where FK_ROLE_ID in (" + Ufn.join(roles.toArray()) + ")");
-				Set<Integer> privs = new HashSet<Integer>(privList);
-				user.setPrivs(privs);
+                List<Integer> privList = (List<Integer>) queryListByNavtiveSql("select PRIV_ID from t_role_priv where FK_ROLE_ID in (" + Ufn.join(roles.toArray()) + ")");
+                Set<Integer> privs = new HashSet<Integer>(privList);
+                user.setPrivs(privs);
                 request.getSession().setAttribute(SystemConstant.CURRENT_USER, user);
             }
         }
     }
 
     @Override
-    @MyLog(operationName = "批量删除客户",operationType = "delete")
+    @MyLog(operationName = "批量删除客户", operationType = "delete")
     public void deleteUserByIds(Integer[] ids) {
-        if (ids == null || ids.length == 0){
+        if (ids == null || ids.length == 0) {
             throw new BusinessException("未指定要删除的用户");
         }
         String hql = "update User u set u.isDelete=1 where u.id in (" + DSUtil.parseIntegerArr(ids) + ")";
         updateByHql(hql);
+    }
+
+    @Override
+    public void updateUser(Integer userId, Integer[] roleIds) {
+        if (userId == null) {
+            throw new BusinessException("未指定要修改的用户");
+        }
+        if (roleIds != null && roleIds.length != 0) {
+            String hql = "delete UserRole ur where ur.user.id = " + userId;
+            updateByHql(hql);
+            List<String> sqls = new ArrayList<String>();
+            for (Integer roleId : roleIds) {
+                String tempSql = "insert into T_USER_ROLE (FK_ROLE_ID,FK_USER_ID) values("
+                        + roleId + "," + userId + ")";
+                sqls.add(tempSql);
+            }
+            batchExecuteNativeSql(sqls);
+        }
     }
 }

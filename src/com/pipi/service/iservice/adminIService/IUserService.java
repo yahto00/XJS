@@ -1,5 +1,6 @@
 package com.pipi.service.iservice.adminIService;
 
+import com.pipi.entity.admin.User;
 import com.pipi.service.iservice.IBaseService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,4 +15,6 @@ public interface IUserService extends IBaseService{
     void queryUserForLogin(String loginName, String password, HttpServletRequest request);
     /** 批量删除用户*/
     void deleteUserByIds(Integer[] ids);
+    /** 修改用户角色*/
+    void updateUser(Integer userId,Integer[] roleIds);
 }
