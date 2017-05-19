@@ -37,11 +37,11 @@ public class SlateService extends BaseService implements ISlateService {
         stabKind.setCurrentCount(stabKind.getCurrentCount() + 1);//入库数量加1
         stabKind.setCurrentAcreage(stabKind.getCurrentAcreage() + slate.getHeight() * slate.getLength() - loseAcreage);//改变在库面积
         slate.setStabKindId(stabKindId);//关联板材
-        add(slate);
+        Integer slateId = (Integer) save(slate);
         SlateOnChange slateOnChange = new SlateOnChange();
-        slateOnChange.setDescription("增加板材");
         slateOnChange.setOp_time(new Date());
         User user = (User)(request.getSession().getAttribute(SystemConstant.CURRENT_USER));
+        slateOnChange.setDescription("用户：" + user.getUserName() + " 增加板材 " + slate.getSlateName() + " " +slateId);
         slateOnChange.setUserId(user.getId());
         add(slateOnChange);
     }
@@ -71,9 +71,9 @@ public class SlateService extends BaseService implements ISlateService {
         }
         delete(Slate.class, DSUtil.parseIntegerArr(ids));
         SlateOnChange slateOnChange = new SlateOnChange();
-        slateOnChange.setDescription("删除板材");
         slateOnChange.setOp_time(new Date());
         User user = (User)(request.getSession().getAttribute(SystemConstant.CURRENT_USER));
+        slateOnChange.setDescription("用户：" + user.getUserName() + " 删除板材 " + DSUtil.parseIntegerArr(ids));
         slateOnChange.setUserId(user.getId());
         add(slateOnChange);
     }
