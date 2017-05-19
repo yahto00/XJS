@@ -10,6 +10,7 @@ import com.pipi.entity.admin.User;
 import com.pipi.service.iservice.adminIService.IUserService;
 import com.pipi.util.DSUtil;
 import com.pipi.util.Ufn;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import com.pipi.dao.idao.adminIDao.IUserDao;
@@ -37,7 +38,7 @@ public class UserService extends BaseService implements IUserService {
         }
         String hql = "from User u where u.isDelete=0 and loginName='" + loginName + "'";
         List<User> list = (List<User>) baseDao.getObjectListByNativeHql(hql);
-        if (list == null || list.size() == 0) {
+        if (CollectionUtils.isEmpty(list)) {
             throw new BusinessException("该用户不存在");
         } else {
             if (!password.equals(list.get(0).getPassword())) {
@@ -45,7 +46,7 @@ public class UserService extends BaseService implements IUserService {
             } else {
                 User user = list.get(0);
                 List<Integer> roleIdList = (List<Integer>) queryListByNavtiveSql("select FK_ROLE_ID from t_user_role where FK_USER_ID=" + user.getId());
-                if (roleIdList == null || roleIdList.size() == 0)
+                if (CollectionUtils.isEmpty(roleIdList))
                     throw new BusinessException("该用户未分配角色，暂时不能访问本系统！");
                 user.setRoles(new HashSet<Integer>(roleIdList));
                 Set<Integer> roles = user.getRoles();
