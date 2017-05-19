@@ -6,6 +6,7 @@ import com.pipi.entity.Slate;
 import com.pipi.entity.StabKind;
 import com.pipi.service.iservice.IStabKindService;
 import com.pipi.util.DSUtil;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class StabKindService extends BaseService implements IStabKindService {
         String hql = "from Slate s where stabKindId in (" +
                 DSUtil.parseIntegerArr(ids) + ")";
         List<Slate> slateList = (List<Slate>) baseDao.getObjectList(hql);
-        if (slateList.size() != 0) {
+        if (CollectionUtils.isEmpty(slateList)) {
             throw new BusinessException("当前扎下面还有板材 不能删除");
         } else {
             delete(StabKind.class, DSUtil.parseIntegerArr(ids));
