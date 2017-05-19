@@ -22,11 +22,12 @@ public class SlateController extends BaseController {
 
     /**
      * 增加板材功能
-     * @author yahto
+     *
      * @param slate
      * @param kindId
      * @param stabKindId
      * @return
+     * @author yahto
      */
     @RequestMapping("slate_addSlate.ajax")
     @ResponseBody
@@ -34,7 +35,7 @@ public class SlateController extends BaseController {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            slateService.addSlate(slate, kindId, stabKindId, loseAcreage,request);
+            slateService.addSlate(slate, kindId, stabKindId, loseAcreage, request);
             map.put("msg", "操作成功");
             map.put("data", true);
         } catch (BusinessException e) {
@@ -45,17 +46,18 @@ public class SlateController extends BaseController {
 
     /**
      * 批量删除板材功能
-     * @author yahto
+     *
      * @param ids
      * @return
+     * @author yahto
      */
     @RequestMapping("slate_deleteSlateByIds")
     @ResponseBody
-    public Map<String, Object> deleteSlateByIds(Integer[] ids,Integer stabKindId,HttpServletRequest request) {
+    public Map<String, Object> deleteSlateByIds(Integer[] ids, Integer stabKindId, HttpServletRequest request) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            slateService.deleteSlateByIds(ids,stabKindId,request);
+            slateService.deleteSlateByIds(ids, stabKindId, request);
             map.put("msg", "操作成功");
             map.put("data", true);
         } catch (BusinessException e) {

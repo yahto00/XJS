@@ -15,48 +15,50 @@ import java.util.Map;
  * Created by yahto on 14/05/2017.
  */
 @Controller
-public class StabKindController extends BaseController{
+public class StabKindController extends BaseController {
     @Autowired
     private IStabKindService stabKindService;
 
     /**
      * 添加扎功能
-     * @author yahto
+     *
      * @param stabKind
      * @return
+     * @author yahto
      */
     @RequestMapping("stabKind_addStabKind.ajax")
     @ResponseBody
-    public Map<String,Object> addStabKind(StabKind stabKind){
-        Map<String,Object> map = new HashMap<String,Object>();
-        map.put("data",false);
+    public Map<String, Object> addStabKind(StabKind stabKind) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("data", false);
         try {
             stabKindService.addStabKind(stabKind);
-            map.put("msg","操作成功");
-            map.put("data",true);
-        }catch (BusinessException e){
-            map.put("msg",e.getMessage());
+            map.put("msg", "操作成功");
+            map.put("data", true);
+        } catch (BusinessException e) {
+            map.put("msg", e.getMessage());
         }
         return map;
     }
 
     /**
      * 批量删除扎功能
-     * @author yahto
+     *
      * @param ids
      * @return
+     * @author yahto
      */
     @RequestMapping("stabKind_deleteStabKindByIds.ajax")
     @ResponseBody
-    public Map<String,Object> deleteStabKindByIds(Integer[] ids){
-        Map<String,Object> map = new HashMap<String,Object>();
-        map.put("data",false);
+    public Map<String, Object> deleteStabKindByIds(Integer[] ids) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("data", false);
         try {
             stabKindService.deleteStabKindByIds(ids);
-            map.put("msg","操作成功");
-            map.put("data",true);
-        }catch (BusinessException e){
-            map.put("msg",e.getMessage());
+            map.put("msg", "操作成功");
+            map.put("data", true);
+        } catch (BusinessException e) {
+            map.put("msg", e.getMessage());
         }
         return map;
     }

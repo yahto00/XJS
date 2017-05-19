@@ -186,11 +186,11 @@ public class UserController extends BaseController {
 
     /**
      * 修改用户角色功能
-     * author yahto
      *
      * @param userId
      * @param roleIds
      * @return
+     * @author yahto
      */
     @RequestMapping("user_updateUserRoleById.ajax")
     @ResponseBody

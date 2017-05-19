@@ -21,95 +21,99 @@ public class KindController extends BaseController {
 
     /**
      * 添加种类功能
-     * @author yahto
+     *
      * @param kind
      * @return
+     * @author yahto
      */
     @RequestMapping("kind_addKind.ajax")
     @ResponseBody
-    public Map<String,Object> addKind(Kind kind){
-        Map<String,Object> map = new HashMap<String,Object>();
-        map.put("data",false);
+    public Map<String, Object> addKind(Kind kind) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("data", false);
         try {
             kindService.add(kind);
-            map.put("msg","操作成功");
-            map.put("data",true);
-        }catch (BusinessException e){
-            map.put("msg",e.getMessage());
+            map.put("msg", "操作成功");
+            map.put("data", true);
+        } catch (BusinessException e) {
+            map.put("msg", e.getMessage());
         }
         return map;
     }
 
     /**
      * 根据id查询种类
-     * @author yahto
+     *
      * @param id
      * @return
+     * @author yahto
      */
     @RequestMapping("kind_queryKindById")
     @ResponseBody
-    public Map<String,Object> queryKindById(Integer id){
-        Map<String,Object> map = new HashMap<String,Object>();
-        map.put("data",false);
+    public Map<String, Object> queryKindById(Integer id) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("data", false);
         try {
             if (id == null)
                 throw new BusinessException("未指定种类");
-            Kind kind = (Kind) kindService.queryObjectByID(Kind.class,id);
-            map.put("msg","操作成功");
-            map.put("data",true);
-            map.put("kind",kind);
-        }catch (BusinessException e){
-            map.put("msg",e.getMessage());
+            Kind kind = (Kind) kindService.queryObjectByID(Kind.class, id);
+            map.put("msg", "操作成功");
+            map.put("data", true);
+            map.put("kind", kind);
+        } catch (BusinessException e) {
+            map.put("msg", e.getMessage());
         }
         return map;
     }
 
     /**
      * 编辑种类功能
-     * @author yahto
+     *
      * @param kind
      * @return
+     * @author yahto
      */
     @RequestMapping("kind_editKind")
     @ResponseBody
-    public Map<String,Object> editKind(Kind kind){
-        Map<String,Object> map = new HashMap<String,Object>();
-        map.put("data",false);
+    public Map<String, Object> editKind(Kind kind) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("data", false);
         try {
             if (kind == null)
                 throw new BusinessException("未指定种类");
-            Kind existKind = (Kind) kindService.queryObjectByID(Kind.class,kind.getId());
+            Kind existKind = (Kind) kindService.queryObjectByID(Kind.class, kind.getId());
             if (existKind == null)
                 throw new BusinessException("要编辑的种类不存在");
             existKind.setName(kind.getName());
             existKind.setNum(kind.getNum());
             kindService.update(existKind);
-            map.put("msg","操作成功");
-            map.put("data",true);
-            map.put("kind",kind);
-        }catch (BusinessException e){
-            map.put("msg",e.getMessage());
+            map.put("msg", "操作成功");
+            map.put("data", true);
+            map.put("kind", kind);
+        } catch (BusinessException e) {
+            map.put("msg", e.getMessage());
         }
         return map;
     }
 
     /**
      * 批量删除种类
-     * @author yahto
+     *
      * @param ids
      * @return
+     * @author yahto
      */
     @RequestMapping("kind_deleteKindByIds.ajax")
     @ResponseBody
-    public Map<String,Object> deleteKindByIds(Integer[] ids){
-        Map<String,Object> map = new HashMap<String,Object>();
-        map.put("data",false);
+    public Map<String, Object> deleteKindByIds(Integer[] ids) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("data", false);
         try {
             kindService.deleteKindByIds(ids);
-            map.put("msg","操作成功");
-            map.put("data",true);
-        }catch (BusinessException e){
-            map.put("msg",e.getMessage());
+            map.put("msg", "操作成功");
+            map.put("data", true);
+        } catch (BusinessException e) {
+            map.put("msg", e.getMessage());
         }
         return map;
     }
