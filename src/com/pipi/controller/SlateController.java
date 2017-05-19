@@ -22,12 +22,11 @@ public class SlateController extends BaseController {
 
     /**
      * 增加板材功能
-     *
+     * @author yahto
      * @param slate
      * @param kindId
      * @param stabKindId
      * @return
-     * @author yahto
      */
     @RequestMapping("slate_addSlate.ajax")
     @ResponseBody
