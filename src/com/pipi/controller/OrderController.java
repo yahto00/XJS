@@ -27,11 +27,12 @@ public class OrderController extends BaseController{
      */
     @RequestMapping("order_getAllOrder.ajax")
     @ResponseBody
-    public Map<String,Object> userLogin(){
+    public Map<String,Object> getAllOrder(){
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("data",false);
         try {
             List<Order> list = orderService.getAllOrder();
+            map.put("list",list);
             map.put("data",true);
             map.put("msg","操作成功");
         }catch (BusinessException e){
