@@ -16,27 +16,27 @@ import java.util.Map;
  * Created by yahto on 07/05/2017.
  */
 @Controller
-public class OrderController extends BaseController{
+public class OrderController extends BaseController {
 
     @Autowired
     private IOrderService orderService;
 
     /**
-     * @author yahto
      * @return
+     * @author yahto
      */
     @RequestMapping("order_getAllOrder.ajax")
     @ResponseBody
-    public Map<String,Object> getAllOrder(){
-        Map<String,Object> map = new HashMap<String,Object>();
-        map.put("data",false);
+    public Map<String, Object> getAllOrder() {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("data", false);
         try {
             List<Order> list = orderService.getAllOrder();
-            map.put("list",list);
-            map.put("data",true);
-            map.put("msg","操作成功");
-        }catch (BusinessException e){
-            map.put("msg",e.getMessage());
+            map.put("list", list);
+            map.put("data", true);
+            map.put("msg", "操作成功");
+        } catch (BusinessException e) {
+            map.put("msg", e.getMessage());
         }
         return map;
     }

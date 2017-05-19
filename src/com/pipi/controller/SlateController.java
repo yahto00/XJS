@@ -15,30 +15,51 @@ import java.util.Map;
  * Created by yahto on 13/05/2017.
  */
 @Controller
-public class SlateController extends BaseController{
+public class SlateController extends BaseController {
     @Autowired
     private ISlateService slateService;
 
     /**
      * 增加板材功能
-     * @author yahto
+     *
      * @param slate
      * @param kindId
      * @param stabKindId
      * @return
+     * @author yahto
      */
     @RequestMapping("slate_addSlate.ajax")
     @ResponseBody
-    public Map<String,Object> addSlate(Slate slate,Integer kindId,Integer stabKindId){
-
-        Map<String,Object> map = new HashMap<String,Object>();
-        map.put("data",false);
+    public Map<String, Object> addSlate(Slate slate, Integer kindId, Integer stabKindId, Float loseAcreage) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("data", false);
         try {
-            slateService.addSlate(slate,kindId,stabKindId);
-            map.put("msg","操作成功");
-            map.put("data",true);
-        }catch (BusinessException e){
-            map.put("msg",e.getMessage());
+            slateService.addSlate(slate, kindId, stabKindId, loseAcreage);
+            map.put("msg", "操作成功");
+            map.put("data", true);
+        } catch (BusinessException e) {
+            map.put("msg", e.getMessage());
+        }
+        return map;
+    }
+
+    /**
+     * 批量删除板材功能
+     * @author yahto
+     * @param ids
+     * @return
+     */
+    @RequestMapping("slate_deleteSlateByIds")
+    @ResponseBody
+    public Map<String, Object> deleteSlateByIds(Integer[] ids,Integer stabKindId) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("data", false);
+        try {
+            slateService.deleteSlateByIds(ids,stabKindId);
+            map.put("msg", "操作成功");
+            map.put("data", true);
+        } catch (BusinessException e) {
+            map.put("msg", e.getMessage());
         }
         return map;
     }
