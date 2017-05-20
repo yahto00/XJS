@@ -37,4 +37,21 @@ public class DSUtil {
         return stringBuilder.toString();
     }
 
+    /**
+     * 将List<Object>转为String
+     * @param list
+     * @return
+     */
+    public static String parseObjectList(List<Object> list){
+        StringBuilder stringBuilder = new StringBuilder();
+        int length = list.size();
+        for (int i = 0; i < length-1; i++) {
+            stringBuilder.append(list.get(i).toString()+",");
+        }
+        stringBuilder.append(list.get(length -1).toString());
+        return stringBuilder.toString();
+    }
+
+
+
 }
