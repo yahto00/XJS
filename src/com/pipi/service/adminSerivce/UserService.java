@@ -6,20 +6,19 @@ import javax.servlet.http.HttpServletRequest;
 import com.pipi.common.constant.SystemConstant;
 import com.pipi.common.exception.BusinessException;
 import com.pipi.common.logaop.MyLog;
+import com.pipi.entity.admin.Role;
 import com.pipi.entity.admin.User;
 import com.pipi.service.iservice.adminIService.IUserService;
 import com.pipi.util.DSUtil;
 import com.pipi.util.Ufn;
+import com.pipi.vo.UserRoleVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import com.pipi.dao.idao.adminIDao.IUserDao;
 import com.pipi.service.BaseService;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by yahto on 07/05/2017.
@@ -89,7 +88,27 @@ public class UserService extends BaseService implements IUserService {
 
     @Override
     public User queryUserById(Integer id) {
-        return (User) userDao.getObjectByID(User.class,id);
+        return (User) userDao.getObjectByID(User.class, id);
+    }
+
+    @Override
+    public List<UserRoleVo> queryAllUsers() {
+        List<User> userList = (List<User>) queryAll(User.class);
+        List<UserRoleVo> list = new ArrayList<UserRoleVo>();
+        Iterator iterator = userList.iterator();
+        while (iterator.hasNext()) {
+            User user = (User) iterator.next();
+            UserRoleVo userRoleVo = new UserRoleVo();
+            userRoleVo.setUser(user);
+            String sql = "select FK_ROLE_ID from T_USER_ROLE ur where FK_USER_ID = " + user.getId();
+            List<Object> userRole = (List<Object>) queryListByNavtiveSql(sql);
+            String hql = "from Role r where r.isDelete=0 and r.id in ("
+                    + DSUtil.parseObjectList(userRole) + ")";
+            List<Role> roleList = (List<Role>) queryObjectList(hql);
+            userRoleVo.setRoleList(roleList);
+            list.add(userRoleVo);
+        }
+        return list;
     }
 
     @Override

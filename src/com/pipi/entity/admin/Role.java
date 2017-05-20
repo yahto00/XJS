@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pipi.entity.BaseEntity;
 
 
@@ -35,6 +36,7 @@ public class Role extends BaseEntity {
 	private String description;
 
 	/** 权限，以逗号隔开多个权限 */
+	@JsonIgnore
 	@Transient
 	private String privs;
 
