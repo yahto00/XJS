@@ -2,6 +2,7 @@ package com.pipi.service.iservice.adminIService;
 
 import com.pipi.entity.admin.User;
 import com.pipi.service.iservice.IBaseService;
+import com.pipi.vo.UserRoleVo;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -20,4 +21,8 @@ public interface IUserService extends IBaseService{
     void updateUser(Integer userId,Integer[] roleIds);
    /** 根据Id查找用户*/
     User queryUserById(Integer id);
+    /** 添加用户功能*/
+    void addUser(User user, Integer[] roleIds);
+    /** 查询所有用户功能*/
+    List<UserRoleVo> queryAllUsers();
 }
