@@ -4,6 +4,7 @@ import com.pipi.entity.admin.User;
 import com.pipi.service.iservice.IBaseService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
 /**
@@ -17,4 +18,6 @@ public interface IUserService extends IBaseService{
     void deleteUserByIds(Integer[] ids);
     /** 修改用户角色*/
     void updateUser(Integer userId,Integer[] roleIds);
+   /** 根据Id查找用户*/
+    User queryUserById(Integer id);
 }

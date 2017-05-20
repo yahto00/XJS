@@ -86,4 +86,9 @@ public class UserService extends BaseService implements IUserService {
             batchExecuteNativeSql(sqls);
         }
     }
+
+    @Override
+    public User queryUserById(Integer id) {
+        return (User) userDao.getObjectByID(User.class,id);
+    }
 }

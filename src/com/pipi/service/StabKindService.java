@@ -44,4 +44,9 @@ public class StabKindService extends BaseService implements IStabKindService {
             delete(StabKind.class, DSUtil.parseIntegerArr(ids));
         }
     }
+
+    @Override
+    public List<StabKind> queryAllStabKind() {
+        return (List<StabKind>) queryAll(StabKind.class);
+    }
 }
