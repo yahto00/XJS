@@ -119,6 +119,11 @@ public class UserService extends BaseService implements IUserService {
         if (roleIds == null || roleIds.length ==0){
             throw new BusinessException("未指定用户的角色");
         }
+        String tempSql = "select * from T_USER u where u.LOGIN_NAME = " + user.getLoginName();
+        Object existUser = baseDao.getObjectByNativeSql2(tempSql);
+        if (existUser !=null){
+            throw new BusinessException("该登录名已经被使用，请重试");
+        }
         Integer userId = (Integer) save(user);
         List<String> stringList = new ArrayList<String>();
         for (Integer id : roleIds) {
