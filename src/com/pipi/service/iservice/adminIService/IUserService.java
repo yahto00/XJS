@@ -20,4 +20,6 @@ public interface IUserService extends IBaseService{
     void updateUser(Integer userId,Integer[] roleIds);
    /** 根据Id查找用户*/
     User queryUserById(Integer id);
+   /** 添加用户*/
+    void addUser(User user, Integer[] roleIds);
 }

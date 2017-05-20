@@ -232,6 +232,29 @@ public class UserController extends BaseController {
     }
 
     /**
+     * 添加用户
+     *
+     * @param user
+     * @param roleIds
+     * @return
+     * @author hbwj
+     */
+    @RequestMapping("user_addUser.ajax")
+    @ResponseBody
+       public  Map<String ,Object> addUser(User user,Integer[] roleIds){
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("data", false);
+        try {
+            userService.addUser(user,roleIds);
+            map.put("msg", "操作成功");
+            map.put("data", true);
+        } catch (BusinessException e) {
+            map.put("msg", e.getMessage());
+        }
+        return map;
+       }
+
+    /**
      * 其他页面直接返回
      *
      * @param path

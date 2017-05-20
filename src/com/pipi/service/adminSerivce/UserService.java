@@ -91,4 +91,21 @@ public class UserService extends BaseService implements IUserService {
     public User queryUserById(Integer id) {
         return (User) userDao.getObjectByID(User.class,id);
     }
+
+    @Override
+    public void addUser(User user, Integer[] roleIds) {
+        if (user == null){
+            throw new BusinessException("未接收到用户信息");
+        }
+        if (roleIds == null || roleIds.length ==0){
+            throw new BusinessException("未指定用户的角色");
+        }
+        Integer userId = (Integer) save(user);
+        List<String> stringList = new ArrayList<String>();
+        for (Integer id : roleIds) {
+            String sql = "insert into T_USER_ROLE (FK_ROLE_ID,FK_USER_ID) values(" + id + "," + userId +")";
+            stringList.add(sql);
+        }
+        batchExecuteNativeSql(stringList);
+    }
 }
