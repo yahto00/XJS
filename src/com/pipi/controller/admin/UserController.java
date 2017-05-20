@@ -3,6 +3,7 @@ package com.pipi.controller.admin;
 
 import com.pipi.common.constant.SystemConstant;
 import com.pipi.common.exception.BusinessException;
+import com.pipi.entity.admin.Role;
 import com.pipi.entity.admin.User;
 import com.pipi.service.iservice.adminIService.IUserService;
 import com.pipi.vo.UserRoleVo;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -173,8 +175,10 @@ public class UserController extends BaseController {
             if (user == null) {
                 throw new BusinessException("未登录,请先登陆");
             } else {
+                Iterator iterator = user.getRoles().iterator();
+                Role role = (Role) userService.queryObjectByID(Role.class,Integer.valueOf(iterator.next().toString()));
                 map.put("current_user", user);
-                map.put("roles", user.getRoles());
+                map.put("role", role);
                 map.put("privs", user.getPrivs());
             }
             map.put("msg", "操作成功");
