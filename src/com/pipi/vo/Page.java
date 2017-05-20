@@ -39,7 +39,7 @@ public class Page {
         if (flag == 0){
             pageCount = totalCount/pageSize;
         }else {
-            pageCount = totalCount + 1;
+            pageCount = totalCount/pageSize + 1;
         }
         return pageCount;
     }

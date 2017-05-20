@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -62,4 +63,27 @@ public class StabKindController extends BaseController {
         }
         return map;
     }
+
+    /**
+     * 查询所有扎种类
+     *
+     * @return
+     * @author  hbwj
+     */
+    @RequestMapping("stabKind_queryAllStabKind.ajax")
+    @ResponseBody
+     public Map<String,Object>  queryAllStabKind(){
+        Map<String,Object> map  =  new HashMap<String,Object>();
+        map.put("data",false);
+        try {
+            List<StabKind> list = stabKindService.queryAllStabKind();
+            map.put("list",list);
+            map.put("msg", "操作成功");
+            map.put("data", true);
+        } catch (BusinessException e) {
+            map.put("msg", e.getMessage());
+        }
+        return map;
+
+     }
 }

@@ -208,6 +208,30 @@ public class UserController extends BaseController {
     }
 
     /**
+     * 根据Id查询用户
+     *
+     * @param id
+     * @return
+     * @author hbwj
+     */
+    @RequestMapping("user_queryUserById.ajax")
+    @ResponseBody
+    public Map<String, Object> queryUserById(Integer id) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("data", false);
+        try {
+            User user = userService.queryUserById(id);
+            map.put("user", user);
+            map.put("msg", "操作成功");
+            map.put("data", true);
+        } catch (BusinessException e) {
+            map.put("msg", e.getMessage());
+        }
+        return map;
+
+    }
+
+    /**
      * 其他页面直接返回
      *
      * @param path
@@ -228,4 +252,6 @@ public class UserController extends BaseController {
     public String pagesPath(@PathVariable("path") String path) {
         return path;
     }
+
+
 }
