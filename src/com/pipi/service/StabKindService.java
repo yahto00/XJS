@@ -49,4 +49,9 @@ public class StabKindService extends BaseService implements IStabKindService {
     public List<StabKind> queryAllStabKind() {
         return (List<StabKind>) queryAll(StabKind.class);
     }
+
+    @Override
+    public void updateStabKind(StabKind stabKind) {
+         update(stabKind);
+    }
 }
