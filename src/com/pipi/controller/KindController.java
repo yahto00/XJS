@@ -73,7 +73,7 @@ public class KindController extends BaseController {
      * @return
      * @author yahto
      */
-    @RequestMapping("kind_editKind")
+    @RequestMapping("kind_editKind.ajax")
     @ResponseBody
     public Map<String, Object> editKind(Kind kind) {
         Map<String, Object> map = new HashMap<String, Object>();
