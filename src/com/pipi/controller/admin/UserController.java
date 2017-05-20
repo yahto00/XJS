@@ -5,6 +5,7 @@ import com.pipi.common.constant.SystemConstant;
 import com.pipi.common.exception.BusinessException;
 import com.pipi.entity.admin.User;
 import com.pipi.service.iservice.adminIService.IUserService;
+import com.pipi.vo.UserRoleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import com.pipi.controller.BaseController;
@@ -94,7 +95,7 @@ public class UserController extends BaseController {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            List<User> list = (List<User>) userService.queryAll(User.class);
+            List<UserRoleVo> list = (List<UserRoleVo>) userService.queryAllUsers();
             map.put("list", list);
             map.put("data", true);
             map.put("msg", "操作成功");

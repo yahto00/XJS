@@ -84,6 +84,27 @@ public class StabKindController extends BaseController {
             map.put("msg", e.getMessage());
         }
         return map;
+     }
 
+    /**
+     * 修改扎种类
+     *
+     * @param stabKind
+     * @return
+     */
+    @RequestMapping("stabKind_updateStabKind.ajax")
+    @ResponseBody
+     public  Map<String,Object> updateStabKind(StabKind stabKind){
+
+        Map<String,Object> map  =  new HashMap<String,Object>();
+        map.put("data",false);
+        try {
+             stabKindService.updateStabKind(stabKind);
+            map.put("msg", "操作成功");
+            map.put("data", true);
+        } catch (BusinessException e) {
+            map.put("msg", e.getMessage());
+        }
+        return map;
      }
 }

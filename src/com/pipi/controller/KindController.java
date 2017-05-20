@@ -48,7 +48,7 @@ public class KindController extends BaseController {
      * @return
      * @author yahto
      */
-    @RequestMapping("kind_queryKindById")
+    @RequestMapping("kind_queryKindById.ajax")
     @ResponseBody
     public Map<String, Object> queryKindById(Integer id) {
         Map<String, Object> map = new HashMap<String, Object>();
