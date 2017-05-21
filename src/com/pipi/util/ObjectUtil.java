@@ -15,16 +15,15 @@ public class ObjectUtil {
         Method[] methods = object.getClass().getDeclaredMethods();
         List<Method> getMethodList = new ArrayList<Method>();
         for (int i = 0; i < methods.length; i++) {
-            if (methods[i].getName().contains("get")){
+            if (methods[i].getName().contains("get") && methods[i].getReturnType().toString().equals("class java.lang.String")){
                 getMethodList.add(methods[i]);
             }
         }
-        for (Method getMethod :
-                getMethodList) {
+        for (Method getMethod : getMethodList) {
             try {
                 Object vo = getMethod.invoke(object);
-                if (!StringUtils.isBlank(vo.toString())){
-                    return false;
+                if (StringUtils.isBlank(vo.toString())){
+                    return true;
                 }
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
@@ -32,6 +31,6 @@ public class ObjectUtil {
                 e.printStackTrace();
             }
         }
-        return true;
+        return false;
     }
 }

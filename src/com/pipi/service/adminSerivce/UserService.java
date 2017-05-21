@@ -10,6 +10,7 @@ import com.pipi.entity.admin.Role;
 import com.pipi.entity.admin.User;
 import com.pipi.service.iservice.adminIService.IUserService;
 import com.pipi.util.DSUtil;
+import com.pipi.util.ObjectUtil;
 import com.pipi.util.Ufn;
 import com.pipi.vo.UserRoleVo;
 import org.apache.commons.collections.CollectionUtils;
@@ -70,8 +71,9 @@ public class UserService extends BaseService implements IUserService {
 
     @Override
     public void updateUser(User user, Integer[] roleIds) {
-        if (user == null) {
-            throw new BusinessException("未指定要修改的用户");
+        ObjectUtil.objectIsEmpty(user);
+        if (user == null || ObjectUtil.objectIsEmpty(user)) {
+            throw new BusinessException("未完整填写修改信息");
         }
         User existUser = (User) queryObjectByID(User.class,user.getId());
         if (existUser == null){
@@ -123,7 +125,7 @@ public class UserService extends BaseService implements IUserService {
 
     @Override
     public void addUser(User user, Integer[] roleIds) {
-        if (user == null){
+        if (user == null || ObjectUtil.objectIsEmpty(user)){
             throw new BusinessException("未接收到用户信息");
         }
         if (roleIds == null || roleIds.length ==0){
