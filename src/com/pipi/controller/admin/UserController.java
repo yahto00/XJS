@@ -176,7 +176,7 @@ public class UserController extends BaseController {
                 throw new BusinessException("未登录,请先登陆");
             } else {
                 Iterator iterator = user.getRoles().iterator();
-                Role role = (Role) userService.queryObjectByID(Role.class,Integer.valueOf(iterator.next().toString()));
+                Role role = (Role) userService.queryObjectByID(Role.class, Integer.valueOf(iterator.next().toString()));
                 map.put("current_user", user);
                 map.put("role", role);
                 map.put("privs", user.getPrivs());
@@ -199,11 +199,11 @@ public class UserController extends BaseController {
      */
     @RequestMapping("user_updateUser.ajax")
     @ResponseBody
-    public Map<String, Object> updateUser(User user, Integer[] roleIds) {
+    public Map<String, Object> updateUser(User user, Integer[] roleIds, String currentLoginName) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            userService.updateUser(user, roleIds);
+            userService.updateUser(user, roleIds, currentLoginName);
             map.put("msg", "操作成功");
             map.put("data", true);
         } catch (BusinessException e) {
@@ -246,18 +246,18 @@ public class UserController extends BaseController {
      */
     @RequestMapping("user_addUser.ajax")
     @ResponseBody
-       public  Map<String ,Object> addUser(User user,Integer[] roleIds){
+    public Map<String, Object> addUser(User user, Integer[] roleIds) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            userService.addUser(user,roleIds);
+            userService.addUser(user, roleIds);
             map.put("msg", "操作成功");
             map.put("data", true);
         } catch (BusinessException e) {
             map.put("msg", e.getMessage());
         }
         return map;
-       }
+    }
 
     /**
      * 其他页面直接返回
