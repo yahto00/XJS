@@ -73,11 +73,18 @@ public class UserService extends BaseService implements IUserService {
     public void updateUser(User user, Integer[] roleIds) {
         ObjectUtil.objectIsEmpty(user);
         if (user == null || ObjectUtil.objectIsEmpty(user)) {
-            throw new BusinessException("未完整填写修改信息");
+            throw new BusinessException("未完整填写用户修改信息信息");
         }
         User existUser = (User) queryObjectByID(User.class,user.getId());
         if (existUser == null){
             throw new BusinessException("要修改的用户不存在,请重试");
+        }
+        List<User> users = (List<User>) queryAll(User.class);
+        for (User tempUser :
+                users) {
+            if (user.getLoginName().equals(tempUser.getLoginName())){
+                throw new BusinessException("该账号已经存在,请重试");
+            }
         }
         existUser.setLoginName(user.getLoginName());
         existUser.setUserName(user.getUserName());
@@ -126,7 +133,7 @@ public class UserService extends BaseService implements IUserService {
     @Override
     public void addUser(User user, Integer[] roleIds) {
         if (user == null || ObjectUtil.objectIsEmpty(user)){
-            throw new BusinessException("未接收到用户信息");
+            throw new BusinessException("未填写完整用户信息");
         }
         if (roleIds == null || roleIds.length ==0){
             throw new BusinessException("未指定用户的角色");
