@@ -136,27 +136,27 @@ public class UserController extends BaseController {
      * @return
      * @author yahto
      */
-    @RequestMapping("user_updateUserById.ajax")
-    @ResponseBody
-    public Map<String, Object> updateUser(User user) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("data", false);
-        try {
-            if (user.getId() == null || !(user.getId() instanceof Integer)) {
-                throw new BusinessException("未指定用户");
-            }
-            User existUser = (User) userService.queryObjectByID(User.class, user.getId());
-            existUser.setLoginName(user.getLoginName());
-            existUser.setPassword(user.getPassword());
-            existUser.setUserName(user.getUserName());
-            userService.update(existUser);
-            map.put("data", true);
-            map.put("msg", "操作成功");
-        } catch (BusinessException e) {
-            map.put("msg", e.getMessage());
-        }
-        return map;
-    }
+//    @RequestMapping("user_updateUserById.ajax")
+//    @ResponseBody
+//    public Map<String, Object> updateUser(User user) {
+//        Map<String, Object> map = new HashMap<String, Object>();
+//        map.put("data", false);
+//        try {
+//            if (user.getId() == null || !(user.getId() instanceof Integer)) {
+//                throw new BusinessException("未指定用户");
+//            }
+//            User existUser = (User) userService.queryObjectByID(User.class, user.getId());
+//            existUser.setLoginName(user.getLoginName());
+//            existUser.setPassword(user.getPassword());
+//            existUser.setUserName(user.getUserName());
+//            userService.update(existUser);
+//            map.put("data", true);
+//            map.put("msg", "操作成功");
+//        } catch (BusinessException e) {
+//            map.put("msg", e.getMessage());
+//        }
+//        return map;
+//    }
 
     /**
      * 检测当前浏览器是否有用户已经登陆功能
@@ -192,18 +192,18 @@ public class UserController extends BaseController {
     /**
      * 修改用户角色功能
      *
-     * @param userId
+     * @param user
      * @param roleIds
      * @return
      * @author yahto
      */
-    @RequestMapping("user_updateUserRoleById.ajax")
+    @RequestMapping("user_updateUser.ajax")
     @ResponseBody
-    public Map<String, Object> updateUserRoleById(Integer userId, Integer[] roleIds) {
+    public Map<String, Object> updateUser(User user, Integer[] roleIds) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            userService.updateUser(userId, roleIds);
+            userService.updateUser(user, roleIds);
             map.put("msg", "操作成功");
             map.put("data", true);
         } catch (BusinessException e) {

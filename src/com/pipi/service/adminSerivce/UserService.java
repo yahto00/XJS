@@ -69,20 +69,30 @@ public class UserService extends BaseService implements IUserService {
     }
 
     @Override
-    public void updateUser(Integer userId, Integer[] roleIds) {
-        if (userId == null) {
+    public void updateUser(User user, Integer[] roleIds) {
+        if (user == null) {
             throw new BusinessException("未指定要修改的用户");
         }
+        User existUser = (User) queryObjectByID(User.class,user.getId());
+        if (existUser == null){
+            throw new BusinessException("要修改的用户不存在,请重试");
+        }
+        existUser.setLoginName(user.getLoginName());
+        existUser.setUserName(user.getUserName());
+        existUser.setPassword(user.getPassword());
+        update(existUser);
         if (roleIds != null && roleIds.length != 0) {
-            String hql = "delete UserRole ur where ur.user.id = " + userId;
+            String hql = "delete UserRole ur where ur.user.id = " + user.getId();
             updateByHql(hql);
             List<String> sqls = new ArrayList<String>();
             for (Integer roleId : roleIds) {
                 String tempSql = "insert into T_USER_ROLE (FK_ROLE_ID,FK_USER_ID) values("
-                        + roleId + "," + userId + ")";
+                        + roleId + "," + user.getId() + ")";
                 sqls.add(tempSql);
             }
             batchExecuteNativeSql(sqls);
+        }else {
+            throw new BusinessException("未指定用户角色");
         }
     }
 
