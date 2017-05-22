@@ -89,7 +89,7 @@ public class UserService extends BaseService implements IUserService {
             for (User tempUser :
                     users) {
                 if (user.getLoginName().equals(tempUser.getLoginName())) {
-                    throw new BusinessException("该账号已经存在,请重试");
+                    throw new BusinessException("该登录名已经被使用，请重试");
                 }
             }
         }
@@ -147,7 +147,7 @@ public class UserService extends BaseService implements IUserService {
         if (roleIds == null || roleIds.length == 0) {
             throw new BusinessException("未指定用户的角色");
         }
-        String tempSql = "select * from T_USER  where LOGIN_NAME = '" + user.getLoginName() + "'";
+        String tempSql = "select * from T_USER  where ISDELETE=0 and LOGIN_NAME = '" + user.getLoginName() + "'";
         Object existUser = baseDao.getObjectByNativeSql2(tempSql);
         if (existUser != null) {
             throw new BusinessException("该登录名已经被使用，请重试");
