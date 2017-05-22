@@ -24,7 +24,7 @@ public class ObjectUtil {
         for (Method getMethod : getMethodList) {
             try {
                 Object vo = getMethod.invoke(object);
-                if (StringUtils.isBlank(vo.toString())){
+                if (vo == null || StringUtils.isBlank(vo.toString())){
                     return true;
                 }
             } catch (IllegalAccessException e) {
