@@ -71,6 +71,7 @@ public class UserService extends BaseService implements IUserService {
     }
 
     @Override
+    @MyLog(operationName = "更新用户",operationType = "update")
     public void updateUser(User user, Integer[] roleIds, String currentLoginName) {
         String[] params = {"userName","loginName","password"};
         if (user == null || ObjectUtil.objectIsEmpty(user,params)) {
@@ -137,6 +138,7 @@ public class UserService extends BaseService implements IUserService {
     }
 
     @Override
+    @MyLog(operationName = "添加用户",operationType = "add")
     public void addUser(User user, Integer[] roleIds) {
         String[] params = {"userName","loginName","password"};
         if (user == null || ObjectUtil.objectIsEmpty(user,params)) {
