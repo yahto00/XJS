@@ -3,12 +3,14 @@ package com.pipi.controller;
 import com.pipi.common.exception.BusinessException;
 import com.pipi.entity.Kind;
 import com.pipi.service.iservice.IKindService;
+import com.pipi.util.ObjectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,7 +34,12 @@ public class KindController extends BaseController {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            kindService.add(kind);
+            String[] params = {"name", "num"};
+            if (null == kind || ObjectUtil.objectIsEmpty(kind, params)) {
+                throw new BusinessException("未填写种类的完整信息");
+            } else {
+                kindService.add(kind);
+            }
             map.put("msg", "操作成功");
             map.put("data", true);
         } catch (BusinessException e) {
@@ -79,8 +86,9 @@ public class KindController extends BaseController {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            if (kind == null)
-                throw new BusinessException("未指定种类");
+            String[] params = {"name", "num"};
+            if (null == kind || ObjectUtil.objectIsEmpty(kind, params))
+                throw new BusinessException("未填写种类的完整信息");
             Kind existKind = (Kind) kindService.queryObjectByID(Kind.class, kind.getId());
             if (existKind == null)
                 throw new BusinessException("要编辑的种类不存在");
@@ -114,6 +122,28 @@ public class KindController extends BaseController {
             map.put("data", true);
         } catch (BusinessException e) {
             map.put("msg", e.getMessage());
+        }
+        return map;
+    }
+
+    /**
+     * 查询所有种类信息功能
+     *
+     * @return
+     * @author yahto
+     */
+    @RequestMapping("kind_queryAllKind.ajax")
+    @ResponseBody
+    public Map<String, Object> queryAllKind() {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("data", false);
+        try {
+            List<Kind> list = (List<Kind>) kindService.queryAll(Kind.class);
+            map.put("list",list);
+            map.put("msg","操作成功");
+            map.put("data",true);
+        }catch (BusinessException e){
+            map.put("msg",e.getMessage());
         }
         return map;
     }
