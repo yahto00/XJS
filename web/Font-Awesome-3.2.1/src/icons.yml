@@ -1177,8 +1177,8 @@ icons:
       - Web Application Icons
 
 
-  - name:       CorsFilter
-    id:         CorsFilter
+  - name:       CrosFilter
+    id:         CrosFilter
     unicode:    f0b0
     created:    2.0
     categories:

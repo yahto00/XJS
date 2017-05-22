@@ -40,7 +40,7 @@
   </filter-mapping>
   <filter>
     <filter-name>CorsFilter</filter-name>
-    <filter-class>com.pipi.common.filter.CorsFilter</filter-class>
+    <filter-class>com.pipi.common.filter.CrosFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>CorsFilter</filter-name>

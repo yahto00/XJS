@@ -6,8 +6,11 @@ import com.pipi.entity.Kind;
 import com.pipi.entity.StabKind;
 import com.pipi.service.iservice.IKindService;
 import com.pipi.util.DSUtil;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,7 +28,7 @@ public class KindService extends BaseService implements IKindService {
         String hql = "from StabKind s where kindId in (" +
                 DSUtil.parseIntegerArr(ids) + ")";
         List<StabKind> slateList = (List<StabKind>) baseDao.getObjectList(hql);
-        if (slateList.size() != 0) {
+        if (!CollectionUtils.isEmpty(slateList)) {
             throw new BusinessException("当前种类下面还有扎 不能删除");
         } else {
             delete(Kind.class, DSUtil.parseIntegerArr(ids));
