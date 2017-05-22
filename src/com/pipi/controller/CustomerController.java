@@ -39,7 +39,7 @@ public class CustomerController extends BaseController {
             map.put("data", true);
             map.put("msg", "操作成功");
         } catch (BusinessException e) {
-            map.put("msg", "操作失败");
+            map.put("msg", e.getMessage());
         }
         return map;
     }
@@ -62,7 +62,7 @@ public class CustomerController extends BaseController {
             map.put("data", true);
             map.put("msg", "操作成功");
         } catch (BusinessException e) {
-            map.put("msg", "操作失败");
+            map.put("msg", e.getMessage());
         }
         return map;
     }

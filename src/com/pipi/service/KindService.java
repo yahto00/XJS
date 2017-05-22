@@ -25,7 +25,7 @@ public class KindService extends BaseService implements IKindService {
             throw new BusinessException("未指定要删除的种类");
         }
         //先去查找板材表里面是否有属于当前扎的 若有 直接返回失败
-        String hql = "from StabKind s where kindId in (" +
+        String hql = "from StabKind s where s.isDelete=0 kindId in (" +
                 DSUtil.parseIntegerArr(ids) + ")";
         List<StabKind> slateList = (List<StabKind>) baseDao.getObjectList(hql);
         if (!CollectionUtils.isEmpty(slateList)) {

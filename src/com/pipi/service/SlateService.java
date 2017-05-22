@@ -54,7 +54,7 @@ public class SlateService extends BaseService implements ISlateService {
         }
         StabKind stabKind = (StabKind) queryObjectByID(StabKind.class, stabKindId);
         Float outAcreage = 0f;
-        String hql = "from Slate where id in (" + DSUtil.parseIntegerArr(ids) + ")";
+        String hql = "from Slate where isDelete=0 and id in (" + DSUtil.parseIntegerArr(ids) + ")";
         List<Slate> list = (List<Slate>) queryObjectList(hql);
         for (Slate slate :
                 list) {
