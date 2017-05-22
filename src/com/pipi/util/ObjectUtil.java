@@ -11,12 +11,14 @@ import java.util.List;
  * Created by yahto on 21/05/2017.
  */
 public class ObjectUtil {
-    public static boolean objectIsEmpty(Object object){
+    public static boolean objectIsEmpty(Object object,String[] params){
         Method[] methods = object.getClass().getDeclaredMethods();
         List<Method> getMethodList = new ArrayList<Method>();
         for (int i = 0; i < methods.length; i++) {
-            if (methods[i].getName().contains("get") && methods[i].getReturnType().toString().equals("class java.lang.String")){
-                getMethodList.add(methods[i]);
+            for (int j = 0; j < params.length; j++) {
+                if (methods[i].getName().toUpperCase().contains("GET"+params[j].toUpperCase()) && methods[i].getReturnType().toString().equals("class java.lang.String")){
+                    getMethodList.add(methods[i]);
+                }
             }
         }
         for (Method getMethod : getMethodList) {

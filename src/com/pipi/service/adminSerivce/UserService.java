@@ -72,8 +72,8 @@ public class UserService extends BaseService implements IUserService {
 
     @Override
     public void updateUser(User user, Integer[] roleIds, String currentLoginName) {
-        ObjectUtil.objectIsEmpty(user);
-        if (user == null || ObjectUtil.objectIsEmpty(user)) {
+        String[] params = {"userName","loginName","password"};
+        if (user == null || ObjectUtil.objectIsEmpty(user,params)) {
             throw new BusinessException("未完整填写用户修改信息信息");
         }
         User existUser = (User) queryObjectByID(User.class, user.getId());
@@ -138,7 +138,8 @@ public class UserService extends BaseService implements IUserService {
 
     @Override
     public void addUser(User user, Integer[] roleIds) {
-        if (user == null || ObjectUtil.objectIsEmpty(user)) {
+        String[] params = {"userName","loginName","password"};
+        if (user == null || ObjectUtil.objectIsEmpty(user,params)) {
             throw new BusinessException("未填写完整用户信息");
         }
         if (roleIds == null || roleIds.length == 0) {
