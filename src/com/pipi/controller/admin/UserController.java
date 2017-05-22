@@ -3,6 +3,7 @@ package com.pipi.controller.admin;
 
 import com.pipi.common.constant.SystemConstant;
 import com.pipi.common.exception.BusinessException;
+import com.pipi.entity.admin.Role;
 import com.pipi.entity.admin.User;
 import com.pipi.service.iservice.adminIService.IUserService;
 import com.pipi.vo.UserRoleVo;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -134,27 +136,27 @@ public class UserController extends BaseController {
      * @return
      * @author yahto
      */
-    @RequestMapping("user_updateUserById.ajax")
-    @ResponseBody
-    public Map<String, Object> updateUser(User user) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("data", false);
-        try {
-            if (user.getId() == null || !(user.getId() instanceof Integer)) {
-                throw new BusinessException("未指定用户");
-            }
-            User existUser = (User) userService.queryObjectByID(User.class, user.getId());
-            existUser.setLoginName(user.getLoginName());
-            existUser.setPassword(user.getPassword());
-            existUser.setUserName(user.getUserName());
-            userService.update(existUser);
-            map.put("data", true);
-            map.put("msg", "操作成功");
-        } catch (BusinessException e) {
-            map.put("msg", e.getMessage());
-        }
-        return map;
-    }
+//    @RequestMapping("user_updateUserById.ajax")
+//    @ResponseBody
+//    public Map<String, Object> updateUser(User user) {
+//        Map<String, Object> map = new HashMap<String, Object>();
+//        map.put("data", false);
+//        try {
+//            if (user.getId() == null || !(user.getId() instanceof Integer)) {
+//                throw new BusinessException("未指定用户");
+//            }
+//            User existUser = (User) userService.queryObjectByID(User.class, user.getId());
+//            existUser.setLoginName(user.getLoginName());
+//            existUser.setPassword(user.getPassword());
+//            existUser.setUserName(user.getUserName());
+//            userService.update(existUser);
+//            map.put("data", true);
+//            map.put("msg", "操作成功");
+//        } catch (BusinessException e) {
+//            map.put("msg", e.getMessage());
+//        }
+//        return map;
+//    }
 
     /**
      * 检测当前浏览器是否有用户已经登陆功能
@@ -173,8 +175,10 @@ public class UserController extends BaseController {
             if (user == null) {
                 throw new BusinessException("未登录,请先登陆");
             } else {
+                Iterator iterator = user.getRoles().iterator();
+                Role role = (Role) userService.queryObjectByID(Role.class, Integer.valueOf(iterator.next().toString()));
                 map.put("current_user", user);
-                map.put("roles", user.getRoles());
+                map.put("role", role);
                 map.put("privs", user.getPrivs());
             }
             map.put("msg", "操作成功");
@@ -188,22 +192,22 @@ public class UserController extends BaseController {
     /**
      * 修改用户角色功能
      *
-     * @param userId
+     * @param user
      * @param roleIds
      * @return
      * @author yahto
      */
-    @RequestMapping("user_updateUserRoleById.ajax")
+    @RequestMapping("user_updateUser.ajax")
     @ResponseBody
-    public Map<String, Object> updateUserRoleById(Integer userId, Integer[] roleIds) {
+    public Map<String, Object> updateUser(User user, Integer[] roleIds, String currentLoginName) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            userService.updateUser(userId, roleIds);
+            userService.updateUser(user, roleIds, currentLoginName);
             map.put("msg", "操作成功");
             map.put("data", true);
         } catch (BusinessException e) {
-            map.put("msg", "操作失败");
+            map.put("msg", e.getMessage());
         }
         return map;
     }
@@ -230,6 +234,29 @@ public class UserController extends BaseController {
         }
         return map;
 
+    }
+
+    /**
+     * 添加用户
+     *
+     * @param user
+     * @param roleIds
+     * @return
+     * @author hbwj
+     */
+    @RequestMapping("user_addUser.ajax")
+    @ResponseBody
+    public Map<String, Object> addUser(User user, Integer[] roleIds) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("data", false);
+        try {
+            userService.addUser(user, roleIds);
+            map.put("msg", "操作成功");
+            map.put("data", true);
+        } catch (BusinessException e) {
+            map.put("msg", e.getMessage());
+        }
+        return map;
     }
 
     /**

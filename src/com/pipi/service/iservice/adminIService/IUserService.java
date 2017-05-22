@@ -18,9 +18,11 @@ public interface IUserService extends IBaseService{
     /** 批量删除用户*/
     void deleteUserByIds(Integer[] ids);
     /** 修改用户角色*/
-    void updateUser(Integer userId,Integer[] roleIds);
+    void updateUser(User user,Integer[] roleIds,String currentLoginName);
    /** 根据Id查找用户*/
     User queryUserById(Integer id);
-    /** 查询所有用户和用户角色*/
+    /** 添加用户功能*/
+    void addUser(User user, Integer[] roleIds);
+    /** 查询所有用户功能*/
     List<UserRoleVo> queryAllUsers();
 }

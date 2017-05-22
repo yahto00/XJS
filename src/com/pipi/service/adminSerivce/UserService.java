@@ -10,9 +10,11 @@ import com.pipi.entity.admin.Role;
 import com.pipi.entity.admin.User;
 import com.pipi.service.iservice.adminIService.IUserService;
 import com.pipi.util.DSUtil;
+import com.pipi.util.ObjectUtil;
 import com.pipi.util.Ufn;
 import com.pipi.vo.UserRoleVo;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.pipi.dao.idao.adminIDao.IUserDao;
@@ -69,20 +71,43 @@ public class UserService extends BaseService implements IUserService {
     }
 
     @Override
-    public void updateUser(Integer userId, Integer[] roleIds) {
-        if (userId == null) {
-            throw new BusinessException("未指定要修改的用户");
+    public void updateUser(User user, Integer[] roleIds, String currentLoginName) {
+        String[] params = {"userName","loginName","password"};
+        if (user == null || ObjectUtil.objectIsEmpty(user,params)) {
+            throw new BusinessException("未完整填写用户修改信息信息");
         }
+        User existUser = (User) queryObjectByID(User.class, user.getId());
+        if (existUser == null) {
+            throw new BusinessException("要修改的用户不存在,请重试");
+        }
+        List<User> users = (List<User>) queryAll(User.class);
+        if (StringUtils.isBlank(currentLoginName)) {
+            throw new BusinessException("未接收到当前账号名");
+        }
+        if (!currentLoginName.equals(user.getLoginName())) {
+            for (User tempUser :
+                    users) {
+                if (user.getLoginName().equals(tempUser.getLoginName())) {
+                    throw new BusinessException("该账号已经存在,请重试");
+                }
+            }
+        }
+        existUser.setLoginName(user.getLoginName());
+        existUser.setUserName(user.getUserName());
+        existUser.setPassword(user.getPassword());
+        update(existUser);
         if (roleIds != null && roleIds.length != 0) {
-            String hql = "delete UserRole ur where ur.user.id = " + userId;
+            String hql = "delete UserRole ur where ur.user.id = " + user.getId();
             updateByHql(hql);
             List<String> sqls = new ArrayList<String>();
             for (Integer roleId : roleIds) {
                 String tempSql = "insert into T_USER_ROLE (FK_ROLE_ID,FK_USER_ID) values("
-                        + roleId + "," + userId + ")";
+                        + roleId + "," + user.getId() + ")";
                 sqls.add(tempSql);
             }
             batchExecuteNativeSql(sqls);
+        } else {
+            throw new BusinessException("未指定用户角色");
         }
     }
 
@@ -109,5 +134,28 @@ public class UserService extends BaseService implements IUserService {
             list.add(userRoleVo);
         }
         return list;
+    }
+
+    @Override
+    public void addUser(User user, Integer[] roleIds) {
+        String[] params = {"userName","loginName","password"};
+        if (user == null || ObjectUtil.objectIsEmpty(user,params)) {
+            throw new BusinessException("未填写完整用户信息");
+        }
+        if (roleIds == null || roleIds.length == 0) {
+            throw new BusinessException("未指定用户的角色");
+        }
+        String tempSql = "select * from T_USER  where LOGIN_NAME = '" + user.getLoginName() + "'";
+        Object existUser = baseDao.getObjectByNativeSql2(tempSql);
+        if (existUser != null) {
+            throw new BusinessException("该登录名已经被使用，请重试");
+        }
+        Integer userId = (Integer) save(user);
+        List<String> stringList = new ArrayList<String>();
+        for (Integer id : roleIds) {
+            String sql = "insert into T_USER_ROLE (FK_ROLE_ID,FK_USER_ID) values(" + id + "," + userId + ")";
+            stringList.add(sql);
+        }
+        batchExecuteNativeSql(stringList);
     }
 }
