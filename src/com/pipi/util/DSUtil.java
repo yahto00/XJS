@@ -1,5 +1,7 @@
 package com.pipi.util;
 
+import org.apache.commons.collections.CollectionUtils;
+
 import java.util.List;
 
 /**
@@ -43,6 +45,8 @@ public class DSUtil {
      * @return
      */
     public static String parseObjectList(List<Object> list){
+        if (CollectionUtils.isEmpty(list))
+            return null;
         StringBuilder stringBuilder = new StringBuilder();
         int length = list.size();
         for (int i = 0; i < length-1; i++) {

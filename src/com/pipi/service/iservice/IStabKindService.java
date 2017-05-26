@@ -12,8 +12,6 @@ public interface IStabKindService extends IBaseService{
     void addStabKind(StabKind stabKind);
     /** 批量删除扎*/
     void deleteStabKindByIds(Integer[] ids);
-   /** 查询所有扎种类*/
+    /** 查询所有扎种类*/
     List<StabKind> queryAllStabKind();
-
-    void updateStabKind(StabKind stabKind);
 }

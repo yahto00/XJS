@@ -128,6 +128,9 @@ public class UserService extends BaseService implements IUserService {
             userRoleVo.setUser(user);
             String sql = "select FK_ROLE_ID from T_USER_ROLE ur where FK_USER_ID = " + user.getId();
             List<Object> userRole = (List<Object>) queryListByNavtiveSql(sql);
+            String condition = DSUtil.parseObjectList(userRole);
+            if (StringUtils.isBlank(condition))
+                throw new BusinessException("有用户暂未分配角色,请联系后台");
             String hql = "from Role r where r.isDelete=0 and r.id in ("
                     + DSUtil.parseObjectList(userRole) + ")";
             List<Role> roleList = (List<Role>) queryObjectList(hql);
