@@ -3,6 +3,7 @@ package com.pipi.service;
 import com.pipi.common.constant.SystemConstant;
 import com.pipi.common.exception.BusinessException;
 import com.pipi.common.logaop.MyLog;
+import com.pipi.entity.Kind;
 import com.pipi.entity.Slate;
 import com.pipi.entity.SlateOnChange;
 import com.pipi.entity.StabKind;
@@ -32,11 +33,11 @@ public class SlateService extends BaseService implements ISlateService {
         if (stabKindId == null) {
             throw new BusinessException("未指定板材所属扎");
         }
-        slate.setKindId(kindId);//关联种类
+        slate.setKind((Kind) queryObjectByID(Kind.class,kindId));//关联种类
         StabKind stabKind = (StabKind) queryObjectByID(StabKind.class, stabKindId);
         stabKind.setCurrentCount(stabKind.getCurrentCount() + 1);//入库数量加1
         stabKind.setCurrentAcreage(stabKind.getCurrentAcreage() + slate.getHeight() * slate.getLength() - loseAcreage);//改变在库面积
-        slate.setStabKindId(stabKindId);//关联板材
+        slate.setStabKind(stabKind);//关联板材
         Integer slateId = (Integer) save(slate);
         SlateOnChange slateOnChange = new SlateOnChange();
         slateOnChange.setOp_time(new Date());

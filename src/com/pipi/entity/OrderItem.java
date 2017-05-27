@@ -28,9 +28,10 @@ public class OrderItem extends BaseEntity{
     private Integer count;
 
     /** 条目所属订单*/
-    /** 关联所属的种类*/
-    @Column(name = "FK_ORDER_ID")
-    private Integer orderId;
+
+    @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+    @JoinColumn(name = "FK_ORDER_ID")
+    private Order order;
 
     public Integer getId() {
         return id;
@@ -64,11 +65,11 @@ public class OrderItem extends BaseEntity{
         this.count = count;
     }
 
-    public Integer getOrderId() {
-        return orderId;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

@@ -34,7 +34,7 @@ public class Development extends BaseEntity{
 
     /** 成品的来源*/
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "FK_STAB_KIND",foreignKey = @ForeignKey(name = "FK_STAB_KIND"))
+    @JoinColumn(name = "FK_STAB_KIND_ID")
     private Slate slate;
 
     public Integer getId() {

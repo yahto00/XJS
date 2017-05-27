@@ -24,7 +24,7 @@ public class StabKindService extends BaseService implements IStabKindService {
         if (ObjectUtil.objectIsEmpty(stabKind,params)) {
             throw new BusinessException("未填写完整信息");
         }
-        if (stabKind.getKindId() == null) {
+        if (stabKind.getKind() == null) {
             throw new BusinessException("未指定扎所属的种类");
         }
         save(stabKind);

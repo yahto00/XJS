@@ -95,8 +95,9 @@ public class StabKind extends BaseEntity {
     /**
      * 关联所属的种类
      */
-    @Column(name = "FK_KIND_ID")
-    private Integer kindId;
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "FK_KIND_ID")
+    private Kind kind;
 
     public Integer getId() {
         return id;
@@ -190,11 +191,11 @@ public class StabKind extends BaseEntity {
         return in_time;
     }
 
-    public Integer getKindId() {
-        return kindId;
+    public Kind getKind() {
+        return kind;
     }
 
-    public void setKindId(Integer kindId) {
-        this.kindId = kindId;
+    public void setKind(Kind kind) {
+        this.kind = kind;
     }
 }
