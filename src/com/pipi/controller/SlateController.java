@@ -21,7 +21,7 @@ public class SlateController extends BaseController {
     private ISlateService slateService;
 
     /**
-     * 增加板材功能
+     * 增加回退板材功能
      *
      * @param slate
      * @param kindId
@@ -31,11 +31,11 @@ public class SlateController extends BaseController {
      */
     @RequestMapping("slate_addSlate.ajax")
     @ResponseBody
-    public Map<String, Object> addSlate(Slate slate, Integer kindId, Integer stabKindId, Float loseAcreage, HttpServletRequest request) {
+    public Map<String, Object> addSlate(Slate slate, Integer kindId, Integer stabKindId, HttpServletRequest request) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            slateService.addSlate(slate, kindId, stabKindId, loseAcreage, request);
+            slateService.addSlate(slate, kindId, stabKindId, request);
             map.put("msg", "操作成功");
             map.put("data", true);
         } catch (BusinessException e) {

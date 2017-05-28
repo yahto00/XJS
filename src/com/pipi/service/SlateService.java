@@ -10,6 +10,7 @@ import com.pipi.entity.StabKind;
 import com.pipi.entity.admin.User;
 import com.pipi.service.iservice.ISlateService;
 import com.pipi.util.DSUtil;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,7 @@ import java.util.List;
 public class SlateService extends BaseService implements ISlateService {
     @Override
     @MyLog(operationName = "添加板材", operationType = "add")
-    public void addSlate(Slate slate, Integer kindId, Integer stabKindId, Float loseAcreage, HttpServletRequest request) {
+    public void addSlate(Slate slate, Integer kindId, Integer stabKindId, HttpServletRequest request) {
         if (slate == null) {
             throw new BusinessException("未填写板材信息");
         }
@@ -33,10 +34,10 @@ public class SlateService extends BaseService implements ISlateService {
         if (stabKindId == null) {
             throw new BusinessException("未指定板材所属扎");
         }
-        slate.setKind((Kind) queryObjectByID(Kind.class,kindId));//关联种类
+        slate.setKind((Kind) queryObjectByID(Kind.class, kindId));//关联种类
         StabKind stabKind = (StabKind) queryObjectByID(StabKind.class, stabKindId);
         stabKind.setCurrentCount(stabKind.getCurrentCount() + 1);//入库数量加1
-        stabKind.setCurrentAcreage(stabKind.getCurrentAcreage() + slate.getHeight() * slate.getLength() - loseAcreage);//改变在库面积
+        stabKind.setCurrentAcreage(stabKind.getCurrentAcreage() + slate.getHeight() * slate.getLength());//改变在库面积
         slate.setStabKind(stabKind);//关联板材
         Integer slateId = (Integer) save(slate);
         SlateOnChange slateOnChange = new SlateOnChange();
@@ -55,7 +56,8 @@ public class SlateService extends BaseService implements ISlateService {
         }
         StabKind stabKind = (StabKind) queryObjectByID(StabKind.class, stabKindId);
         Float outAcreage = 0f;
-        String hql = "from Slate where isDelete=0 and id in (" + DSUtil.parseIntegerArr(ids) + ")";
+        String finalIds = DSUtil.parseIntegerArr(ids);
+        String hql = "from Slate where isDelete=0 and id in (" + finalIds + ")";
         List<Slate> list = (List<Slate>) queryObjectList(hql);
         for (Slate slate :
                 list) {
@@ -70,11 +72,30 @@ public class SlateService extends BaseService implements ISlateService {
         } else {
             stabKind.setCurrentAcreage(stabKind.getCurrentAcreage() - outAcreage);
         }
-        delete(Slate.class, DSUtil.parseIntegerArr(ids));
+        delete(Slate.class, finalIds);
+        update(stabKind);
         SlateOnChange slateOnChange = new SlateOnChange();
         slateOnChange.setOp_time(new Date());
         User user = (User) (request.getSession().getAttribute(SystemConstant.CURRENT_USER));
-        slateOnChange.setDescription("用户：" + user.getUserName() + " 删除板材 " + DSUtil.parseIntegerArr(ids));
+        slateOnChange.setDescription("用户：" + user.getUserName() + " 删除板材 " + finalIds);
+        slateOnChange.setUserId(user.getId());
+        add(slateOnChange);
+    }
+
+    @Override
+    @MyLog(operationName = "添加扎的时候添加板材", operationType = "add")
+    public void addSlate(List<Slate> slateList, HttpServletRequest request) {
+        if (CollectionUtils.isEmpty(slateList)) {
+            throw new BusinessException("未填写板材信息");
+        }
+        for (Slate slate :
+                slateList) {
+            add(slate);
+        }
+        SlateOnChange slateOnChange = new SlateOnChange();
+        slateOnChange.setOp_time(new Date());
+        User user = (User) (request.getSession().getAttribute(SystemConstant.CURRENT_USER));
+        slateOnChange.setDescription("用户：" + user.getUserName() + " 增加" + slateList.size() + "块板材 " + slateList.get(0).getSlateName() + " " + slateList.get(0).getId());
         slateOnChange.setUserId(user.getId());
         add(slateOnChange);
     }
