@@ -86,6 +86,9 @@ public class StabKindController extends BaseController {
             map.put("data", true);
         } catch (BusinessException e) {
             map.put("msg", e.getMessage());
+        }catch (Exception e){
+            e.printStackTrace();
+            map.put("msg","系统错误");
         }
         return map;
     }
