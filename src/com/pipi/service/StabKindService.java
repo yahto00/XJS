@@ -8,6 +8,7 @@ import com.pipi.service.iservice.IStabKindService;
 import com.pipi.util.DSUtil;
 import com.pipi.util.ObjectUtil;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -54,8 +55,17 @@ public class StabKindService extends BaseService implements IStabKindService {
     }
 
     @Override
-    public List<StabKind> queryALLStabKindByKindId(Integer id) {
-        String hql = " from StabKind where is isDelete=0 and kind.id = " + id;
-        return (List<StabKind>) baseDao.getObjectListByNativeHql(hql);
+    public List<StabKind> queryALLStabKindByKindId(Integer id, String num) {
+        if (id == null && StringUtils.isBlank(num)) {
+            throw new BusinessException("没有填写查询条件");
+        }
+        StringBuilder hql = new StringBuilder("from StabKind where isDelete=0");
+        if (!StringUtils.isBlank(num)) {
+            hql.append(" and num like '%" + num + "%'");
+        }
+        if (id != null) {
+            hql.append(" and kind.id=" + id);
+        }
+        return (List<StabKind>) baseDao.getObjectListByNativeHql(hql.toString());
     }
 }

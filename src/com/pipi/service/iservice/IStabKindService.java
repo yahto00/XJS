@@ -15,5 +15,5 @@ public interface IStabKindService extends IBaseService{
     /** 查询所有扎种类*/
     List<StabKind> queryAllStabKind();
     /** 根据种类Id查询所有扎种类*/
-    List<StabKind> queryALLStabKindByKindId(Integer id);
+    List<StabKind> queryALLStabKindByKindId(Integer id,String num);
 }

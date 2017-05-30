@@ -87,9 +87,9 @@ public class StabKindController extends BaseController {
             map.put("data", true);
         } catch (BusinessException e) {
             map.put("msg", e.getMessage());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            map.put("msg","系统错误");
+            map.put("msg", "系统错误");
         }
         return map;
     }
@@ -156,18 +156,20 @@ public class StabKindController extends BaseController {
 
     /**
      * 根据种类Id查询所有扎种类
+     *
      * @param id
      * @return
+     * @author hbwj
      */
 
     @RequestMapping("slate_queryALLStabKindByKindId.ajax")
     @ResponseBody
-    public  Map<String,Object> queryALLStabKindByKindId(Integer id){
+    public Map<String, Object> queryALLStabKindByKindId(Integer id, String num) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            List<StabKind> list = stabKindService.queryALLStabKindByKindId(id);
-            map.put("list",list);
+            List<StabKind> list = stabKindService.queryALLStabKindByKindId(id, num);
+            map.put("list", list);
             map.put("msg", "操作成功");
             map.put("data", true);
         } catch (BusinessException e) {
