@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface ISlateService extends IBaseService {
     /** 增加板材功能*/
-    void addSlate(Slate slate, Integer kindId, Integer stabKindId, HttpServletRequest request);
+    void backSlate(Slate slate, Integer kindId, Integer stabKindId, HttpServletRequest request);
     /** 批量删除板材*/
     void deleteSlateByIds(Integer[] ids,Integer stabKindId,HttpServletRequest request);
     /** 在添加扎的时候添加板材*/

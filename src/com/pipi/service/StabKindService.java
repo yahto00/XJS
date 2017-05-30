@@ -37,9 +37,9 @@ public class StabKindService extends BaseService implements IStabKindService {
             throw new BusinessException("未指定要删除的扎");
         }
         //先去查找板材表里面是否有属于当前扎的 若有 直接返回失败
-        String hql = "from Slate s where isDelete=0 and stabKindId in (" +
+        String hql = "from Slate where isDelete=0 and stabKind.id in (" +
                 DSUtil.parseIntegerArr(ids) + ")";
-        List<Slate> slateList = (List<Slate>) baseDao.getObjectList(hql);
+        List<Slate> slateList = (List<Slate>) baseDao.getObjectListByNativeHql(hql);
         if (CollectionUtils.isEmpty(slateList)) {
             throw new BusinessException("当前扎下面还有板材 不能删除");
         } else {

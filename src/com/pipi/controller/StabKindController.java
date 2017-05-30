@@ -65,15 +65,13 @@ public class StabKindController extends BaseController {
             stabKind.setDescription(description);
             stabKind.setKind(kind);
             stabKind.setOriginalCount(voList.size());
-            Integer stabKindId = stabKindService.addStabKind(stabKind);
-            StabKind existStabKind = (StabKind) stabKindService.queryObjectByID(StabKind.class,stabKindId);
             //填充Slate信息
             List<Slate> slateList = new ArrayList<Slate>();
             for (SlateVO vo : voList) {
                 Slate slate = new Slate();
-                slate.setStabKind(existStabKind);
+                slate.setStabKind(stabKind);
                 slate.setKind(kind);
-                slate.setParentId(0);
+                slate.setParentId(0);//刚存入 父id 为0
                 slate.setSlateName(json.getString("slateName"));
                 slate.setPrice(json.getDouble("price"));
                 slate.setHeight(vo.getHeight());
