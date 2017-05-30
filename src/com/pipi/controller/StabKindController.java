@@ -65,6 +65,8 @@ public class StabKindController extends BaseController {
             stabKind.setDescription(description);
             stabKind.setKind(kind);
             stabKind.setOriginalCount(voList.size());
+            stabKind.setCurrentCount(voList.size());
+            stabKind.setCurrentAcreage(originalAcreage);
             //填充Slate信息
             List<Slate> slateList = new ArrayList<Slate>();
             for (SlateVO vo : voList) {
