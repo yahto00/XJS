@@ -83,6 +83,7 @@ public class SlateService extends BaseService implements ISlateService {
     }
 
     @Override
+    @MyLog(operationName = "添加扎的时候添加板材",operationType = "add")
     public void addSlate(List<Slate> slateList, HttpServletRequest request) {
         if (CollectionUtils.isEmpty(slateList)) {
             throw new BusinessException("未填写板材信息");
