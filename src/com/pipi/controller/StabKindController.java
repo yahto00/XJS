@@ -161,8 +161,7 @@ public class StabKindController extends BaseController {
      * @return
      * @author hbwj
      */
-
-    @RequestMapping("slate_queryALLStabKindByKindId.ajax")
+    @RequestMapping("stabKind_queryALLStabKindByKindId.ajax")
     @ResponseBody
     public Map<String, Object> queryALLStabKindByKindId(Integer id, String num) {
         Map<String, Object> map = new HashMap<String, Object>();
