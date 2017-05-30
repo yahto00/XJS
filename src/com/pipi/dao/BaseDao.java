@@ -297,8 +297,8 @@ public class BaseDao extends HibernateDaoSupport implements IBaseDao {
 		return (Long)getUnqueResult(hql, map);
 	}
 
-	@Override
-	public Integer getObjectByNativeSql(String sql) {
-		return getHBSession().createSQLQuery(sql).list().size();
-	}
+		@Override
+		public Integer getObjectByNativeSql(String sql) {
+			return getHBSession().createSQLQuery(sql).list().size();
+		}
 }

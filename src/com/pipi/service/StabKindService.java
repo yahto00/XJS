@@ -10,6 +10,7 @@ import com.pipi.util.ObjectUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,8 +21,8 @@ public class StabKindService extends BaseService implements IStabKindService {
     @Override
     @MyLog(operationName = "添加扎", operationType = "add")
     public Integer addStabKind(StabKind stabKind) {
-        String[] params = {"num","originalCount","originalAcreage"};
-        if (ObjectUtil.objectIsEmpty(stabKind,params)) {
+        String[] params = {"num", "originalCount", "originalAcreage"};
+        if (ObjectUtil.objectIsEmpty(stabKind, params)) {
             throw new BusinessException("未填写完整信息");
         }
         if (stabKind.getKind() == null) {
@@ -50,5 +51,11 @@ public class StabKindService extends BaseService implements IStabKindService {
     @Override
     public List<StabKind> queryAllStabKind() {
         return (List<StabKind>) queryAll(StabKind.class);
+    }
+
+    @Override
+    public List<StabKind> queryALLStabKindByKindId(Integer id) {
+        String hql = " from StabKind where is isDelete=0 and kind.id = " + id;
+        return (List<StabKind>) baseDao.getObjectListByNativeHql(hql);
     }
 }

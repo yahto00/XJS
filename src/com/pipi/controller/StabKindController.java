@@ -8,6 +8,7 @@ import com.pipi.common.exception.BusinessException;
 import com.pipi.entity.Kind;
 import com.pipi.entity.Slate;
 import com.pipi.entity.StabKind;
+import com.pipi.service.StabKindService;
 import com.pipi.service.iservice.IKindService;
 import com.pipi.service.iservice.ISlateService;
 import com.pipi.service.iservice.IStabKindService;
@@ -144,6 +145,29 @@ public class StabKindController extends BaseController {
         try {
             List<StabKind> list = stabKindService.queryAllStabKind();
             map.put("list", list);
+            map.put("msg", "操作成功");
+            map.put("data", true);
+        } catch (BusinessException e) {
+            map.put("msg", e.getMessage());
+        }
+        return map;
+    }
+
+
+    /**
+     * 根据种类Id查询所有扎种类
+     * @param id
+     * @return
+     */
+
+    @RequestMapping("slate_queryALLStabKindByKindId.ajax")
+    @ResponseBody
+    public  Map<String,Object> queryALLStabKindByKindId(Integer id){
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("data", false);
+        try {
+            List<StabKind> list = stabKindService.queryALLStabKindByKindId(id);
+            map.put("list",list);
             map.put("msg", "操作成功");
             map.put("data", true);
         } catch (BusinessException e) {
