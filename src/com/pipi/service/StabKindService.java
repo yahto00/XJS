@@ -42,7 +42,7 @@ public class StabKindService extends BaseService implements IStabKindService {
         String hql = "from Slate where isDelete=0 and stabKind.id in (" +
                 DSUtil.parseIntegerArr(ids) + ")";
         List<Slate> slateList = (List<Slate>) baseDao.getObjectListByNativeHql(hql);
-        if (CollectionUtils.isEmpty(slateList)) {
+        if (!CollectionUtils.isEmpty(slateList)) {
             throw new BusinessException("当前扎下面还有板材 不能删除");
         } else {
             delete(StabKind.class, DSUtil.parseIntegerArr(ids));
