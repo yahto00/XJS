@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.log4j.Logger;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -39,7 +40,7 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
 		if (!(bean instanceof BaseController))
 			return true;	// 非本系统的Action
 		Integer actionId = BaseController.getActionId(BaseController.getActionPath(servletPath));
-		if (actionId == null || actionId == 0)
+		if (actionId == null || actionId == -1)
 			return true;	// 该方法不需要登录
 		//BaseController controller = (BaseController)bean;
 		Object userO = request.getSession().getAttribute(SystemConstant.CURRENT_USER);
@@ -62,7 +63,7 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
 				PrintWriter out = null;
 			    try {
 			        out = response.getWriter();
-			        out.append(JsonUtils.jsonFromObject(map));
+			        out.append(JSON.toJSONString(map));
 			    } catch (IOException e) {  
 			        e.printStackTrace();  
 			    } finally {  
