@@ -21,7 +21,7 @@ import java.util.List;
 public class StabKindService extends BaseService implements IStabKindService {
     @Override
     @MyLog(operationName = "添加扎", operationType = "add")
-    public Integer addStabKind(StabKind stabKind) {
+    public void addStabKind(StabKind stabKind) {
         String[] params = {"num", "originalCount", "originalAcreage"};
         if (ObjectUtil.objectIsEmpty(stabKind, params)) {
             throw new BusinessException("未填写完整信息");
@@ -29,7 +29,7 @@ public class StabKindService extends BaseService implements IStabKindService {
         if (stabKind.getKind() == null) {
             throw new BusinessException("未指定扎所属的种类");
         }
-        return (Integer) save(stabKind);
+        add(stabKind);
     }
 
     @Override

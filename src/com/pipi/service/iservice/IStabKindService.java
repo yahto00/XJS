@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface IStabKindService extends IBaseService{
     /** 添加扎*/
-    Integer addStabKind(StabKind stabKind);
+    void addStabKind(StabKind stabKind);
     /** 批量删除扎*/
     void deleteStabKindByIds(Integer[] ids);
     /** 查询所有扎种类*/

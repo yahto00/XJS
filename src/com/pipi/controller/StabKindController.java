@@ -55,6 +55,8 @@ public class StabKindController extends BaseController {
             String num = json.getString("num");
             String description = json.getString("description");
             Kind kind = (Kind) kindService.queryObjectByID(Kind.class, json.getInteger("kindId"));
+            if (kind == null)
+                throw new BusinessException("未指定该扎的种类");
             JSONArray array = json.getJSONArray("data");
             //得到长宽数据List
             List<SlateVO> voList = JSONArray.parseArray(array.toJSONString(), SlateVO.class);
@@ -68,6 +70,7 @@ public class StabKindController extends BaseController {
             stabKind.setOriginalCount(voList.size());
             stabKind.setCurrentCount(voList.size());
             stabKind.setCurrentAcreage(originalAcreage);
+            stabKindService.addStabKind(stabKind);
             //填充Slate信息
             List<Slate> slateList = new ArrayList<Slate>();
             for (SlateVO vo : voList) {
@@ -155,15 +158,15 @@ public class StabKindController extends BaseController {
 
 
     /**
-     * 根据种类Id查询所有扎种类
+     * 根据种类Id和种类编号模糊查询所有扎种类
      *
      * @param id
      * @return
      * @author hbwj
      */
-    @RequestMapping("stabKind_queryALLStabKindByKindId.ajax")
+    @RequestMapping("stabKind_queryStabKindByKindIdOrNum.ajax")
     @ResponseBody
-    public Map<String, Object> queryALLStabKindByKindId(Integer id, String num) {
+    public Map<String, Object> queryStabKindByKindIdOrNum(Integer id, String num) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
