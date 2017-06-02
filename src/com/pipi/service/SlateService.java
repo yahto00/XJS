@@ -38,6 +38,7 @@ public class SlateService extends BaseService implements ISlateService {
         StabKind stabKind = (StabKind) queryObjectByID(StabKind.class, stabKindId);
         stabKind.setCurrentCount(stabKind.getCurrentCount() + 1);//入库数量加1
         stabKind.setCurrentAcreage(stabKind.getCurrentAcreage() + slate.getHeight() * slate.getLength());//改变在库面积
+        stabKind.setBackCount(stabKind.getBackCount()+1);
         slate.setStabKind(stabKind);//关联板材
         Integer slateId = (Integer) save(slate);
         SlateOnChange slateOnChange = new SlateOnChange();
@@ -66,6 +67,8 @@ public class SlateService extends BaseService implements ISlateService {
         stabKind.setOut_time(new Date());//记录出库时间
         stabKind.setOutCount(ids.length);//记录出库数量
         stabKind.setOutAcreage(outAcreage);//记录出库面积
+        stabKind.setCurrentAcreage(stabKind.getCurrentAcreage()-outAcreage);
+        stabKind.setCurrentCount(stabKind.getCurrentCount()-ids.length);
         //如果出库面积大于当前扎的面积 将扎面积置为0
         if (stabKind.getCurrentAcreage() < outAcreage) {
             stabKind.setCurrentAcreage(0f);
@@ -98,5 +101,14 @@ public class SlateService extends BaseService implements ISlateService {
         slateOnChange.setDescription("用户：" + user.getUserName() + " 增加" + slateList.size() + "块板材 " + slateList.get(0).getSlateName() + " " + slateList.get(0).getId());
         slateOnChange.setUserId(user.getId());
         add(slateOnChange);
+    }
+
+    @Override
+    public List<Slate> querySlateByStabKindId(Integer stabKindId) {
+        if (stabKindId == null){
+            throw new BusinessException("未指定扎");
+        }
+        String hql = "from Slate where isDelete=0 and stabKind.id=" + stabKindId;
+        return (List<Slate>) baseDao.getObjectListByNativeHql(hql);
     }
 }

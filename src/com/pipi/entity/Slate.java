@@ -46,16 +46,17 @@ public class Slate extends BaseEntity {
     /**
      * 关联所属的扎
      */
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "FK_STAB_KIND_ID")
     private StabKind stabKind;
 
     /**
      * 关联所属的种类
      */
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "FK_KIND_ID")
     private Kind kind;
+
     /**
      * 如果是回库板材 parentId记录这个板材是来自哪个板材 如果是第一次加板材 parentId=0
      */

@@ -27,7 +27,7 @@ import java.util.*;
  * Created by yahto on 14/05/2017.
  */
 @Controller
-public class StabKindController extends BaseController {
+public class StabKindAndSlateController extends BaseController {
     @Autowired
     private IStabKindService stabKindService;
 
@@ -44,7 +44,7 @@ public class StabKindController extends BaseController {
      * @return
      * @author yahto
      */
-    @RequestMapping("stabKind_addStabKind.ajax")
+    @RequestMapping("stabKindAndSlate_addStabKind.ajax")
     @ResponseBody
     public Map<String, Object> addStabKind(@RequestBody String data, HttpServletRequest request) {
         Map<String, Object> map = new HashMap<String, Object>();
@@ -119,7 +119,7 @@ public class StabKindController extends BaseController {
      * @return
      * @author yahto
      */
-    @RequestMapping("stabKind_deleteStabKindByIds.ajax")
+    @RequestMapping("stabKindAndSlate_deleteStabKindByIds.ajax")
     @ResponseBody
     public Map<String, Object> deleteStabKindByIds(Integer[] ids) {
         Map<String, Object> map = new HashMap<String, Object>();
@@ -140,7 +140,7 @@ public class StabKindController extends BaseController {
      * @return
      * @author hbwj
      */
-    @RequestMapping("stabKind_queryAllStabKind.ajax")
+    @RequestMapping("stabKindAndSlate_queryAllStabKind.ajax")
     @ResponseBody
     public Map<String, Object> queryAllStabKind() {
         Map<String, Object> map = new HashMap<String, Object>();
@@ -164,7 +164,7 @@ public class StabKindController extends BaseController {
      * @return
      * @author hbwj
      */
-    @RequestMapping("stabKind_queryStabKindByKindIdOrNum.ajax")
+    @RequestMapping("stabKindAndSlate_queryStabKindByKindIdOrNum.ajax")
     @ResponseBody
     public Map<String, Object> queryStabKindByKindIdOrNum(Integer id, String num) {
         Map<String, Object> map = new HashMap<String, Object>();
@@ -172,6 +172,75 @@ public class StabKindController extends BaseController {
         try {
             List<StabKind> list = stabKindService.queryALLStabKindByKindId(id, num);
             map.put("list", list);
+            map.put("msg", "操作成功");
+            map.put("data", true);
+        } catch (BusinessException e) {
+            map.put("msg", e.getMessage());
+        }
+        return map;
+    }
+
+    /**
+     * 根据stabKindId 查询stale
+     *
+     * @param stabKindId
+     * @return
+     * @author yahto
+     */
+    @RequestMapping("stabKindAndSlate_querySlateByStabKindId.ajax")
+    @ResponseBody
+    public Map<String, Object> querySlateByStabKindId(Integer stabKindId) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("data", false);
+        try {
+            List<Slate> list = slateService.querySlateByStabKindId(stabKindId);
+            map.put("msg","操作成功");
+            map.put("data",true);
+            map.put("list",list);
+        } catch (BusinessException e) {
+            map.put("msg", e.getMessage());
+        }
+        return map;
+    }
+
+    /**
+     * 批量删除板材功能
+     *
+     * @param ids
+     * @return
+     * @author yahto
+     */
+    @RequestMapping("stabKindAndSlate_deleteSlateByIds")
+    @ResponseBody
+    public Map<String, Object> deleteSlateByIds(Integer[] ids, Integer stabKindId, HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("data", false);
+        try {
+            slateService.deleteSlateByIds(ids, stabKindId, request);
+            map.put("msg", "操作成功");
+            map.put("data", true);
+        } catch (BusinessException e) {
+            map.put("msg", e.getMessage());
+        }
+        return map;
+    }
+
+    /**
+     * 增加回退板材功能
+     *
+     * @param slate
+     * @param kindId
+     * @param stabKindId
+     * @return
+     * @author yahto
+     */
+    @RequestMapping("stabKindAndSlate_addSlate.ajax")
+    @ResponseBody
+    public Map<String, Object> addSlate(Slate slate, Integer kindId, Integer stabKindId, HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("data", false);
+        try {
+            slateService.backSlate(slate, kindId, stabKindId, request);
             map.put("msg", "操作成功");
             map.put("data", true);
         } catch (BusinessException e) {

@@ -15,4 +15,6 @@ public interface ISlateService extends IBaseService {
     void deleteSlateByIds(Integer[] ids,Integer stabKindId,HttpServletRequest request);
     /** 在添加扎的时候添加板材*/
     void addSlate(List<Slate> slateList, HttpServletRequest request);
+    /** 根据stabKindId查询板材*/
+    List<Slate> querySlateByStabKindId(Integer stabKindId);
 }
