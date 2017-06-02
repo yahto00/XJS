@@ -218,7 +218,7 @@ public class StabKindAndSlateController extends BaseController {
     }
 
     /**
-     * 批量删除板材功能
+     * 批量删除板材功能(出库)
      *
      * @param ids
      * @return

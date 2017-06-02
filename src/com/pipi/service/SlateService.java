@@ -67,7 +67,6 @@ public class SlateService extends BaseService implements ISlateService {
         stabKind.setOut_time(new Date());//记录出库时间
         stabKind.setOutCount(ids.length);//记录出库数量
         stabKind.setOutAcreage(outAcreage);//记录出库面积
-        stabKind.setCurrentAcreage(stabKind.getCurrentAcreage()-outAcreage);
         stabKind.setCurrentCount(stabKind.getCurrentCount()-ids.length);
         //如果出库面积大于当前扎的面积 将扎面积置为0
         if (stabKind.getCurrentAcreage() < outAcreage) {
