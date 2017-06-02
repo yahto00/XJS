@@ -208,9 +208,9 @@ public class StabKindAndSlateController extends BaseController {
                 vo.setStabKindId(slate.getStabKind().getId());
                 list.add(vo);
             }
-            map.put("msg","操作成功");
-            map.put("data",true);
-            map.put("list",list);
+            map.put("msg", "操作成功");
+            map.put("data", true);
+            map.put("list", list);
         } catch (BusinessException e) {
             map.put("msg", e.getMessage());
         }
