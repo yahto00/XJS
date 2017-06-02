@@ -1,5 +1,6 @@
 package com.pipi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pipi.common.constant.SystemConstant;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -97,6 +98,7 @@ public class StabKind extends BaseEntity {
      */
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "FK_KIND_ID")
+    @JsonIgnore
     private Kind kind;
 
     public Integer getId() {

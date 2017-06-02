@@ -1,5 +1,7 @@
 package com.pipi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -48,6 +50,7 @@ public class Slate extends BaseEntity {
      */
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "FK_STAB_KIND_ID")
+    @JsonIgnore
     private StabKind stabKind;
 
     /**
@@ -55,6 +58,7 @@ public class Slate extends BaseEntity {
      */
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "FK_KIND_ID")
+    @JsonIgnore
     private Kind kind;
 
     /**

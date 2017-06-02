@@ -3,17 +3,16 @@ package com.pipi.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.util.AntiCollisionHashMap;
 import com.pipi.common.exception.BusinessException;
 import com.pipi.entity.Kind;
 import com.pipi.entity.Slate;
 import com.pipi.entity.StabKind;
-import com.pipi.service.StabKindService;
 import com.pipi.service.iservice.IKindService;
 import com.pipi.service.iservice.ISlateService;
 import com.pipi.service.iservice.IStabKindService;
-import com.pipi.util.JsonUtils;
+import com.pipi.vo.SlateDataVO;
 import com.pipi.vo.SlateVO;
+import com.pipi.vo.StabKindVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -59,7 +58,7 @@ public class StabKindAndSlateController extends BaseController {
                 throw new BusinessException("未指定该扎的种类");
             JSONArray array = json.getJSONArray("data");
             //得到长宽数据List
-            List<SlateVO> voList = JSONArray.parseArray(array.toJSONString(), SlateVO.class);
+            List<SlateDataVO> voList = JSONArray.parseArray(array.toJSONString(), SlateDataVO.class);
             float originalAcreage = getAcreage(voList);
             //把扎信息存入数据库
             StabKind stabKind = new StabKind();
@@ -73,7 +72,7 @@ public class StabKindAndSlateController extends BaseController {
             stabKindService.addStabKind(stabKind);
             //填充Slate信息
             List<Slate> slateList = new ArrayList<Slate>();
-            for (SlateVO vo : voList) {
+            for (SlateDataVO vo : voList) {
                 Slate slate = new Slate();
                 slate.setStabKind(stabKind);
                 slate.setKind(kind);
@@ -100,13 +99,13 @@ public class StabKindAndSlateController extends BaseController {
     /**
      * 得到板材总面积
      *
-     * @param slateVOS
+     * @param slateDataVOS
      * @return
      * @author yahto
      */
-    private float getAcreage(List<SlateVO> slateVOS) {
+    private float getAcreage(List<SlateDataVO> slateDataVOS) {
         float acreage = 0f;
-        for (SlateVO vo : slateVOS) {
+        for (SlateDataVO vo : slateDataVOS) {
             acreage += vo.getHeight() * vo.getLength();
         }
         return acreage;
@@ -170,7 +169,14 @@ public class StabKindAndSlateController extends BaseController {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            List<StabKind> list = stabKindService.queryALLStabKindByKindId(id, num);
+            List<StabKind> stabKindList = stabKindService.queryALLStabKindByKindId(id, num);
+            List<StabKindVO> list = new ArrayList<StabKindVO>();
+            for (StabKind stabKind : stabKindList) {
+                StabKindVO vo = new StabKindVO();
+                vo.setStabKind(stabKind);
+                vo.setKindId(stabKind.getKind().getId());
+                list.add(vo);
+            }
             map.put("list", list);
             map.put("msg", "操作成功");
             map.put("data", true);
@@ -193,7 +199,15 @@ public class StabKindAndSlateController extends BaseController {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            List<Slate> list = slateService.querySlateByStabKindId(stabKindId);
+            List<Slate> slateList = slateService.querySlateByStabKindId(stabKindId);
+            List<SlateVO> list = new ArrayList<SlateVO>();
+            for (Slate slate : slateList) {
+                SlateVO vo = new SlateVO();
+                vo.setSlate(slate);
+                vo.setKindId(slate.getKind().getId());
+                vo.setStabKindId(slate.getStabKind().getId());
+                list.add(vo);
+            }
             map.put("msg","操作成功");
             map.put("data",true);
             map.put("list",list);
