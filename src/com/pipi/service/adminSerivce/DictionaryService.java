@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import com.pipi.common.logaop.MyLog;
+import com.pipi.common.aop.MyLog;
 import com.pipi.dao.idao.adminIDao.IDictionaryDao;
 import com.pipi.entity.admin.Dictionary;
 import com.pipi.service.BaseService;

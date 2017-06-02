@@ -1,5 +1,5 @@
 
-package com.pipi.common.logaop;
+package com.pipi.common.aop;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

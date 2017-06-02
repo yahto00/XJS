@@ -1,7 +1,7 @@
 package com.pipi.service;
 
 import com.pipi.common.exception.BusinessException;
-import com.pipi.common.logaop.MyLog;
+import com.pipi.common.aop.MyLog;
 import com.pipi.entity.Customer;
 import com.pipi.service.iservice.ICustomerService;
 import com.pipi.util.DSUtil;

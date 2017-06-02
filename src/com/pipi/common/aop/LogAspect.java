@@ -1,4 +1,4 @@
-package com.pipi.common.logaop;
+package com.pipi.common.aop;
 
 import com.pipi.common.constant.SystemConstant;
 import com.pipi.entity.Order;

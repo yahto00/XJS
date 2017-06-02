@@ -1,7 +1,7 @@
 package com.pipi.service;
 
 import com.pipi.common.exception.BusinessException;
-import com.pipi.common.logaop.MyLog;
+import com.pipi.common.aop.MyLog;
 import com.pipi.entity.Slate;
 import com.pipi.entity.StabKind;
 import com.pipi.service.iservice.IStabKindService;
@@ -11,7 +11,6 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

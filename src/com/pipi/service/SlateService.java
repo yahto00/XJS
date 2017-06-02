@@ -2,7 +2,7 @@ package com.pipi.service;
 
 import com.pipi.common.constant.SystemConstant;
 import com.pipi.common.exception.BusinessException;
-import com.pipi.common.logaop.MyLog;
+import com.pipi.common.aop.MyLog;
 import com.pipi.entity.Kind;
 import com.pipi.entity.Slate;
 import com.pipi.entity.SlateOnChange;
