@@ -170,7 +170,7 @@ public class UserController extends BaseController {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            User user =  getCurrentUser(request);
+            User user = getCurrentUser(request);
             if (user == null) {
                 throw new BusinessException("未登录,请先登陆");
             } else {
