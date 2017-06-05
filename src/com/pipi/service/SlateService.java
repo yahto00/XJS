@@ -97,7 +97,7 @@ public class SlateService extends BaseService implements ISlateService {
         SlateOnChange slateOnChange = new SlateOnChange();
         slateOnChange.setOp_time(new Date());
         User user = (User) (request.getSession().getAttribute(SystemConstant.CURRENT_USER));
-        slateOnChange.setDescription("用户：" + user.getUserName() + " 增加" + slateList.size() + "块板材 " + slateList.get(0).getSlateName() + " " + slateList.get(0).getId());
+        slateOnChange.setDescription("用户：" + user.getUserName() + " 增加" + slateList.size() + "块板材 " + DSUtil.parseObjectList(slateList));
         slateOnChange.setUserId(user.getId());
         add(slateOnChange);
     }

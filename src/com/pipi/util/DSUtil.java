@@ -44,7 +44,7 @@ public class DSUtil {
      * @param list
      * @return
      */
-    public static String parseObjectList(List<Object> list){
+    public static String parseObjectList(List<?> list){
         if (CollectionUtils.isEmpty(list))
             return null;
         StringBuilder stringBuilder = new StringBuilder();

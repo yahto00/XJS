@@ -130,4 +130,12 @@ public class Slate extends BaseEntity {
     public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
+
+    @Override
+    public String toString() {
+        return "Slate{" +
+                "id=" + id +
+                ", slateName='" + slateName + '\'' +
+                '}';
+    }
 }
