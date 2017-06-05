@@ -139,11 +139,11 @@ public class KindController extends BaseController {
         map.put("data", false);
         try {
             List<Kind> list = (List<Kind>) kindService.queryAll(Kind.class);
-            map.put("list",list);
-            map.put("msg","操作成功");
-            map.put("data",true);
-        }catch (BusinessException e){
-            map.put("msg",e.getMessage());
+            map.put("list", list);
+            map.put("msg", "操作成功");
+            map.put("data", true);
+        } catch (BusinessException e) {
+            map.put("msg", e.getMessage());
         }
         return map;
     }
