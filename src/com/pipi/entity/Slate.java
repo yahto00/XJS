@@ -133,9 +133,6 @@ public class Slate extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Slate{" +
-                "id=" + id +
-                ", slateName='" + slateName + '\'' +
-                '}';
+        return id.toString();
     }
 }
