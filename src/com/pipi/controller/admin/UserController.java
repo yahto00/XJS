@@ -52,7 +52,6 @@ public class UserController extends BaseController {
             map.put("msg", "操作成功");
         } catch (BusinessException e) {
             map.put("msg", e.getMessage());
-
         }
         return map;
     }
