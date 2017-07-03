@@ -34,8 +34,8 @@ public class Development extends BaseEntity{
 
     /** 成品的来源*/
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "FK_STAB_KIND_ID")
-    private Slate slate;
+    @JoinColumn(name = "FK_PROCESS_SLATE_ID")
+    private ProcessSlate processSlate;
 
     public Integer getId() {
         return id;
@@ -77,11 +77,11 @@ public class Development extends BaseEntity{
         this.height = height;
     }
 
-    public Slate getSlate() {
-        return slate;
+    public ProcessSlate getProcessSlate() {
+        return processSlate;
     }
 
-    public void setSlate(Slate slate) {
-        this.slate = slate;
+    public void setProcessSlate(ProcessSlate processSlate) {
+        this.processSlate = processSlate;
     }
 }

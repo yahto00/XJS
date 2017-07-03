@@ -1,5 +1,7 @@
 package com.pipi.entity;
 
+import com.pipi.entity.admin.User;
+
 import javax.persistence.*;
 
 /**
@@ -31,6 +33,15 @@ public class ProcessSlate extends BaseEntity{
     /** 石材的宽度*/
     @Column(name = "SLATE_HEIGHT")
     private float height;
+
+    /** 石材所属的加工单编号*/
+    @Column(name = "SLATE_PRO_NUM")
+    private String proNum;
+
+    /** 石材加工单操作人 */
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "FK_OPERATE_USER_ID")
+    private User user;
 
     /**
      * 关联所属的扎
@@ -84,6 +95,22 @@ public class ProcessSlate extends BaseEntity{
 
     public void setHeight(float height) {
         this.height = height;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getProNum() {
+        return proNum;
+    }
+
+    public void setProNum(String proNum) {
+        this.proNum = proNum;
     }
 
     public StabKind getStabKind() {
