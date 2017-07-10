@@ -21,7 +21,7 @@ public class Kind extends BaseEntity{
     private String name;
 
     /** 种类编号*/
-    @Column(name = "KIND_NUM")
+    @Column(name = "KIND_NUM",unique = true)
     private String num;
 
     public Integer getId() {

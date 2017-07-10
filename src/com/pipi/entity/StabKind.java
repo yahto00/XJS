@@ -98,7 +98,6 @@ public class StabKind extends BaseEntity {
      */
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "FK_KIND_ID")
-    @JsonIgnore
     private Kind kind;
 
     public Integer getId() {

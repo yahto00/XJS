@@ -38,7 +38,12 @@ public class KindController extends BaseController {
             if (null == kind || ObjectUtil.objectIsEmpty(kind, params)) {
                 throw new BusinessException("未填写种类的完整信息");
             } else {
-                kindService.add(kind);
+                try {
+                    kindService.add(kind);
+                }catch (Exception e){
+                    map.put("msg",e.getMessage());
+                    return map;
+                }
             }
             map.put("msg", "操作成功");
             map.put("data", true);

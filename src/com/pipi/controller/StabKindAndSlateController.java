@@ -11,8 +11,6 @@ import com.pipi.service.iservice.IKindService;
 import com.pipi.service.iservice.ISlateService;
 import com.pipi.service.iservice.IStabKindService;
 import com.pipi.vo.SlateDataVO;
-import com.pipi.vo.SlateVO;
-import com.pipi.vo.StabKindVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -169,14 +167,7 @@ public class StabKindAndSlateController extends BaseController {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            List<StabKind> stabKindList = stabKindService.queryALLStabKindByKindId(id, num);
-            List<StabKindVO> list = new ArrayList<StabKindVO>();
-            for (StabKind stabKind : stabKindList) {
-                StabKindVO vo = new StabKindVO();
-                vo.setStabKind(stabKind);
-                vo.setKindId(stabKind.getKind().getId());
-                list.add(vo);
-            }
+            List<StabKind> list = stabKindService.queryALLStabKindByKindId(id, num);
             map.put("list", list);
             map.put("msg", "操作成功");
             map.put("data", true);
@@ -187,7 +178,7 @@ public class StabKindAndSlateController extends BaseController {
     }
 
     /**
-     * 根据stabKindId 查询stale
+     * 根据stabKindId 查询slate
      *
      * @param stabKindId
      * @return
@@ -199,15 +190,7 @@ public class StabKindAndSlateController extends BaseController {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            List<Slate> slateList = slateService.querySlateByStabKindId(stabKindId);
-            List<SlateVO> list = new ArrayList<SlateVO>();
-            for (Slate slate : slateList) {
-                SlateVO vo = new SlateVO();
-                vo.setSlate(slate);
-                vo.setKindId(slate.getKind().getId());
-                vo.setStabKindId(slate.getStabKind().getId());
-                list.add(vo);
-            }
+            List<Slate> list = slateService.querySlateByStabKindId(stabKindId);
             map.put("msg", "操作成功");
             map.put("data", true);
             map.put("list", list);
