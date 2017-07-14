@@ -37,7 +37,50 @@ public class StabKindAndSlateController extends BaseController {
     /**
      * 添加扎功能
      *
-     * @param data
+     * @param data {
+     *             "num":"JFJ-0012834",
+     *             "description":"测试扎一",
+     *             "kindId":1,
+     *             "data":[{
+     *             "length":3.9,
+     *             "height":2.5
+     *             },{
+     *             "length":3.9,
+     *             "height":2.5
+     *             },{
+     *             "length":3.9,
+     *             "height":2.5
+     *             },{
+     *             "length":3.9,
+     *             "height":2.5
+     *             },{
+     *             "length":3.9,
+     *             "height":2.5
+     *             },{
+     *             "length":3.9,
+     *             "height":2.5
+     *             },{
+     *             "length":3.9,
+     *             "height":2.5
+     *             },{
+     *             "length":3.9,
+     *             "height":2.5
+     *             },{
+     *             "length":3.9,
+     *             "height":2.5
+     *             },{
+     *             "length":3.9,
+     *             "height":2.5
+     *             },{
+     *             "length":3.9,
+     *             "height":2.5
+     *             },{
+     *             "length":3.9,
+     *             "height":2.5
+     *             }],
+     *             "slateName":"测试板材一",
+     *             "price":108.7
+     *             }
      * @return
      * @author yahto
      */
@@ -200,27 +243,27 @@ public class StabKindAndSlateController extends BaseController {
         return map;
     }
 
-    /**
-     * 批量删除板材功能(出库)
-     *
-     * @param ids
-     * @return
-     * @author yahto
-     */
-    @RequestMapping("stabKindAndSlate_deleteSlateByIds")
-    @ResponseBody
-    public Map<String, Object> deleteSlateByIds(Integer[] ids, Integer stabKindId, HttpServletRequest request) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("data", false);
-        try {
-            slateService.deleteSlateByIds(ids, stabKindId, request);
-            map.put("msg", "操作成功");
-            map.put("data", true);
-        } catch (BusinessException e) {
-            map.put("msg", e.getMessage());
-        }
-        return map;
-    }
+//    /**
+//     * 批量删除板材功能(出库)
+//     *
+//     * @param ids
+//     * @return
+//     * @author yahto
+//     */
+//    @RequestMapping("stabKindAndSlate_deleteSlateByIds")
+//    @ResponseBody
+//    public Map<String, Object> deleteSlateByIds(Integer[] ids, Integer stabKindId, HttpServletRequest request) {
+//        Map<String, Object> map = new HashMap<String, Object>();
+//        map.put("data", false);
+//        try {
+//            slateService.deleteSlateByIds(ids, stabKindId, request);
+//            map.put("msg", "操作成功");
+//            map.put("data", true);
+//        } catch (BusinessException e) {
+//            map.put("msg", e.getMessage());
+//        }
+//        return map;
+//    }
 
     /**
      * 增加回退板材功能
@@ -240,6 +283,21 @@ public class StabKindAndSlateController extends BaseController {
             slateService.backSlate(slate, kindId, stabKindId, request);
             map.put("msg", "操作成功");
             map.put("data", true);
+        } catch (BusinessException e) {
+            map.put("msg", e.getMessage());
+        }
+        return map;
+    }
+
+    @RequestMapping("stabKindAndSlate_outStock.ajax")
+    @ResponseBody
+    public Map<String, Object> outStock(Integer[] ids, Integer stabKindId, String outNum, HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("data", false);
+        try {
+            slateService.deleteSlateByIds(ids, stabKindId, outNum, request);
+            map.put("data", true);
+            map.put("msg", "操作成功");
         } catch (BusinessException e) {
             map.put("msg", e.getMessage());
         }

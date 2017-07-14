@@ -9,8 +9,11 @@ import com.pipi.util.DSUtil;
 import com.pipi.util.ObjectUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -50,7 +53,16 @@ public class StabKindService extends BaseService implements IStabKindService {
 
     @Override
     public List<StabKind> queryAllStabKind() {
-        return (List<StabKind>) queryAll(StabKind.class);
+        List<StabKind> stabKindList = (List<StabKind>) queryAll(StabKind.class);
+        Iterator<StabKind> iterator = stabKindList.iterator();
+        while (iterator.hasNext()){
+            String hql = "from Slate where isDelete = 0 and stabKind.id = " + iterator.next().getId();
+            List<Slate> slateList = (List<Slate>) baseDao.getObjectListByNativeHql(hql);
+            if (CollectionUtils.isEmpty(slateList)){
+                iterator.remove();
+            }
+        }
+        return stabKindList;
     }
 
     @Override

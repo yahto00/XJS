@@ -12,7 +12,7 @@ public interface ISlateService extends IBaseService {
     /** 增加板材功能*/
     void backSlate(Slate slate, Integer kindId, Integer stabKindId, HttpServletRequest request);
     /** 批量删除板材*/
-    void deleteSlateByIds(Integer[] ids,Integer stabKindId,HttpServletRequest request);
+    void deleteSlateByIds(Integer[] ids,Integer stabKindId, String outNum,HttpServletRequest request);
     /** 在添加扎的时候添加板材*/
     void addSlate(List<Slate> slateList, HttpServletRequest request);
     /** 根据stabKindId查询板材*/
