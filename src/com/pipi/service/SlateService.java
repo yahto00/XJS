@@ -24,6 +24,7 @@ import java.util.List;
 public class SlateService extends BaseService implements ISlateService {
     @Autowired
     private IProcessDao processDao;
+
     @Override
     @MyLog(operationName = "添加板材", operationType = "add")
     public void backSlate(Slate slate, Integer kindId, Integer stabKindId, HttpServletRequest request) {
@@ -57,7 +58,7 @@ public class SlateService extends BaseService implements ISlateService {
         if (ids == null || ids.length == 0) {
             throw new BusinessException("未填指定板材");
         }
-        if ((User)request.getSession().getAttribute(SystemConstant.CURRENT_USER) == null){
+        if ((User) request.getSession().getAttribute(SystemConstant.CURRENT_USER) == null) {
             throw new BusinessException("请登陆后再操作");
         }
         StabKind stabKind = (StabKind) queryObjectByID(StabKind.class, stabKindId);
@@ -75,6 +76,9 @@ public class SlateService extends BaseService implements ISlateService {
             processSlate.setProNum(outNum);
             processSlate.setSlateName(slate.getSlateName());
             processSlate.setUser((User) request.getSession().getAttribute(SystemConstant.CURRENT_USER));
+            processSlate.setPrice(slate.getPrice());
+            processSlate.setStabKind(slate.getStabKind());
+            processSlate.setKind(slate.getKind());
             processSlates.add(processSlate);
         }
         //板材转到加工厂

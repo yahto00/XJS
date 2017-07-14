@@ -40,8 +40,8 @@ public class KindController extends BaseController {
             } else {
                 try {
                     kindService.add(kind);
-                }catch (Exception e){
-                    map.put("msg",e.getMessage());
+                } catch (Exception e) {
+                    map.put("msg", e.getMessage());
                     return map;
                 }
             }

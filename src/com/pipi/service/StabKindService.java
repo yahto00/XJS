@@ -55,10 +55,10 @@ public class StabKindService extends BaseService implements IStabKindService {
     public List<StabKind> queryAllStabKind() {
         List<StabKind> stabKindList = (List<StabKind>) queryAll(StabKind.class);
         Iterator<StabKind> iterator = stabKindList.iterator();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             String hql = "from Slate where isDelete = 0 and stabKind.id = " + iterator.next().getId();
             List<Slate> slateList = (List<Slate>) baseDao.getObjectListByNativeHql(hql);
-            if (CollectionUtils.isEmpty(slateList)){
+            if (CollectionUtils.isEmpty(slateList)) {
                 iterator.remove();
             }
         }

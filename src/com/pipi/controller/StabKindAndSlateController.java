@@ -289,6 +289,16 @@ public class StabKindAndSlateController extends BaseController {
         return map;
     }
 
+    /**
+     * 板材出库
+     *
+     * @param ids
+     * @param stabKindId
+     * @param outNum
+     * @param request
+     * @return
+     * @author yahto
+     */
     @RequestMapping("stabKindAndSlate_outStock.ajax")
     @ResponseBody
     public Map<String, Object> outStock(Integer[] ids, Integer stabKindId, String outNum, HttpServletRequest request) {
