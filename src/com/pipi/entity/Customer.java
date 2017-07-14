@@ -1,7 +1,5 @@
 package com.pipi.entity;
 
-import com.pipi.entity.BaseEntity;
-
 import javax.persistence.*;
 
 /**

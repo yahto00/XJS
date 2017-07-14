@@ -1,6 +1,5 @@
 package com.pipi.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pipi.common.constant.SystemConstant;
 import org.springframework.format.annotation.DateTimeFormat;
 

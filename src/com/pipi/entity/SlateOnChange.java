@@ -1,7 +1,5 @@
 package com.pipi.entity;
 
-import com.pipi.entity.admin.User;
-
 import javax.persistence.*;
 import java.util.Date;
 
