@@ -9,51 +9,68 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "T_PROCESS_SLATE")
-public class ProcessSlate extends BaseEntity{
+public class ProcessSlate extends BaseEntity {
     private static final long serialVersionUID = -7732329958431149263L;
 
-    /** 石材主键 */
+    /**
+     * 石材主键
+     */
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "PK_PROCESS_SLATE_ID")
     private Integer id;
 
-    /** 用户名 */
+    /**
+     * 用户名
+     */
     @Column(name = "SLATE_NAME", length = 100)
     private String slateName;
 
-    /** 石材单价*/
+    /**
+     * 石材单价
+     */
     @Column(name = "SLATE_PRICE")
     private Double price;
 
-    /** 石材的长度*/
-    @Column(name = "SLATE_LENGTH")
-    private float length;
+//    /** 石材的长度*/
+//    @Column(name = "SLATE_LENGTH")
+//    private float length;
+//
+//    /** 石材的宽度*/
+//    @Column(name = "SLATE_HEIGHT")
+//    private float height;
 
-    /** 石材的宽度*/
-    @Column(name = "SLATE_HEIGHT")
-    private float height;
 
-    /** 石材所属的加工单编号*/
+    /**
+     * 板材面积
+     */
+    @Column(name = "SLATE_ACREAGE")
+    private Float acreage;
+
+    /**
+     * 石材所属的加工单编号
+     */
     @Column(name = "SLATE_PRO_NUM")
     private String proNum;
 
-    /** 石材加工单操作人 */
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    /**
+     * 石材加工单操作人
+     */
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "FK_OPERATE_USER_ID")
     private User user;
 
     /**
      * 关联所属的扎
      */
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "FK_STAB_KIND_ID")
     private StabKind stabKind;
 
     /**
      * 关联所属的种类
      */
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "FK_KIND_ID")
     private Kind kind;
 
@@ -81,20 +98,27 @@ public class ProcessSlate extends BaseEntity{
         this.price = price;
     }
 
-    public float getLength() {
-        return length;
+    //    public float getLength() {
+//        return length;
+//    }
+//
+//    public void setLength(float length) {
+//        this.length = length;
+//    }
+//
+//    public float getHeight() {
+//        return height;
+//    }
+//
+//    public void setHeight(float height) {
+//        this.height = height;
+//    }
+    public Float getAcreage() {
+        return acreage;
     }
 
-    public void setLength(float length) {
-        this.length = length;
-    }
-
-    public float getHeight() {
-        return height;
-    }
-
-    public void setHeight(float height) {
-        this.height = height;
+    public void setAcreage(Float acreage) {
+        this.acreage = acreage;
     }
 
     public User getUser() {

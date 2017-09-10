@@ -70,9 +70,8 @@ public class SlateService extends BaseService implements ISlateService {
         for (Slate slate : list) {
             outAcreage += slate.getLength() * slate.getHeight();
             ProcessSlate processSlate = new ProcessSlate();
-            processSlate.setHeight(slate.getHeight());
             processSlate.setKind(slate.getKind());
-            processSlate.setLength(slate.getLength());
+            processSlate.setAcreage(slate.getHeight() * slate.getLength());
             processSlate.setProNum(outNum);
             processSlate.setSlateName(slate.getSlateName());
             processSlate.setUser((User) request.getSession().getAttribute(SystemConstant.CURRENT_USER));

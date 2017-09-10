@@ -61,11 +61,11 @@ public class Slate extends BaseEntity {
     @JsonIgnore
     private Kind kind;
 
-    /**
-     * 如果是回库板材 parentId记录这个板材是来自哪个板材 如果是第一次加板材 parentId=0
-     */
-    @Column(name = "PARENT_ID")
-    private Integer parentId;
+//    /**
+//     * 如果是回库板材 parentId记录这个板材是来自哪个板材 如果是第一次加板材 parentId=0
+//     */
+//    @Column(name = "PARENT_ID")
+//    private Integer parentId;
 
     public Integer getId() {
         return id;
@@ -123,16 +123,12 @@ public class Slate extends BaseEntity {
         this.kind = kind;
     }
 
-    public Integer getParentId() {
-        return parentId;
-    }
+//    public Integer getParentId() {
+//        return parentId;
+//    }
+//
+//    public void setParentId(Integer parentId) {
+//        this.parentId = parentId;
+//    }
 
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
-    }
-
-    @Override
-    public String toString() {
-        return id.toString();
-    }
 }

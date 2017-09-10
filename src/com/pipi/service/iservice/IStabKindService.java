@@ -1,7 +1,9 @@
 package com.pipi.service.iservice;
 
+import com.pipi.entity.Slate;
 import com.pipi.entity.StabKind;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**

@@ -3,10 +3,12 @@ package com.pipi.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.pipi.common.constant.SystemConstant;
 import com.pipi.common.exception.BusinessException;
 import com.pipi.entity.Kind;
 import com.pipi.entity.Slate;
 import com.pipi.entity.StabKind;
+import com.pipi.entity.admin.User;
 import com.pipi.service.iservice.IKindService;
 import com.pipi.service.iservice.ISlateService;
 import com.pipi.service.iservice.IStabKindService;
@@ -89,7 +91,12 @@ public class StabKindAndSlateController extends BaseController {
     public Map<String, Object> addStabKind(@RequestBody String data, HttpServletRequest request) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
+
         try {
+            User user = (User) request.getSession().getAttribute(SystemConstant.CURRENT_USER);
+            if (user == null){
+                throw new BusinessException("未登录");
+            }
             //解析json
             JSONObject json = JSON.parseObject(data);
             String num = json.getString("num");
@@ -110,20 +117,20 @@ public class StabKindAndSlateController extends BaseController {
             stabKind.setOriginalCount(voList.size());
             stabKind.setCurrentCount(voList.size());
             stabKind.setCurrentAcreage(originalAcreage);
-            stabKindService.addStabKind(stabKind);
             //填充Slate信息
             List<Slate> slateList = new ArrayList<Slate>();
             for (SlateDataVO vo : voList) {
                 Slate slate = new Slate();
                 slate.setStabKind(stabKind);
                 slate.setKind(kind);
-                slate.setParentId(0);//刚存入 父id 为0
+//                slate.setParentId(0);//刚存入 父id 为0
                 slate.setSlateName(json.getString("slateName"));
                 slate.setPrice(json.getDouble("price"));
                 slate.setHeight(vo.getHeight());
                 slate.setLength(vo.getLength());
                 slateList.add(slate);
             }
+            stabKindService.addStabKind(stabKind);
             //批量存入数据库
             slateService.addSlate(slateList, request);
             map.put("msg", "操作成功");

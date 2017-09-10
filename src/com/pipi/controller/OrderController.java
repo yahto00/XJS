@@ -22,6 +22,8 @@ public class OrderController extends BaseController {
     private IOrderService orderService;
 
     /**
+     * 查询所有订单
+     *
      * @return
      * @author yahto
      */
@@ -37,6 +39,19 @@ public class OrderController extends BaseController {
             map.put("msg", "操作成功");
         } catch (BusinessException e) {
             map.put("msg", e.getMessage());
+        }
+        return map;
+    }
+
+    @RequestMapping("order_addOrder.ajax")
+    @ResponseBody
+    public Map<String,Object> addOrder(){
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("data", false);
+        try {
+
+        }catch (BusinessException e){
+            map.put("msg",e.getMessage());
         }
         return map;
     }

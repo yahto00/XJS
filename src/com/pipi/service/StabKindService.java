@@ -4,6 +4,7 @@ import com.pipi.common.exception.BusinessException;
 import com.pipi.common.aop.MyLog;
 import com.pipi.entity.Slate;
 import com.pipi.entity.StabKind;
+import com.pipi.service.iservice.ISlateService;
 import com.pipi.service.iservice.IStabKindService;
 import com.pipi.util.DSUtil;
 import com.pipi.util.ObjectUtil;
@@ -13,6 +14,7 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Iterator;
 import java.util.List;
 
@@ -21,6 +23,7 @@ import java.util.List;
  */
 @Service
 public class StabKindService extends BaseService implements IStabKindService {
+
     @Override
     @MyLog(operationName = "添加扎", operationType = "add")
     public void addStabKind(StabKind stabKind) {
