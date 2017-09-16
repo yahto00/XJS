@@ -312,7 +312,7 @@ public class StabKindAndSlateController extends BaseController {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            slateService.deleteSlateByIds(ids, stabKindId, outNum, request);
+            slateService.deleteSlateByIds(ids, stabKindId, request);
             map.put("data", true);
             map.put("msg", "操作成功");
         } catch (BusinessException e) {

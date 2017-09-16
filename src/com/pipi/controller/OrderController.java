@@ -45,16 +45,14 @@ public class OrderController extends BaseController {
 
     @RequestMapping("order_addOrder.ajax")
     @ResponseBody
-    public Map<String,Object> addOrder(){
+    public Map<String, Object> addOrder() {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
 
-        }catch (BusinessException e){
-            map.put("msg",e.getMessage());
+        } catch (BusinessException e) {
+            map.put("msg", e.getMessage());
         }
         return map;
     }
-
-
 }

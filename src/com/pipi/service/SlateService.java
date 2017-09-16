@@ -54,7 +54,7 @@ public class SlateService extends BaseService implements ISlateService {
 
     @Override
     @MyLog(operationName = "删除板材,出库", operationType = "delete")
-    public void deleteSlateByIds(Integer[] ids, Integer stabKindId, String outNum, HttpServletRequest request) {
+    public void deleteSlateByIds(Integer[] ids, Integer stabKindId, HttpServletRequest request) {
         if (ids == null || ids.length == 0) {
             throw new BusinessException("未填指定板材");
         }
@@ -72,7 +72,7 @@ public class SlateService extends BaseService implements ISlateService {
             ProcessSlate processSlate = new ProcessSlate();
             processSlate.setKind(slate.getKind());
             processSlate.setAcreage(slate.getHeight() * slate.getLength());
-            processSlate.setProNum(outNum);
+            processSlate.setProNum(String.valueOf(ids.length));
             processSlate.setSlateName(slate.getSlateName());
             processSlate.setUser((User) request.getSession().getAttribute(SystemConstant.CURRENT_USER));
             processSlate.setPrice(slate.getPrice());

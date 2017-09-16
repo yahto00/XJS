@@ -7,6 +7,8 @@ import com.pipi.entity.StabKind;
 import com.pipi.service.iservice.IProcessorService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 /**
  * Created by yahto on 10/09/2017.
@@ -42,5 +44,11 @@ public class ProcessorService extends BaseService implements IProcessorService {
         slate.setPrice(processSlate.getPrice());
         save(stabKind);
         save(slate);
+    }
+
+    @Override
+    public List<ProcessSlate> queryAllProcessSlate() {
+        String hql = "from ProcessSlate where isDelete=0";
+        return (List<ProcessSlate>) baseDao.getObjectListByNativeHql(hql);
     }
 }

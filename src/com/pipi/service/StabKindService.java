@@ -34,7 +34,11 @@ public class StabKindService extends BaseService implements IStabKindService {
         if (stabKind.getKind() == null) {
             throw new BusinessException("未指定扎所属的种类");
         }
-        add(stabKind);
+        try {
+            add(stabKind);
+        }catch (Throwable e){
+            throw new BusinessException("扎编号重名");
+        }
     }
 
     @Override

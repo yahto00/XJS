@@ -25,7 +25,7 @@ public class StabKind extends BaseEntity {
     /**
      * 扎编号
      */
-    @Column(name = "STAB_KIND_NUM")
+    @Column(name = "STAB_KIND_NUM",unique = true)
     private String num;
 
     /**
