@@ -1,5 +1,7 @@
 package com.pipi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -35,6 +37,7 @@ public class Customer extends BaseEntity {
      * 最近的订单
      */
     @Column(name = "CUS_LAST_ORDER_ID")
+    @JsonIgnore
     private Integer last_order_id;
 
     public Integer getId() {

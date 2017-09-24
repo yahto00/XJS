@@ -3,6 +3,7 @@ package com.pipi.controller;
 import com.pipi.common.exception.BusinessException;
 import com.pipi.entity.Customer;
 import com.pipi.service.iservice.ICustomerService;
+import com.pipi.util.ObjectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -101,9 +102,12 @@ public class CustomerController extends BaseController {
     @RequestMapping("customer_addCustomer.ajax")
     @ResponseBody
     public Map<String, Object> addCustomer(Customer customer) {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<String, Object>(3);
         map.put("data", false);
         try {
+            if (ObjectUtil.objectIsEmpty(customer, new String[]{"name", "phone"})) {
+                throw new BusinessException("没有填写客户名或客户电话,请重试");
+            }
             customerService.save(customer);
             map.put("msg", "操作成功");
             map.put("data", true);
