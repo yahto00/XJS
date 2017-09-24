@@ -15,136 +15,155 @@ import com.pipi.common.constant.SystemConstant;
 import com.pipi.entity.BaseEntity;
 
 
-
 /**
  * Created by yahto on 07/05/2017.
  */
 @Entity
 @Table(name = "T_DICTIONARY")
-public class Dictionary extends BaseEntity{
+public class Dictionary extends BaseEntity {
 
-	private static final long serialVersionUID = -4843286092042358897L;
-	
-	/** 字典主键*/
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "PK_DICTIONARY_ID")
-	private Integer id;
-	
-	/** 名称*/
-	@Column(name = "NAME", length = 200)
-	private String name;
-	
-	/** 编码，在XML文件中配置*/
-	@Column(name = "CODE", length = 200)
-	private String code;
-	
-	/** 排序或等级 */
-	@Column(name = "SORT")
-	private Integer sort;
-	
-	/**操作的时间*/
-	@Column(name = "SUBMIT_DATE")
-	@DateTimeFormat(pattern=SystemConstant.TIME_PATTEN)
-	private Date submitDate;
-	
-	/** 备注：网点号*/
-	@Column(name = "REMARKS", length = 200)
-	private String remarks;
-	
-	/** 备注2*/
-	@Column(name = "REMARKS2", length = 200)
-	private String remarks2;
-	
-	/** 备注3*/
-	@Column(name = "REMARKS3", length = 200)
-	private String remarks3;
-	
-	/** 备注4*/
-	@Column(name = "REMARKS4", length = 200)
-	private String remarks4;
-	
-	/** 备注5*/
-	@Column(name = "REMARKS5", length = 200)
-	private String remarks5;
+    private static final long serialVersionUID = -4843286092042358897L;
 
-	public Integer getId() {
-		return id;
-	}
+    /**
+     * 字典主键
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "PK_DICTIONARY_ID")
+    private Integer id;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    /**
+     * 名称
+     */
+    @Column(name = "NAME", length = 200)
+    private String name;
 
-	public String getName() {
-		return name;
-	}
+    /**
+     * 编码，在XML文件中配置
+     */
+    @Column(name = "CODE", length = 200)
+    private String code;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * 排序或等级
+     */
+    @Column(name = "SORT")
+    private Integer sort;
 
-	public String getCode() {
-		return code;
-	}
+    /**
+     * 操作的时间
+     */
+    @Column(name = "SUBMIT_DATE")
+    @DateTimeFormat(pattern = SystemConstant.TIME_PATTEN)
+    private Date submitDate;
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    /**
+     * 备注：网点号
+     */
+    @Column(name = "REMARKS", length = 200)
+    private String remarks;
 
-	public Integer getSort() {
-		return sort;
-	}
+    /**
+     * 备注2
+     */
+    @Column(name = "REMARKS2", length = 200)
+    private String remarks2;
 
-	public void setSort(Integer sort) {
-		this.sort = sort;
-	}
+    /**
+     * 备注3
+     */
+    @Column(name = "REMARKS3", length = 200)
+    private String remarks3;
 
-	public Date getSubmitDate() {
-		return submitDate;
-	}
+    /**
+     * 备注4
+     */
+    @Column(name = "REMARKS4", length = 200)
+    private String remarks4;
 
-	public void setSubmitDate(Date submitDate) {
-		this.submitDate = submitDate;
-	}
+    /**
+     * 备注5
+     */
+    @Column(name = "REMARKS5", length = 200)
+    private String remarks5;
 
-	public String getRemarks() {
-		return remarks;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public String getRemarks2() {
-		return remarks2;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getRemarks3() {
-		return remarks3;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getRemarks4() {
-		return remarks4;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getRemarks5() {
-		return remarks5;
-	}
+    public String getCode() {
+        return code;
+    }
 
-	public void setRemarks(String remarks) {
-		this.remarks = remarks;
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public void setRemarks2(String remarks2) {
-		this.remarks2 = remarks2;
-	}
+    public Integer getSort() {
+        return sort;
+    }
 
-	public void setRemarks3(String remarks3) {
-		this.remarks3 = remarks3;
-	}
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
 
-	public void setRemarks4(String remarks4) {
-		this.remarks4 = remarks4;
-	}
+    public Date getSubmitDate() {
+        return submitDate;
+    }
 
-	public void setRemarks5(String remarks5) {
-		this.remarks5 = remarks5;
-	}
+    public void setSubmitDate(Date submitDate) {
+        this.submitDate = submitDate;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public String getRemarks2() {
+        return remarks2;
+    }
+
+    public String getRemarks3() {
+        return remarks3;
+    }
+
+    public String getRemarks4() {
+        return remarks4;
+    }
+
+    public String getRemarks5() {
+        return remarks5;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public void setRemarks2(String remarks2) {
+        this.remarks2 = remarks2;
+    }
+
+    public void setRemarks3(String remarks3) {
+        this.remarks3 = remarks3;
+    }
+
+    public void setRemarks4(String remarks4) {
+        this.remarks4 = remarks4;
+    }
+
+    public void setRemarks5(String remarks5) {
+        this.remarks5 = remarks5;
+    }
 }

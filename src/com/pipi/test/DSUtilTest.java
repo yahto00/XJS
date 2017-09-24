@@ -11,13 +11,13 @@ import java.util.List;
  */
 public class DSUtilTest {
     @Test
-    public void parseIntegerArrTest(){
-        Integer[] integers = {1,2,3,4,5,6,7};
+    public void parseIntegerArrTest() {
+        Integer[] integers = {1, 2, 3, 4, 5, 6, 7};
         System.out.println(DSUtil.parseIntegerArr(integers));
     }
 
     @Test
-    public void parseObjectListTest(){
+    public void parseObjectListTest() {
         List<Object> list = new ArrayList<Object>();
         list.add(1);
         list.add(2);

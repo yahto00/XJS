@@ -18,41 +18,41 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
  */
 public class CommonsMultipartResolverExt extends CommonsMultipartResolver {
 
-	private HttpServletRequest request;
+    private HttpServletRequest request;
 
-	@Override
-	protected FileUpload newFileUpload(FileItemFactory fileItemFactory) {
-		ServletFileUpload upload = new ServletFileUpload(fileItemFactory);
-		upload.setSizeMax(-1);
-		if (request != null) {
-			/**注入监听*/
-			final HttpSession hs = request.getSession();
-			upload.setProgressListener(new ProgressListener() {
+    @Override
+    protected FileUpload newFileUpload(FileItemFactory fileItemFactory) {
+        ServletFileUpload upload = new ServletFileUpload(fileItemFactory);
+        upload.setSizeMax(-1);
+        if (request != null) {
+            /**注入监听*/
+            final HttpSession hs = request.getSession();
+            upload.setProgressListener(new ProgressListener() {
 
-				/**
-				 * pBytesRead代表已上传字节数 pContentLength代表总大小 pItems代表总长度
-				 */
-				@Override
-				public void update(long pBytesRead, long pContentLength,
-						int pItems) {
-					ProcessInfo pri = new ProcessInfo();
-					pri.itemNum = pItems;
-					pri.readSize = pBytesRead;
-					pri.totalSize = pContentLength;
-					pri.show = pBytesRead + "/" + pContentLength + " byte";
-					pri.rate = Math.round(new Float(pBytesRead)
-							/ new Float(pContentLength) * 100);
-					hs.setAttribute("proInfo", pri);
-				}
-			});
-		}
-		return upload;
-	}
+                /**
+                 * pBytesRead代表已上传字节数 pContentLength代表总大小 pItems代表总长度
+                 */
+                @Override
+                public void update(long pBytesRead, long pContentLength,
+                                   int pItems) {
+                    ProcessInfo pri = new ProcessInfo();
+                    pri.itemNum = pItems;
+                    pri.readSize = pBytesRead;
+                    pri.totalSize = pContentLength;
+                    pri.show = pBytesRead + "/" + pContentLength + " byte";
+                    pri.rate = Math.round(new Float(pBytesRead)
+                            / new Float(pContentLength) * 100);
+                    hs.setAttribute("proInfo", pri);
+                }
+            });
+        }
+        return upload;
+    }
 
-	@Override
-	public MultipartHttpServletRequest resolveMultipart(
-			HttpServletRequest request) throws MultipartException {
-		this.request = request;// 获取到request,要用到session
-		return super.resolveMultipart(request);
-	}
+    @Override
+    public MultipartHttpServletRequest resolveMultipart(
+            HttpServletRequest request) throws MultipartException {
+        this.request = request;// 获取到request,要用到session
+        return super.resolveMultipart(request);
+    }
 }

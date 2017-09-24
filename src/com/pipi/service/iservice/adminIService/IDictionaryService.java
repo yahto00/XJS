@@ -13,22 +13,34 @@ import com.pipi.vo.ListVo;
  */
 public interface IDictionaryService extends IBaseService {
 
-	/** 获取字典集合 */
-	public ListVo<Dictionary> getDictionaryList(int i, int j, Map<String, Object> paramMap);
+    /**
+     * 获取字典集合
+     */
+    public ListVo<Dictionary> getDictionaryList(int i, int j, Map<String, Object> paramMap);
 
-	/** 添加字典 */
-	public void addDictionary(Dictionary dictionary);
+    /**
+     * 添加字典
+     */
+    public void addDictionary(Dictionary dictionary);
 
-	/** 修改字典 */
-	public void updateDictionary(Dictionary dictionary);
+    /**
+     * 修改字典
+     */
+    public void updateDictionary(Dictionary dictionary);
 
-	/** 获取字典最大顺序  */
-	public int getMaxSortByDictionaryType(String type);
+    /**
+     * 获取字典最大顺序
+     */
+    public int getMaxSortByDictionaryType(String type);
 
-	/** 批量删除字典 */
-	public void deleteDictionary(String ids);
-	
-	/** 通过名字获取字典列表 */
-	public List<Dictionary> getDictionaryByName(Dictionary dictionary);
+    /**
+     * 批量删除字典
+     */
+    public void deleteDictionary(String ids);
+
+    /**
+     * 通过名字获取字典列表
+     */
+    public List<Dictionary> getDictionaryByName(Dictionary dictionary);
 
 }

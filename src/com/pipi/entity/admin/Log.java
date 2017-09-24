@@ -22,57 +22,65 @@ import com.pipi.entity.BaseEntity;
 @Table(name = "T_LOG")
 public class Log extends BaseEntity {
 
-	private static final long serialVersionUID = 6920412063790353593L;
-	
-	/** 日志的主键  */
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "PK_LOG_ID")
-	private Integer id;  
+    private static final long serialVersionUID = 6920412063790353593L;
 
-	/** 操作内容  */
-	@Column(name = "CONTENT", length = 2000, nullable = false)
-	private String content;
+    /**
+     * 日志的主键
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "PK_LOG_ID")
+    private Integer id;
 
-	/** 操作的IP地址  */
-	@Column(name = "LOG_IP", length = 50, nullable = false)
-	private String ip;
-	
-	/**操作的时间*/
-	@Column(name = "SUBMIT_DATE")
-	@DateTimeFormat(pattern=SystemConstant.TIME_PATTEN)
-	private Date submitDate;
+    /**
+     * 操作内容
+     */
+    @Column(name = "CONTENT", length = 2000, nullable = false)
+    private String content;
+
+    /**
+     * 操作的IP地址
+     */
+    @Column(name = "LOG_IP", length = 50, nullable = false)
+    private String ip;
+
+    /**
+     * 操作的时间
+     */
+    @Column(name = "SUBMIT_DATE")
+    @DateTimeFormat(pattern = SystemConstant.TIME_PATTEN)
+    private Date submitDate;
 
     public Integer getId() {
-    	return id;
+        return id;
     }
-	
+
     public void setId(Integer id) {
-    	this.id = id;
+        this.id = id;
     }
 
     public String getContent() {
-    	return content;
+        return content;
     }
-	
+
     public void setContent(String content) {
-    	this.content = content;
+        this.content = content;
     }
 
     public String getIp() {
-    	return ip;
+        return ip;
     }
-	
+
     public void setIp(String ip) {
-    	this.ip = ip;
+        this.ip = ip;
     }
 
-	public Date getSubmitDate() {
-		return submitDate;
-	}
+    public Date getSubmitDate() {
+        return submitDate;
+    }
 
-	public void setSubmitDate(Date submitDate) {
-		this.submitDate = submitDate;
-	}
-	
+    public void setSubmitDate(Date submitDate) {
+        this.submitDate = submitDate;
+    }
+
 }

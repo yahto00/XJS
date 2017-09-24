@@ -36,10 +36,10 @@ public class Page {
 
     public Integer getPageCount() {
         int flag = totalCount % pageSize;
-        if (flag == 0){
-            pageCount = totalCount/pageSize;
-        }else {
-            pageCount = totalCount/pageSize + 1;
+        if (flag == 0) {
+            pageCount = totalCount / pageSize;
+        } else {
+            pageCount = totalCount / pageSize + 1;
         }
         return pageCount;
     }

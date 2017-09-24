@@ -9,9 +9,9 @@ import com.pipi.service.iservice.IBaseService;
  */
 public interface IRoleService extends IBaseService {
 
-	void addRole(Role role);
+    void addRole(Role role);
 
-	void updateRole(Role role);
+    void updateRole(Role role);
 
-	void deleteRoles(String ids);
+    void deleteRoles(String ids);
 }

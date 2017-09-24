@@ -62,11 +62,16 @@ public class ProcessorController {
         try {
             List<ProcessSlate> processSlateList = (List<ProcessSlate>) processorService.queryAllProcessSlate();
             List<ProcessSlateVo> list = new ArrayList<ProcessSlateVo>();
-            for (ProcessSlate processSlate :processSlateList) {
+            for (ProcessSlate processSlate : processSlateList) {
                 ProcessSlateVo processSlateVo = new ProcessSlateVo();
-                processSlateVo.setProcessSlate(processSlate);
-                processSlateVo.setKind(processSlate.getKind());
-                processSlateVo.setStabKind(processSlate.getStabKind());
+                processSlateVo.setStabKindId(processSlate.getStabKind().getId());
+                processSlateVo.setSlateId(processSlate.getId());
+                processSlateVo.setPrice(processSlate.getPrice());
+                processSlateVo.setAcreage(processSlate.getAcreage());
+                processSlateVo.setProNum(processSlate.getProNum());
+                processSlateVo.setOperatorName(processSlate.getUser().getUserName());
+                processSlateVo.setKindName(processSlate.getKind().getName());
+                processSlateVo.setStabKindNum(processSlate.getStabKind().getNum());
                 list.add(processSlateVo);
             }
             map.put("list", list);

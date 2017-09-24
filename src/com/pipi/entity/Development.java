@@ -7,35 +7,54 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "T_DEVELOPMENT")
-public class Development extends BaseEntity{
+public class Development extends BaseEntity {
     private static final long serialVersionUID = 59265530157645975L;
 
-    /** 成品主键 */
+    /**
+     * 成品主键
+     */
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "PK_DEVELOPMENT_ID")
     private Integer id;
 
-    /** 成品名 */
+    /**
+     * 成品名
+     */
     @Column(name = "SLATE_NAME", length = 100)
     private String slateName;
 
-    /** 成品单价*/
+    /**
+     * 成品单价
+     */
     @Column(name = "SLATE_PRICE")
     private Double price;
 
-    /** 成品的长度*/
+    /**
+     * 成品的长度
+     */
     @Column(name = "SLATE_LENGTH")
     private float length;
 
-    /** 成品的宽度*/
+    /**
+     * 成品的宽度
+     */
     @Column(name = "SLATE_HEIGHT")
     private float height;
 
-    /** 成品的来源*/
+    /**
+     * 成品的来源
+     */
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "FK_PROCESS_SLATE_ID")
     private ProcessSlate processSlate;
+
+    /**
+     * 关联所属订单
+     */
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "FK_ORDERITEM_ID")
+    private OrderItem orderItem;
 
     public Integer getId() {
         return id;
@@ -83,5 +102,13 @@ public class Development extends BaseEntity{
 
     public void setProcessSlate(ProcessSlate processSlate) {
         this.processSlate = processSlate;
+    }
+
+    public OrderItem getOrderItem() {
+        return orderItem;
+    }
+
+    public void setOrderItem(OrderItem orderItem) {
+        this.orderItem = orderItem;
     }
 }

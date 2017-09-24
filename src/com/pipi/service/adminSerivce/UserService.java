@@ -12,6 +12,7 @@ import com.pipi.service.iservice.adminIService.IUserService;
 import com.pipi.util.DSUtil;
 import com.pipi.util.ObjectUtil;
 import com.pipi.util.Ufn;
+import com.pipi.vo.Page;
 import com.pipi.vo.UserRoleVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -118,8 +119,11 @@ public class UserService extends BaseService implements IUserService {
     }
 
     @Override
-    public List<UserRoleVo> queryAllUsers() {
-        List<User> userList = (List<User>) queryAll(User.class);
+    public List<UserRoleVo> queryAllUsers(Page page) {
+        String countHql = "select count(*) from User";
+        Long totalCount = queryTotalCount(countHql,null);
+        page.setTotalCount(totalCount.intValue());
+        List<User> userList = (List<User>) userDao.getAllObjectByPage(User.class,page);
         List<UserRoleVo> list = new ArrayList<UserRoleVo>();
         Iterator iterator = userList.iterator();
         while (iterator.hasNext()) {

@@ -13,6 +13,7 @@ import java.util.List;
 public class ObjectUtil {
     /**
      * 判断对象是否为空
+     *
      * @param object
      * @param params 需要判断的字段
      * @return

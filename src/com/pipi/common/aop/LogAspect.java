@@ -151,7 +151,7 @@ public class LogAspect extends BaseController {
                 try {
                     pd = new PropertyDescriptor("id", obj1.getClass());
                     method = pd.getReadMethod();
-                    result += String.valueOf(method.invoke(obj1)) +",";
+                    result += String.valueOf(method.invoke(obj1)) + ",";
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -9,31 +9,43 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "T_ORDER")
-public class Order extends BaseEntity{
+public class Order extends BaseEntity {
     private static final long serialVersionUID = 5926553015764565L;
-    /** 主键 */
+    /**
+     * 主键
+     */
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "PK_ORDER_ID")
     private Integer id;
 
-    /** 订单编号 */
+    /**
+     * 订单编号
+     */
     @Column(name = "ORDER_NUM", length = 100)
     private String orderNum;
 
-    /** 订单条目总数量*/
+    /**
+     * 订单条目总数量
+     */
     @Column(name = "ORDER_TOTAL_COUNT")
     private Integer totalCount;
 
-    /** 订单金额*/
+    /**
+     * 订单金额
+     */
     @Column(name = "ORDER_TOTAL_PRICE")
     private float price;
 
-    /** 关联客户信息*/
+    /**
+     * 关联客户信息
+     */
     @Column(name = "FK_CUSTOMER_ID")
     private Integer customerId;
 
-    /** 订单条目关联信息*/
+    /**
+     * 订单条目关联信息
+     */
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<OrderItem> orderItems = new HashSet<OrderItem>();
 

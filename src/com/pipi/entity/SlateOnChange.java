@@ -8,23 +8,31 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "T_SLATE_ON_CHANGE")
-public class SlateOnChange extends BaseEntity{
+public class SlateOnChange extends BaseEntity {
     private static final long serialVersionUID = 592530157645975L;
-    /** 主键 */
+    /**
+     * 主键
+     */
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "PK_SLATE_ON_CHANGE_ID")
     private Integer id;
 
-    /** 记录表操作描述*/
+    /**
+     * 记录表操作描述
+     */
     @Column(name = "SLATE_ON_CHANGE_DESCRIPTION")
     private String description;
 
-    /** 操作时间*/
+    /**
+     * 操作时间
+     */
     @Column(name = "OP_TIME")
     private Date op_time = new Date();
 
-    /** 操作人*/
+    /**
+     * 操作人
+     */
     @Column(name = "FK_USER_ID")
     private Integer userId;
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dictionary>
-	<dictionary-item>
-		<name>网点</name>
-		<code>dot</code>
-	</dictionary-item>
+    <dictionary-item>
+        <name>网点</name>
+        <code>dot</code>
+    </dictionary-item>
 </dictionary>

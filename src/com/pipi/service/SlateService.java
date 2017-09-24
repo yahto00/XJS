@@ -58,6 +58,9 @@ public class SlateService extends BaseService implements ISlateService {
         if (ids == null || ids.length == 0) {
             throw new BusinessException("未填指定板材");
         }
+        if (stabKindId == null) {
+            throw new BusinessException("未制定扎,请重试");
+        }
         if ((User) request.getSession().getAttribute(SystemConstant.CURRENT_USER) == null) {
             throw new BusinessException("请登陆后再操作");
         }

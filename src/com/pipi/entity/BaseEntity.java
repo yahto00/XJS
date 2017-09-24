@@ -13,19 +13,21 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class BaseEntity implements Serializable {
 
-	private static final long serialVersionUID = -1730442499015839066L;
+    private static final long serialVersionUID = -1730442499015839066L;
 
-	/**  是否删除: 0 不删除，1 删除 */
-	@Column(name = "ISDELETE", length = 2,nullable=false,columnDefinition="INT default 0")
-	@JsonIgnore
-	private int isDelete = 0;
+    /**
+     * 是否删除: 0 不删除，1 删除
+     */
+    @Column(name = "ISDELETE", length = 2, nullable = false, columnDefinition = "INT default 0")
+    @JsonIgnore
+    private int isDelete = 0;
 
-	public int getIsDelete() {
-		return isDelete;
-	}
+    public int getIsDelete() {
+        return isDelete;
+    }
 
-	public void setIsDelete(int isDelete) {
-		this.isDelete = isDelete;
-	}
+    public void setIsDelete(int isDelete) {
+        this.isDelete = isDelete;
+    }
 
 }

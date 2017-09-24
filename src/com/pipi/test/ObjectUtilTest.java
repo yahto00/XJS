@@ -9,12 +9,12 @@ import org.junit.Test;
  */
 public class ObjectUtilTest {
     @Test
-    public void objectIsEmptyTest(){
+    public void objectIsEmptyTest() {
         User user = new User();
         user.setLoginName("yahto");
         user.setUserName("yahto");
         user.setPassword("123");
-        String[] params = {"userName","password","loginName"};
-        System.out.println(ObjectUtil.objectIsEmpty(user,params));
+        String[] params = {"userName", "password", "loginName"};
+        System.out.println(ObjectUtil.objectIsEmpty(user, params));
     }
 }

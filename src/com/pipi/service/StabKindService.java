@@ -36,7 +36,7 @@ public class StabKindService extends BaseService implements IStabKindService {
         }
         try {
             add(stabKind);
-        }catch (Throwable e){
+        } catch (Throwable e) {
             throw new BusinessException("扎编号重名");
         }
     }

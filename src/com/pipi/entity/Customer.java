@@ -7,25 +7,33 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "T_CUSTOMER")
-public class Customer extends BaseEntity{
+public class Customer extends BaseEntity {
 
     private static final long serialVersionUID = 59265530157645L;
 
-    /** 主键*/
+    /**
+     * 主键
+     */
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "PK_CUS_ID")
     private Integer id;
 
-    /** 姓名*/
+    /**
+     * 姓名
+     */
     @Column(name = "CUS_NAME")
     private String name;
 
-    /** 联系方式*/
+    /**
+     * 联系方式
+     */
     @Column(name = "CUS_PHONE")
     private String phone;
 
-    /** 最近的订单*/
+    /**
+     * 最近的订单
+     */
     @Column(name = "CUS_LAST_ORDER_ID")
     private Integer last_order_id;
 

@@ -25,7 +25,7 @@ public class StabKind extends BaseEntity {
     /**
      * 扎编号
      */
-    @Column(name = "STAB_KIND_NUM",unique = true)
+    @Column(name = "STAB_KIND_NUM", unique = true)
     private String num;
 
     /**
@@ -95,7 +95,7 @@ public class StabKind extends BaseEntity {
     /**
      * 关联所属的种类
      */
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "FK_KIND_ID")
     private Kind kind;
 

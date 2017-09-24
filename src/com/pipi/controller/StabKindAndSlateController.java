@@ -94,7 +94,7 @@ public class StabKindAndSlateController extends BaseController {
 
         try {
             User user = (User) request.getSession().getAttribute(SystemConstant.CURRENT_USER);
-            if (user == null){
+            if (user == null) {
                 throw new BusinessException("未登录");
             }
             //解析json
@@ -301,14 +301,13 @@ public class StabKindAndSlateController extends BaseController {
      *
      * @param ids
      * @param stabKindId
-     * @param outNum
      * @param request
      * @return
      * @author yahto
      */
     @RequestMapping("stabKindAndSlate_outStock.ajax")
     @ResponseBody
-    public Map<String, Object> outStock(Integer[] ids, Integer stabKindId, String outNum, HttpServletRequest request) {
+    public Map<String, Object> outStock(Integer[] ids, Integer stabKindId, HttpServletRequest request) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {

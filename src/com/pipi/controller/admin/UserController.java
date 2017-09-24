@@ -6,6 +6,7 @@ import com.pipi.common.exception.BusinessException;
 import com.pipi.entity.admin.Role;
 import com.pipi.entity.admin.User;
 import com.pipi.service.iservice.adminIService.IUserService;
+import com.pipi.vo.Page;
 import com.pipi.vo.UserRoleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -92,12 +93,22 @@ public class UserController extends BaseController {
      */
     @RequestMapping("user_queryAllUsers.ajax")
     @ResponseBody
-    public Map<String, Object> queryAllUsers() {
+    public Map<String, Object> queryAllUsers(Integer startPage, Integer pageSize) {
+        if (startPage == null) {
+            startPage = 1;
+        }
+        if (pageSize == null){
+            pageSize = SystemConstant.PAGE_SIZE;
+        }
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            List<UserRoleVo> list = (List<UserRoleVo>) userService.queryAllUsers();
+            Page page = new Page();
+            page.setPageSize(pageSize);
+            page.setStartPage(startPage);
+            List<UserRoleVo> list = (List<UserRoleVo>) userService.queryAllUsers(page);
             map.put("list", list);
+            map.put("page",page);
             map.put("data", true);
             map.put("msg", "操作成功");
         } catch (BusinessException e) {

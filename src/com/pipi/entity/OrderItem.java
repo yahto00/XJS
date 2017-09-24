@@ -1,35 +1,52 @@
 package com.pipi.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by yahto on 03/05/2017.
  */
 @Entity
 @Table(name = "T_ORDER_ITEM")
-public class OrderItem extends BaseEntity{
+public class OrderItem extends BaseEntity {
     private static final long serialVersionUID = -19265530157645975L;
-    /** 条目主键 */
+    /**
+     * 条目主键
+     */
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "PK_ORDER_ITEM_ID")
     private Integer id;
 
-    /** 条目名 */
+    /**
+     * 条目名
+     */
     @Column(name = "ORDER_ITEM_NAME", length = 100)
     private String slateName;
 
-    /** 条目单价*/
+    /**
+     * 条目单价
+     */
     @Column(name = "ORDER_ITEM_PRICE")
     private Double price;
 
-    /** 条目数量*/
+    /**
+     * 条目数量
+     */
     @Column(name = "ORDER_ITEM_COUNT")
     private Integer count;
 
-    /** 条目所属订单*/
+    /**
+     * 订单条目关联的成品
+     */
+    @OneToMany
+    @JoinColumn(name = "FK_ORDERITEM_ID")
+    private Set<Development> developmentSet;
 
-    @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+    /**
+     * 条目所属订单
+     */
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "FK_ORDER_ID")
     private Order order;
 
@@ -63,6 +80,14 @@ public class OrderItem extends BaseEntity{
 
     public void setCount(Integer count) {
         this.count = count;
+    }
+
+    public Set<Development> getDevelopmentSet() {
+        return developmentSet;
+    }
+
+    public void setDevelopmentSet(Set<Development> developmentSet) {
+        this.developmentSet = developmentSet;
     }
 
     public Order getOrder() {
