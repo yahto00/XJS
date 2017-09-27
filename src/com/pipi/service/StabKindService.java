@@ -8,6 +8,7 @@ import com.pipi.service.iservice.ISlateService;
 import com.pipi.service.iservice.IStabKindService;
 import com.pipi.util.DSUtil;
 import com.pipi.util.ObjectUtil;
+import com.pipi.vo.Page;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
@@ -85,5 +86,13 @@ public class StabKindService extends BaseService implements IStabKindService {
             hql.append(" and kind.id=" + id);
         }
         return (List<StabKind>) baseDao.getObjectListByNativeHql(hql.toString());
+    }
+
+    @Override
+    public List<StabKind> queryStabKindByPage(Page page) {
+        String hql = "select count(*) from StabKind where isDelete=0";
+        Long totalCount = queryTotalCount(hql,null);
+        page.setTotalCount(totalCount.intValue());
+        return (List<StabKind>) baseDao.getAllObjectByPage(StabKind.class,page);
     }
 }

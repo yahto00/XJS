@@ -12,6 +12,7 @@ import com.pipi.entity.admin.User;
 import com.pipi.service.iservice.IKindService;
 import com.pipi.service.iservice.ISlateService;
 import com.pipi.service.iservice.IStabKindService;
+import com.pipi.vo.Page;
 import com.pipi.vo.SlateDataVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -194,6 +195,37 @@ public class StabKindAndSlateController extends BaseController {
         map.put("data", false);
         try {
             List<StabKind> list = stabKindService.queryAllStabKind();
+            map.put("list", list);
+            map.put("msg", "操作成功");
+            map.put("data", true);
+        } catch (BusinessException e) {
+            map.put("msg", e.getMessage());
+        }
+        return map;
+    }
+
+    /**
+     * 分页查询扎种类
+     * @param startPage
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping("stabKindAndSlate_queryStabKindByPage")
+    @ResponseBody
+    public Map<String,Object> queryStabKindByPage(Integer startPage,Integer pageSize){
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("data", false);
+        try {
+            if (startPage == null){
+                startPage = 1;
+            }
+            if (pageSize == null){
+                pageSize = SystemConstant.PAGE_SIZE;
+            }
+            Page page = new Page();
+            page.setStartPage(startPage);
+            page.setPageSize(pageSize);
+            List<StabKind> list = stabKindService.queryStabKindByPage(page);
             map.put("list", list);
             map.put("msg", "操作成功");
             map.put("data", true);

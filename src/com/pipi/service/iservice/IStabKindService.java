@@ -2,6 +2,7 @@ package com.pipi.service.iservice;
 
 import com.pipi.entity.Slate;
 import com.pipi.entity.StabKind;
+import com.pipi.vo.Page;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -29,4 +30,6 @@ public interface IStabKindService extends IBaseService {
      * 根据种类Id查询所有扎种类
      */
     List<StabKind> queryALLStabKindByKindId(Integer id, String num);
+
+    List<StabKind> queryStabKindByPage(Page page);
 }
