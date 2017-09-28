@@ -210,7 +210,7 @@ public class StabKindAndSlateController extends BaseController {
      * @param pageSize
      * @return
      */
-    @RequestMapping("stabKindAndSlate_queryStabKindByPage")
+    @RequestMapping("stabKindAndSlate_queryStabKindByPage.ajax")
     @ResponseBody
     public Map<String,Object> queryStabKindByPage(Integer startPage,Integer pageSize){
         Map<String, Object> map = new HashMap<String, Object>();

@@ -193,7 +193,7 @@ public class BaseDao extends HibernateDaoSupport implements IBaseDao {
 
     @Override
     public List<?> getAllObjectByPage(Class<?> clazz, Page page) {
-        String hql = "from " + clazz.getName() + "where isDelete=0";
+        String hql = "from " + clazz.getName() + " where isDelete=0";
         Query query = getHBSession().createQuery(hql);
         query.setFirstResult((page.getStartPage() - 1) * page.getPageSize());
         query.setMaxResults(page.getPageSize());
@@ -202,7 +202,7 @@ public class BaseDao extends HibernateDaoSupport implements IBaseDao {
 
     @Override
     public Integer getObjectCount(Class<?> clazz) {
-        String hql = "select count (*) from " + clazz.getName() + "where isDelte=0";
+        String hql = "select count(*) from " + clazz.getName() + "where isDelte=0";
         Query query = getHBSession().createQuery(hql);
         return Integer.valueOf(((Long) query.uniqueResult()).intValue());
     }
