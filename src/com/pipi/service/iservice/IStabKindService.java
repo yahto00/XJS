@@ -31,5 +31,11 @@ public interface IStabKindService extends IBaseService {
      */
     List<StabKind> queryALLStabKindByKindId(Integer id, String num);
 
+    /**
+     * 分页查询扎种类
+     *
+     * @param page
+     * @return
+     */
     List<StabKind> queryStabKindByPage(Page page);
 }

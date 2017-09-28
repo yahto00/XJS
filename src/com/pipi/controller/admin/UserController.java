@@ -97,7 +97,7 @@ public class UserController extends BaseController {
         if (startPage == null) {
             startPage = 1;
         }
-        if (pageSize == null){
+        if (pageSize == null) {
             pageSize = SystemConstant.PAGE_SIZE;
         }
         Map<String, Object> map = new HashMap<String, Object>();
@@ -108,7 +108,7 @@ public class UserController extends BaseController {
             page.setStartPage(startPage);
             List<UserRoleVo> list = (List<UserRoleVo>) userService.queryAllUsers(page);
             map.put("list", list);
-            map.put("page",page);
+            map.put("page", page);
             map.put("data", true);
             map.put("msg", "操作成功");
         } catch (BusinessException e) {

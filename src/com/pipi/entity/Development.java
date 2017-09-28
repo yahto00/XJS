@@ -1,5 +1,8 @@
 package com.pipi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.pipi.entity.admin.User;
+
 import javax.persistence.*;
 
 /**
@@ -43,14 +46,22 @@ public class Development extends BaseEntity {
     private float height;
 
     /**
+     * 石材加工单操作人
+     */
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "FK_OPERATE_USER_ID")
+    private User user;
+
+    /**
      * 成品的来源
      */
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "FK_PROCESS_SLATE_ID")
+    @JsonIgnore
     private ProcessSlate processSlate;
 
     /**
-     * 关联所属订单
+     * 关联所属订单条目
      */
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "FK_ORDERITEM_ID")
@@ -110,5 +121,13 @@ public class Development extends BaseEntity {
 
     public void setOrderItem(OrderItem orderItem) {
         this.orderItem = orderItem;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

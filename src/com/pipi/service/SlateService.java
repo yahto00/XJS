@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * Created by yahto on 13/05/2017.
@@ -52,6 +54,7 @@ public class SlateService extends BaseService implements ISlateService {
         add(slateOnChange);
     }
 
+    //todo 用单线程出库
     @Override
     @MyLog(operationName = "删除板材,出库", operationType = "delete")
     public void deleteSlateByIds(Integer[] ids, Integer stabKindId, HttpServletRequest request) {
@@ -69,6 +72,9 @@ public class SlateService extends BaseService implements ISlateService {
         String finalIds = DSUtil.parseIntegerArr(ids);
         String hql = "from Slate where isDelete=0 and id in (" + finalIds + ")";
         List<Slate> list = (List<Slate>) queryObjectList(hql);
+        if (list.size() < ids.length) {
+            throw new BusinessException("指定的板材中已经有被出库的板材，请刷新重试");
+        }
         List<ProcessSlate> processSlates = new ArrayList<>(8);
         for (Slate slate : list) {
             outAcreage += slate.getLength() * slate.getHeight();

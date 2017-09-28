@@ -4,9 +4,12 @@ import com.pipi.common.exception.BusinessException;
 import com.pipi.entity.ProcessSlate;
 import com.pipi.entity.Slate;
 import com.pipi.entity.StabKind;
+import com.pipi.entity.admin.User;
 import com.pipi.service.iservice.IProcessorService;
+import com.pipi.vo.Page;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -47,8 +50,17 @@ public class ProcessorService extends BaseService implements IProcessorService {
     }
 
     @Override
-    public List<ProcessSlate> queryAllProcessSlate() {
-        String hql = "from ProcessSlate where isDelete=0";
-        return (List<ProcessSlate>) baseDao.getObjectListByNativeHql(hql);
+    public List<ProcessSlate> queryProcessSlateByPage(User user, Page page) {
+        StringBuilder hql = new StringBuilder();
+        if (user.getRoles().contains(1)) {
+            //如果是超级管理员直接查询到所有的加工板材
+            hql.append("from ProcessSlate where isDelete=0 ");
+            page.setTotalCount(queryTotalCount(hql.toString(), null).intValue());
+            return (List<ProcessSlate>) baseDao.getAllObjectByPageHql(hql.toString(), page);
+        } else {
+            hql.append("from ProcessSlate where isDelete=0 and user.id = " + user.getId());
+            page.setTotalCount(queryTotalCount(hql.toString(), null).intValue());
+            return (List<ProcessSlate>) baseDao.getAllObjectByPageHql(hql.toString(), page);
+        }
     }
 }
