@@ -16,8 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.*;
 
 /**
  * Created by yahto on 13/05/2017.
@@ -26,6 +25,10 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class SlateService extends BaseService implements ISlateService {
     @Autowired
     private IProcessDao processDao;
+
+    private static final ExecutorService executorService = new ThreadPoolExecutor(1, 1, 5,
+            TimeUnit.SECONDS, new
+            ArrayBlockingQueue<Runnable>(10));
 
     @Override
     @MyLog(operationName = "添加板材", operationType = "add")
@@ -68,47 +71,49 @@ public class SlateService extends BaseService implements ISlateService {
             throw new BusinessException("请登陆后再操作");
         }
         StabKind stabKind = (StabKind) queryObjectByID(StabKind.class, stabKindId);
-        Float outAcreage = 0f;
         String finalIds = DSUtil.parseIntegerArr(ids);
         String hql = "from Slate where isDelete=0 and id in (" + finalIds + ")";
         List<Slate> list = (List<Slate>) queryObjectList(hql);
-        if (list.size() < ids.length) {
-            throw new BusinessException("指定的板材中已经有被出库的板材，请刷新重试");
+        synchronized (list){
+            Float outAcreage = 0f;
+            if (list.size() < ids.length) {
+                throw new BusinessException("指定的板材中已经有被出库的板材，请刷新重试");
+            }
+            List<ProcessSlate> processSlates = new ArrayList<>(8);
+            for (Slate slate : list) {
+                outAcreage += slate.getLength() * slate.getHeight();
+                ProcessSlate processSlate = new ProcessSlate();
+                processSlate.setKind(slate.getKind());
+                processSlate.setAcreage(slate.getHeight() * slate.getLength());
+                processSlate.setProNum(String.valueOf(ids.length));
+                processSlate.setSlateName(slate.getSlateName());
+                processSlate.setUser((User) request.getSession().getAttribute(SystemConstant.CURRENT_USER));
+                processSlate.setPrice(slate.getPrice());
+                processSlate.setStabKind(slate.getStabKind());
+                processSlate.setKind(slate.getKind());
+                processSlates.add(processSlate);
+            }
+            //板材转到加工厂
+            processDao.addBatchProcessSlate(processSlates);
+            stabKind.setOut_time(new Date());//记录出库时间
+            stabKind.setOutCount(ids.length);//记录出库数量
+            stabKind.setOutAcreage(outAcreage);//记录出库面积
+            stabKind.setCurrentCount(stabKind.getCurrentCount() - ids.length);
+            //如果出库面积大于当前扎的面积 将扎面积置为0
+            if (stabKind.getCurrentAcreage() < outAcreage) {
+                stabKind.setCurrentAcreage(0f);
+            } else {
+                stabKind.setCurrentAcreage(stabKind.getCurrentAcreage() - outAcreage);
+            }
+            delete(Slate.class, finalIds);
+            update(stabKind);
+            SlateOnChange slateOnChange = new SlateOnChange();
+            slateOnChange.setOp_time(new Date());
+            User user = (User) (request.getSession().getAttribute(SystemConstant.CURRENT_USER));
+            slateOnChange.setDescription("用户：" + user.getUserName() + " 删除板材 " + finalIds);
+            slateOnChange.setUserId(user.getId());
+            add(slateOnChange);
         }
-        List<ProcessSlate> processSlates = new ArrayList<>(8);
-        for (Slate slate : list) {
-            outAcreage += slate.getLength() * slate.getHeight();
-            ProcessSlate processSlate = new ProcessSlate();
-            processSlate.setKind(slate.getKind());
-            processSlate.setAcreage(slate.getHeight() * slate.getLength());
-            processSlate.setProNum(String.valueOf(ids.length));
-            processSlate.setSlateName(slate.getSlateName());
-            processSlate.setUser((User) request.getSession().getAttribute(SystemConstant.CURRENT_USER));
-            processSlate.setPrice(slate.getPrice());
-            processSlate.setStabKind(slate.getStabKind());
-            processSlate.setKind(slate.getKind());
-            processSlates.add(processSlate);
-        }
-        //板材转到加工厂
-        processDao.addBatchProcessSlate(processSlates);
-        stabKind.setOut_time(new Date());//记录出库时间
-        stabKind.setOutCount(ids.length);//记录出库数量
-        stabKind.setOutAcreage(outAcreage);//记录出库面积
-        stabKind.setCurrentCount(stabKind.getCurrentCount() - ids.length);
-        //如果出库面积大于当前扎的面积 将扎面积置为0
-        if (stabKind.getCurrentAcreage() < outAcreage) {
-            stabKind.setCurrentAcreage(0f);
-        } else {
-            stabKind.setCurrentAcreage(stabKind.getCurrentAcreage() - outAcreage);
-        }
-        delete(Slate.class, finalIds);
-        update(stabKind);
-        SlateOnChange slateOnChange = new SlateOnChange();
-        slateOnChange.setOp_time(new Date());
-        User user = (User) (request.getSession().getAttribute(SystemConstant.CURRENT_USER));
-        slateOnChange.setDescription("用户：" + user.getUserName() + " 删除板材 " + finalIds);
-        slateOnChange.setUserId(user.getId());
-        add(slateOnChange);
     }
 
     @Override
