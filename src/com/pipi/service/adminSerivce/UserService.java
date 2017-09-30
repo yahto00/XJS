@@ -121,8 +121,7 @@ public class UserService extends BaseService implements IUserService {
     @Override
     public List<UserRoleVo> queryAllUsers(Page page) {
         String countHql = "select count(*) from User where isDelete=0";
-        Long totalCount = queryTotalCount(countHql,null);
-        page.setTotalCount(totalCount.intValue());
+        page.setTotalCount(userDao.getObjectCountByHql(countHql));
         List<User> userList = (List<User>) userDao.getAllObjectByPage(User.class,page);
         List<UserRoleVo> list = new ArrayList<UserRoleVo>();
         Iterator iterator = userList.iterator();

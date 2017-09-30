@@ -206,20 +206,21 @@ public class StabKindAndSlateController extends BaseController {
 
     /**
      * 分页查询扎种类
+     *
      * @param startPage
      * @param pageSize
      * @return
      */
     @RequestMapping("stabKindAndSlate_queryStabKindByPage.ajax")
     @ResponseBody
-    public Map<String,Object> queryStabKindByPage(Integer startPage,Integer pageSize){
+    public Map<String, Object> queryStabKindByPage(Integer startPage, Integer pageSize) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            if (startPage == null){
+            if (startPage == null) {
                 startPage = 1;
             }
-            if (pageSize == null){
+            if (pageSize == null) {
                 pageSize = SystemConstant.PAGE_SIZE;
             }
             Page page = new Page();

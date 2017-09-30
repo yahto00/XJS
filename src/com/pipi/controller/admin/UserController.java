@@ -235,8 +235,7 @@ public class UserController extends BaseController {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            User user = userService.queryUserById(id);
-            map.put("user", user);
+            map.put("user", userService.queryUserById(id));
             map.put("msg", "操作成功");
             map.put("data", true);
         } catch (BusinessException e) {
