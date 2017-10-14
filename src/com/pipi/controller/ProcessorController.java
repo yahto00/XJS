@@ -21,7 +21,7 @@ import java.util.Map;
  * Created by yahto on 10/09/2017.
  */
 @Controller
-public class ProcessorController extends BaseController{
+public class ProcessorController extends BaseController {
     @Autowired
     private IProcessorService processorService;
 
@@ -59,20 +59,23 @@ public class ProcessorController extends BaseController{
      */
     @RequestMapping("processor_queryProcessSlateByPage.ajax")
     @ResponseBody
-    public Map<String, Object> queryProcessSlateByPage(Integer startPage,Integer pageSize,HttpServletRequest request) {
+    public Map<String, Object> queryProcessSlateByPage(Integer startPage, Integer pageSize, HttpServletRequest request) {
         Map<String, Object> map = new HashMap<String, Object>(3);
         map.put("data", false);
         try {
-            if (startPage == null){
+            if (request.getSession().getAttribute(SystemConstant.CURRENT_USER) == null) {
+                throw new BusinessException("未登录,请先登录!");
+            }
+            if (startPage == null) {
                 startPage = 1;
             }
-            if (pageSize == null){
+            if (pageSize == null) {
                 pageSize = SystemConstant.PAGE_SIZE;
             }
             Page page = new Page();
             page.setStartPage(startPage);
             page.setPageSize(pageSize);
-            List<ProcessSlate> processSlateList = (List<ProcessSlate>) processorService.queryProcessSlateByPage(getCurrentUser(request),page);
+            List<ProcessSlate> processSlateList = (List<ProcessSlate>) processorService.queryProcessSlateByPage(getCurrentUser(request), page);
             List<ProcessSlateVo> list = new ArrayList<ProcessSlateVo>();
             for (ProcessSlate processSlate : processSlateList) {
                 ProcessSlateVo processSlateVo = new ProcessSlateVo();
@@ -91,6 +94,19 @@ public class ProcessorController extends BaseController{
             map.put("msg", "操作成功");
         } catch (BusinessException e) {
             map.put("msg", e.getMessage());
+        }
+        return map;
+    }
+
+    public Map<String,Object> produceDevelopment(){
+        Map<String, Object> map = new HashMap<String, Object>(3);
+        map.put("data", false);
+        try {
+            
+            map.put("data",true);
+            map.put("msg","操作成功");
+        }catch (BusinessException e){
+            map.put("msg",e.getMessage());
         }
         return map;
     }

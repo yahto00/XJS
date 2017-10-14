@@ -67,6 +67,11 @@ public class Development extends BaseEntity {
     @JoinColumn(name = "FK_ORDERITEM_ID")
     private OrderItem orderItem;
 
+    /**
+     * 成品是否已经出售 0否 1是
+     */
+    private Integer status;
+
     public Integer getId() {
         return id;
     }
@@ -129,5 +134,13 @@ public class Development extends BaseEntity {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }
