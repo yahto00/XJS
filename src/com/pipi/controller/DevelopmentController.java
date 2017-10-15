@@ -39,6 +39,7 @@ public class DevelopmentController {
                 throw new BusinessException("请先登录");
             }
             List<Development> list = developmentService.queryAllDevelopment((User) request.getSession().getAttribute(SystemConstant.CURRENT_USER));
+            map.put("list", list);
             map.put("data", true);
             map.put("msg", "操作成功");
         } catch (BusinessException e) {

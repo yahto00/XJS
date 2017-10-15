@@ -3,6 +3,7 @@ package com.pipi.service.iservice;
 import com.pipi.entity.ProcessSlate;
 import com.pipi.entity.admin.User;
 import com.pipi.vo.Page;
+import com.pipi.vo.SlateDataVO;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -17,10 +18,9 @@ public interface IProcessorService extends IBaseService {
      * @param processSlateId
      * @param stabKindId
      * @param description
-     * @param length
-     * @param width
+     * @param voList
      */
-    void backStorage(Integer processSlateId, Integer stabKindId, String description, float length, float width);
+    void backStorage(Integer processSlateId, Integer stabKindId, String description, List<SlateDataVO> voList);
 
     /**
      * 分页查询加工间板材
