@@ -3,7 +3,7 @@
 
   <context-param>
     <param-name>webAppRootKey</param-name>
-    <param-value>XGS.root</param-value>
+    <param-value>XJS.root</param-value>
   </context-param>
   <context-param>   
     <param-name>log4jConfigLocation</param-name>   
