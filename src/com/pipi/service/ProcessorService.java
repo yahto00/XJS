@@ -7,6 +7,7 @@ import com.pipi.entity.StabKind;
 import com.pipi.entity.admin.User;
 import com.pipi.service.iservice.IProcessorService;
 import com.pipi.vo.Page;
+import com.pipi.vo.SlateDataVO;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,7 @@ import java.util.List;
 public class ProcessorService extends BaseService implements IProcessorService {
 
     @Override
-    public void backStorage(Integer processSlateId, Integer stabKindId, String description, float length, float height) {
+    public void backStorage(Integer processSlateId, Integer stabKindId, String description, List<SlateDataVO> voList) {
         if (processSlateId == null) {
             throw new BusinessException("未指定返库的板材，请重试");
         }
@@ -29,36 +30,54 @@ public class ProcessorService extends BaseService implements IProcessorService {
         }
         StabKind stabKind = (StabKind) queryObjectByID(StabKind.class, stabKindId);
         ProcessSlate processSlate = (ProcessSlate) queryObjectByID(ProcessSlate.class, processSlateId);
-        processSlate.setAcreage(processSlate.getAcreage() - length * height);
+        float originalAcreage = getAcreage(voList);
+        if (processSlate.getAcreage() < originalAcreage){
+            throw new BusinessException("返库面积不能大于原板材面积");
+        }
+        processSlate.setAcreage(processSlate.getAcreage() - originalAcreage);
         if (processSlate.getAcreage() <= 0) {
             delete(ProcessSlate.class, processSlate.getId());
         } else {
-            save(processSlate);
+            update(processSlate);
         }
-        stabKind.setCurrentAcreage(stabKind.getCurrentAcreage() + length * height);
+        stabKind.setCurrentAcreage(stabKind.getCurrentAcreage() + originalAcreage);
         stabKind.setCurrentCount(stabKind.getCurrentCount() + 1);
         stabKind.setBackCount(1);
-        Slate slate = new Slate();
-        slate.setStabKind(stabKind);
-        slate.setKind(stabKind.getKind());
-        slate.setHeight(height);
-        slate.setLength(length);
-        slate.setSlateName(processSlate.getSlateName());
-        slate.setPrice(processSlate.getPrice());
-        save(stabKind);
-        save(slate);
+        for (SlateDataVO data : voList) {
+            Slate slate = new Slate();
+            slate.setStabKind(stabKind);
+            slate.setKind(stabKind.getKind());
+            slate.setHeight(data.getHeight());
+            slate.setLength(data.getLength());
+            slate.setSlateName(processSlate.getSlateName());
+            slate.setPrice(processSlate.getPrice());
+            save(stabKind);
+            save(slate);
+        }
+
+    }
+
+    private float getAcreage(List<SlateDataVO> voList) {
+        float acreage = 0f;
+        for (SlateDataVO vo : voList) {
+            acreage += vo.getHeight() * vo.getLength();
+        }
+        return acreage;
     }
 
     @Override
     public List<ProcessSlate> queryProcessSlateByPage(User user, Page page) {
         StringBuilder hql = new StringBuilder();
+        StringBuilder countHql = new StringBuilder("select count(*) from ProcessSlate");
         if (user.getRoles().contains(1)) {
             //如果是超级管理员直接查询到所有的加工板材
             hql.append("from ProcessSlate where isDelete=0 ");
-            page.setTotalCount(baseDao.getObjectCountByHql(hql.toString()));
+            countHql.append(" where isDelete=0");
+            page.setTotalCount(baseDao.getObjectCountByHql(countHql.toString()));
             return (List<ProcessSlate>) baseDao.getAllObjectByPageHql(hql.toString(), page);
         } else {
             hql.append("from ProcessSlate where isDelete=0 and user.id = " + user.getId());
+            countHql.append(" where isDelete=0 and user.id=" + user.getId());
             page.setTotalCount(baseDao.getObjectCountByHql(hql.toString()));
             return (List<ProcessSlate>) baseDao.getAllObjectByPageHql(hql.toString(), page);
         }

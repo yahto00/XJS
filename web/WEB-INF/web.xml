@@ -59,12 +59,12 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>springmvc</servlet-name>
-    <url-pattern>*.do</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>springmvc</servlet-name>
     <url-pattern>*.ajax</url-pattern>
   </servlet-mapping>
+  <!--<servlet-mapping>-->
+    <!--<servlet-name>springmvc</servlet-name>-->
+    <!--<url-pattern>*.ajax</url-pattern>-->
+  <!--</servlet-mapping>-->
   <session-config>
     <session-timeout>600</session-timeout>
   </session-config>

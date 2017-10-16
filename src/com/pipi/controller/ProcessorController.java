@@ -1,13 +1,20 @@
 package com.pipi.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.pipi.common.constant.SystemConstant;
 import com.pipi.common.exception.BusinessException;
+import com.pipi.entity.Development;
 import com.pipi.entity.ProcessSlate;
+import com.pipi.service.iservice.IDevelopmentService;
 import com.pipi.service.iservice.IProcessorService;
 import com.pipi.vo.Page;
 import com.pipi.vo.ProcessSlateVo;
+import com.pipi.vo.SlateDataVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,25 +31,28 @@ import java.util.Map;
 public class ProcessorController extends BaseController {
     @Autowired
     private IProcessorService processorService;
+    @Autowired
+    private IDevelopmentService developmentService;
 
     /**
-     * 返库
+     * 加工间返库
      *
-     * @param processSlateId
-     * @param stabKindId
-     * @param description
-     * @param length
-     * @param width
+     * @param data
      * @return
      * @author yahto
      */
     @RequestMapping("processor_backStorage.ajax")
     @ResponseBody
-    public Map<String, Object> backStorage(Integer processSlateId, Integer stabKindId, String description, float length, float width) {
+    public Map<String, Object> backStorage(@RequestBody String data) {
         Map<String, Object> map = new HashMap<>(3);
         map.put("data", false);
         try {
-            processorService.backStorage(processSlateId, stabKindId, description, length, width);
+            JSONObject jsonObject = JSON.parseObject(data);
+            JSONArray array = jsonObject.getJSONArray("data");
+            //得到长宽数据List
+            List<SlateDataVO> voList = JSONArray.parseArray(array.toJSONString(), SlateDataVO.class);
+            processorService.backStorage(jsonObject.getInteger("processSlateId"),
+                    jsonObject.getInteger("stabKindId"), jsonObject.getString("description"), voList);
             map.put("data", true);
             map.put("msg", "操作成功");
         } catch (BusinessException e) {
@@ -50,6 +60,8 @@ public class ProcessorController extends BaseController {
         }
         return map;
     }
+
+    //Integer processSlateId, Integer stabKindId, String description, float length, float width
 
     /**
      * 查询加工间所有板材
@@ -98,15 +110,21 @@ public class ProcessorController extends BaseController {
         return map;
     }
 
-    public Map<String,Object> produceDevelopment(){
+    @RequestMapping("processor_produceDevelopment.ajax")
+    @ResponseBody
+    public Map<String, Object> produceDevelopment(@RequestBody String data, HttpServletRequest request) {
         Map<String, Object> map = new HashMap<String, Object>(3);
         map.put("data", false);
         try {
-            
-            map.put("data",true);
-            map.put("msg","操作成功");
-        }catch (BusinessException e){
-            map.put("msg",e.getMessage());
+            JSONObject jsonObject = JSON.parseObject(data);
+            Integer processSlateId = jsonObject.getInteger("processSlateId");
+            JSONArray developmentArr = jsonObject.getJSONArray("development");
+            List<Development> list = JSONArray.parseArray(developmentArr.toJSONString(), Development.class);
+            developmentService.produceDevelopment(processSlateId, list, request);
+            map.put("data", true);
+            map.put("msg", "操作成功");
+        } catch (BusinessException e) {
+            map.put("msg", e.getMessage());
         }
         return map;
     }

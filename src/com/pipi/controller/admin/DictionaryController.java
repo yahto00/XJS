@@ -19,7 +19,6 @@ import com.pipi.common.constant.SystemConstant;
 import com.pipi.controller.BaseController;
 import com.pipi.entity.admin.Dictionary;
 import com.pipi.service.iservice.adminIService.IDictionaryService;
-import com.pipi.util.XMLUtil;
 import com.pipi.vo.ListVo;
 
 
@@ -36,17 +35,6 @@ public class DictionaryController extends BaseController {
     @Resource
     IDictionaryService dictionaryService;
 
-    /**
-     * 获取字典类型列表
-     *
-     * @return List<Map<String, Object>>
-     */
-    @RequestMapping("dictionary_list_type.ajax")
-    @ResponseBody
-    public List<Map<String, Object>> getDictionaryTypeList() {
-        List<Map<String, Object>> dictionaryTypeList = XMLUtil.getDictionaryTypeList();
-        return dictionaryTypeList;
-    }
 
     /**
      * 获取字典列表

@@ -55,11 +55,10 @@
     <mvc:annotation-driven/>
 
     <!--对模型视图名称的解析，即在模型视图名称添加前后缀 -->
-    <bean
-            class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-            p:suffix=".html" p:prefix="/WEB-INF/pages/">
-        <!-- 如果页面使用jstl的话，配置下面的属性，而且还要导入jstl相关jar包 -->
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/XJS" />
+        <property name="suffix" value=".jsp" />
     </bean>
 
     <!-- 配置springMVC的拦截器 -->
@@ -143,6 +142,8 @@
             <tx:method name="validate*" propagation="SUPPORTS" read-only="true"/>
             <tx:method name="count*" propagation="SUPPORTS" read-only="true"/>
             <tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="back*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+            <tx:method name="produce*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
         </tx:attributes>
     </tx:advice>
     <!-- xml的aop配置 -->

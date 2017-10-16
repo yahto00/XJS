@@ -14,7 +14,7 @@ public class ProcessSlateDao extends BaseDao implements IProcessDao {
     @Override
     public void addBatchProcessSlate(List<ProcessSlate> processSlates) {
         for (ProcessSlate processSlate : processSlates) {
-            save(processSlate);
+            add(processSlate);
         }
     }
 }
