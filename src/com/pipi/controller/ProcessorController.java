@@ -110,6 +110,14 @@ public class ProcessorController extends BaseController {
         return map;
     }
 
+    /**
+     * 生成成品
+     *
+     * @param data
+     * @param request
+     * @return
+     * @author yahto
+     */
     @RequestMapping("processor_produceDevelopment.ajax")
     @ResponseBody
     public Map<String, Object> produceDevelopment(@RequestBody String data, HttpServletRequest request) {
