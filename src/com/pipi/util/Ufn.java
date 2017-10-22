@@ -325,7 +325,7 @@ public class Ufn extends Properties {
 
     //找出url并加上html标签，不能处理有www.baidu.com和http://www.baidu.com并存的情况，还有若是www.baidu.com很有可能是相对路径，解决不了问题
     /*public static String addHerfTag(String content){
-		Pattern p = Pattern.compile("(((ht|f)tp(s?))\\://)?(www.|[a-zA-Z].)[a-zA-Z0-9\\-\\.]+\\.(com|edu|gov|mil|net|org|biz|info|name|museum|us|ca|uk)(\\:[0-9]+)*(/($|[a-zA-Z0-9\\.\\,\\;\\?\\'\\+&amp;%\\$#\\=~_\\-]+))*");
+        Pattern p = Pattern.compile("(((ht|f)tp(s?))\\://)?(www.|[a-zA-Z].)[a-zA-Z0-9\\-\\.]+\\.(com|edu|gov|mil|net|org|biz|info|name|museum|us|ca|uk)(\\:[0-9]+)*(/($|[a-zA-Z0-9\\.\\,\\;\\?\\'\\+&amp;%\\$#\\=~_\\-]+))*");
         Matcher m = p.matcher(content);
         Set<String> strs = new HashSet<String>();
         while (m.find()) {

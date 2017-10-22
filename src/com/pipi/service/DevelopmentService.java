@@ -23,7 +23,7 @@ public class DevelopmentService extends BaseService implements IDevelopmentServi
         if (user.getRoles().contains(1)) {
             //超级管理员 查询到所有的成品
             return (List<Development>) baseDao.getObjectListByNativeHql(hql.toString());
-        }else {
+        } else {
             hql.append(" and user.id = " + user.getId());
             return (List<Development>) baseDao.getObjectListByNativeHql(hql.toString());
         }
@@ -31,24 +31,36 @@ public class DevelopmentService extends BaseService implements IDevelopmentServi
 
     @Override
     public void produceDevelopment(Integer processSlateId, List<Development> list, HttpServletRequest request) {
-        if (processSlateId == null){
+        if (processSlateId == null) {
             throw new BusinessException("未指定生成成品的板材");
         }
-        if (list == null){
+        if (list == null) {
             throw new BusinessException("未填写成品数据");
         }
-        if (request.getSession().getAttribute(SystemConstant.CURRENT_USER) == null){
+        if (request.getSession().getAttribute(SystemConstant.CURRENT_USER) == null) {
             throw new BusinessException("未登录,请先登录");
         }
-        ProcessSlate processSlate = (ProcessSlate) queryObjectByID(ProcessSlate.class,processSlateId);
+        ProcessSlate processSlate = (ProcessSlate) queryObjectByID(ProcessSlate.class, processSlateId);
+        Float currentAcreage = processSlate.getAcreage();
+        if (currentAcreage - getListAcreage(list) < 0) {
+            throw new BusinessException("加工间板材面积不够");
+        }
         User user = (User) request.getSession().getAttribute(SystemConstant.CURRENT_USER);
-        User existUser = (User) queryObjectByID(User.class,user.getId());
-        delete(ProcessSlate.class,processSlateId);
+        User existUser = (User) queryObjectByID(User.class, user.getId());
+        delete(ProcessSlate.class, processSlateId);
         for (Development development : list) {
             development.setProcessSlate(processSlate);
             development.setStatus(0);
             development.setUser(existUser);
             add(development);
         }
+    }
+
+    private Float getListAcreage(List<Development> list) {
+        Float sum = 0f;
+        for (Development development : list) {
+            sum += development.getHeight() * development.getHeight() * development.getCount();
+        }
+        return sum;
     }
 }

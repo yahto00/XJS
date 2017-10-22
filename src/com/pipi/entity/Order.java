@@ -1,6 +1,11 @@
 package com.pipi.entity;
 
+import com.pipi.common.constant.SystemConstant;
+import com.pipi.entity.admin.User;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,10 +43,18 @@ public class Order extends BaseEntity {
     private float price;
 
     /**
-     * 关联客户信息
+     * 客户
      */
-    @Column(name = "FK_CUSTOMER_ID")
-    private Integer customerId;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "FK_CUSTOMER_ID")
+    private Customer customer;
+    /**
+     * 生成订单时间
+     */
+    @Temporal(TemporalType.DATE)
+    @Column(name = "createTime")
+    @DateTimeFormat(pattern = SystemConstant.DATE_PATTEN)
+    private Date createTime = new Date();
 
     /**
      * 订单条目关联信息
@@ -49,13 +62,14 @@ public class Order extends BaseEntity {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<OrderItem> orderItems = new HashSet<OrderItem>();
 
-    public Integer getCustomerId() {
-        return customerId;
-    }
+    /**
+     * 订单操作人
+     */
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "FK_OPERATE_USER_ID")
+    private User user;
 
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
-    }
+
 
     public Integer getId() {
         return id;
@@ -95,5 +109,25 @@ public class Order extends BaseEntity {
 
     public void setOrderItems(Set<OrderItem> orderItems) {
         this.orderItems = orderItems;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

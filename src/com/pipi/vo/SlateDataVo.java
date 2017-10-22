@@ -3,7 +3,7 @@ package com.pipi.vo;
 /**
  * Created by yahto on 28/05/2017.
  */
-public class SlateDataVO {
+public class SlateDataVo {
     private float length;
     private float height;
 

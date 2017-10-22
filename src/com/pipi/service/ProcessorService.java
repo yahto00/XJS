@@ -7,10 +7,9 @@ import com.pipi.entity.StabKind;
 import com.pipi.entity.admin.User;
 import com.pipi.service.iservice.IProcessorService;
 import com.pipi.vo.Page;
-import com.pipi.vo.SlateDataVO;
+import com.pipi.vo.SlateDataVo;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -21,7 +20,7 @@ import java.util.List;
 public class ProcessorService extends BaseService implements IProcessorService {
 
     @Override
-    public void backStorage(Integer processSlateId, Integer stabKindId, String description, List<SlateDataVO> voList) {
+    public void backStorage(Integer processSlateId, Integer stabKindId, String description, List<SlateDataVo> voList) {
         if (processSlateId == null) {
             throw new BusinessException("未指定返库的板材，请重试");
         }
@@ -31,7 +30,7 @@ public class ProcessorService extends BaseService implements IProcessorService {
         StabKind stabKind = (StabKind) queryObjectByID(StabKind.class, stabKindId);
         ProcessSlate processSlate = (ProcessSlate) queryObjectByID(ProcessSlate.class, processSlateId);
         float originalAcreage = getAcreage(voList);
-        if (processSlate.getAcreage() < originalAcreage){
+        if (processSlate.getAcreage() < originalAcreage) {
             throw new BusinessException("返库面积不能大于原板材面积");
         }
         processSlate.setAcreage(processSlate.getAcreage() - originalAcreage);
@@ -43,7 +42,7 @@ public class ProcessorService extends BaseService implements IProcessorService {
         stabKind.setCurrentAcreage(stabKind.getCurrentAcreage() + originalAcreage);
         stabKind.setCurrentCount(stabKind.getCurrentCount() + 1);
         stabKind.setBackCount(1);
-        for (SlateDataVO data : voList) {
+        for (SlateDataVo data : voList) {
             Slate slate = new Slate();
             slate.setStabKind(stabKind);
             slate.setKind(stabKind.getKind());
@@ -57,9 +56,9 @@ public class ProcessorService extends BaseService implements IProcessorService {
 
     }
 
-    private float getAcreage(List<SlateDataVO> voList) {
+    private float getAcreage(List<SlateDataVo> voList) {
         float acreage = 0f;
-        for (SlateDataVO vo : voList) {
+        for (SlateDataVo vo : voList) {
             acreage += vo.getHeight() * vo.getLength();
         }
         return acreage;

@@ -1,5 +1,7 @@
 package com.pipi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -39,13 +41,13 @@ public class OrderItem extends BaseEntity {
     /**
      * 订单条目关联的成品
      */
-    @OneToMany
-    @JoinColumn(name = "FK_ORDERITEM_ID")
-    private Set<Development> developmentSet;
+    @JsonIgnore
+    private Integer developmentId;
 
     /**
      * 条目所属订单
      */
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "FK_ORDER_ID")
     private Order order;
@@ -82,12 +84,12 @@ public class OrderItem extends BaseEntity {
         this.count = count;
     }
 
-    public Set<Development> getDevelopmentSet() {
-        return developmentSet;
+    public Integer getDevelopmentId() {
+        return developmentId;
     }
 
-    public void setDevelopmentSet(Set<Development> developmentSet) {
-        this.developmentSet = developmentSet;
+    public void setDevelopmentId(Integer developmentId) {
+        this.developmentId = developmentId;
     }
 
     public Order getOrder() {

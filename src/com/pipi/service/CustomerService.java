@@ -16,7 +16,7 @@ import java.util.List;
 public class CustomerService extends BaseService implements ICustomerService {
     @Override
     public List<Customer> getAllCustomer() {
-        return baseDao.getAllObjects(Customer.class);
+        return (List<Customer>) queryAll(Customer.class);
     }
 
     @Override

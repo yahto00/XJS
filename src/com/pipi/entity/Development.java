@@ -44,6 +44,11 @@ public class Development extends BaseEntity {
      */
     @Column(name = "SLATE_HEIGHT")
     private float height;
+    /**
+     * 成品数量
+     */
+    @Column(name = "SLATE_COUNT")
+    private Integer count;
 
     /**
      * 石材加工单操作人
@@ -60,16 +65,11 @@ public class Development extends BaseEntity {
     @JsonIgnore
     private ProcessSlate processSlate;
 
-    /**
-     * 关联所属订单条目
-     */
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "FK_ORDERITEM_ID")
-    private OrderItem orderItem;
 
     /**
      * 成品是否已经出售 0否 1是
      */
+    @JsonIgnore
     private Integer status;
 
     public Integer getId() {
@@ -120,12 +120,12 @@ public class Development extends BaseEntity {
         this.processSlate = processSlate;
     }
 
-    public OrderItem getOrderItem() {
-        return orderItem;
+    public Integer getCount() {
+        return count;
     }
 
-    public void setOrderItem(OrderItem orderItem) {
-        this.orderItem = orderItem;
+    public void setCount(Integer count) {
+        this.count = count;
     }
 
     public User getUser() {

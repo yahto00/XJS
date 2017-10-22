@@ -74,7 +74,7 @@ public class SlateService extends BaseService implements ISlateService {
         String finalIds = DSUtil.parseIntegerArr(ids);
         String hql = "from Slate where isDelete=0 and id in (" + finalIds + ")";
         List<Slate> list = (List<Slate>) queryObjectList(hql);
-        synchronized (list){
+        synchronized (list) {
             Float outAcreage = 0f;
             if (list.size() < ids.length) {
                 throw new BusinessException("指定的板材中已经有被出库的板材，请刷新重试");

@@ -91,8 +91,8 @@ public class StabKindService extends BaseService implements IStabKindService {
     @Override
     public List<StabKind> queryStabKindByPage(Page page) {
         String hql = "select count(*) from StabKind where isDelete=0";
-        Long totalCount = queryTotalCount(hql,null);
+        Long totalCount = queryTotalCount(hql, null);
         page.setTotalCount(totalCount.intValue());
-        return (List<StabKind>) baseDao.getAllObjectByPage(StabKind.class,page);
+        return (List<StabKind>) baseDao.getAllObjectByPage(StabKind.class, page);
     }
 }

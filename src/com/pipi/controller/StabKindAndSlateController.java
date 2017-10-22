@@ -13,7 +13,7 @@ import com.pipi.service.iservice.IKindService;
 import com.pipi.service.iservice.ISlateService;
 import com.pipi.service.iservice.IStabKindService;
 import com.pipi.vo.Page;
-import com.pipi.vo.SlateDataVO;
+import com.pipi.vo.SlateDataVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -107,7 +107,7 @@ public class StabKindAndSlateController extends BaseController {
                 throw new BusinessException("未指定该扎的种类");
             JSONArray array = json.getJSONArray("data");
             //得到长宽数据List
-            List<SlateDataVO> voList = JSONArray.parseArray(array.toJSONString(), SlateDataVO.class);
+            List<SlateDataVo> voList = JSONArray.parseArray(array.toJSONString(), SlateDataVo.class);
             float originalAcreage = getAcreage(voList);
             //把扎信息存入数据库
             StabKind stabKind = new StabKind();
@@ -120,7 +120,7 @@ public class StabKindAndSlateController extends BaseController {
             stabKind.setCurrentAcreage(originalAcreage);
             //填充Slate信息
             List<Slate> slateList = new ArrayList<Slate>();
-            for (SlateDataVO vo : voList) {
+            for (SlateDataVo vo : voList) {
                 Slate slate = new Slate();
                 slate.setStabKind(stabKind);
                 slate.setKind(kind);
@@ -148,13 +148,13 @@ public class StabKindAndSlateController extends BaseController {
     /**
      * 得到板材总面积
      *
-     * @param slateDataVOS
+     * @param slateDataVos
      * @return
      * @author yahto
      */
-    private float getAcreage(List<SlateDataVO> slateDataVOS) {
+    private float getAcreage(List<SlateDataVo> slateDataVos) {
         float acreage = 0f;
-        for (SlateDataVO vo : slateDataVOS) {
+        for (SlateDataVo vo : slateDataVos) {
             acreage += vo.getHeight() * vo.getLength();
         }
         return acreage;

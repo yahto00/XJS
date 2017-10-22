@@ -11,7 +11,7 @@ import com.pipi.service.iservice.IDevelopmentService;
 import com.pipi.service.iservice.IProcessorService;
 import com.pipi.vo.Page;
 import com.pipi.vo.ProcessSlateVo;
-import com.pipi.vo.SlateDataVO;
+import com.pipi.vo.SlateDataVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -50,7 +50,7 @@ public class ProcessorController extends BaseController {
             JSONObject jsonObject = JSON.parseObject(data);
             JSONArray array = jsonObject.getJSONArray("data");
             //得到长宽数据List
-            List<SlateDataVO> voList = JSONArray.parseArray(array.toJSONString(), SlateDataVO.class);
+            List<SlateDataVo> voList = JSONArray.parseArray(array.toJSONString(), SlateDataVo.class);
             processorService.backStorage(jsonObject.getInteger("processSlateId"),
                     jsonObject.getInteger("stabKindId"), jsonObject.getString("description"), voList);
             map.put("data", true);

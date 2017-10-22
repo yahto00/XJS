@@ -72,10 +72,10 @@ public class UserService extends BaseService implements IUserService {
     }
 
     @Override
-    @MyLog(operationName = "更新用户",operationType = "update")
+    @MyLog(operationName = "更新用户", operationType = "update")
     public void updateUser(User user, Integer[] roleIds, String currentLoginName) {
-        String[] params = {"userName","loginName","password"};
-        if (user == null || ObjectUtil.objectIsEmpty(user,params)) {
+        String[] params = {"userName", "loginName", "password"};
+        if (user == null || ObjectUtil.objectIsEmpty(user, params)) {
             throw new BusinessException("未完整填写用户修改信息信息");
         }
         User existUser = (User) queryObjectByID(User.class, user.getId());
@@ -122,7 +122,7 @@ public class UserService extends BaseService implements IUserService {
     public List<UserRoleVo> queryAllUsers(Page page) {
         String countHql = "select count(*) from User where isDelete=0";
         page.setTotalCount(userDao.getObjectCountByHql(countHql));
-        List<User> userList = (List<User>) userDao.getAllObjectByPage(User.class,page);
+        List<User> userList = (List<User>) userDao.getAllObjectByPage(User.class, page);
         List<UserRoleVo> list = new ArrayList<UserRoleVo>();
         Iterator iterator = userList.iterator();
         while (iterator.hasNext()) {
@@ -144,10 +144,10 @@ public class UserService extends BaseService implements IUserService {
     }
 
     @Override
-    @MyLog(operationName = "添加用户",operationType = "add")
+    @MyLog(operationName = "添加用户", operationType = "add")
     public void addUser(User user, Integer[] roleIds) {
-        String[] params = {"userName","loginName","password"};
-        if (user == null || ObjectUtil.objectIsEmpty(user,params)) {
+        String[] params = {"userName", "loginName", "password"};
+        if (user == null || ObjectUtil.objectIsEmpty(user, params)) {
             throw new BusinessException("未填写完整用户信息");
         }
         if (roleIds == null || roleIds.length == 0) {

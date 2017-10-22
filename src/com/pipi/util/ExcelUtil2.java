@@ -82,7 +82,7 @@ public class ExcelUtil2 {
         }
     }
     /* 添加bean列表
-	public void addBeanList(List<Object> list, String[] properties){
+    public void addBeanList(List<Object> list, String[] properties){
 		if (list != null){
 			int nLen = list.size();
 			for (int i=0; i<nLen; i++)
