@@ -9,23 +9,24 @@ import javax.servlet.http.HttpSession;
  * Created by yahto on 07/05/2017.
  */
 public class MySessionContext {
-    private static HashMap<String, HttpSession> mymap = new HashMap<String, HttpSession>();
+    public static HashMap<String, HttpSession> sessionMap = new HashMap<String, HttpSession>();
 
     public static synchronized void AddSession(HttpSession session) {
         if (session != null) {
-            mymap.put(session.getId(), session);
+            session.setMaxInactiveInterval(60*180);//设置session三小时失效
+            sessionMap.put(session.getId(), session);
         }
     }
 
     public static synchronized void DelSession(HttpSession session) {
         if (session != null) {
-            mymap.remove(session.getId());
+            sessionMap.remove(session.getId());
         }
     }
 
     public static synchronized HttpSession getSession(String session_id) {
         if (session_id == null)
             return null;
-        return mymap.get(session_id);
+        return sessionMap.get(session_id);
     }
 }
