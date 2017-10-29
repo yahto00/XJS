@@ -1,6 +1,7 @@
 package com.pipi.service.iservice;
 
 import com.pipi.entity.Customer;
+import com.pipi.vo.Page;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public interface ICustomerService extends IBaseService {
     /**
      * 查询所有客户
      */
-    List<Customer> getAllCustomer();
+    List<Customer> getAllCustomer(Page page);
 
     /**
      * 根据id查询客户

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class SessionTask extends MySessionContext {
-    @Scheduled(cron = "0 */2 * * * ")
+    @Scheduled(cron = "0 0 12 * * ?")
     public void clearSession() {
         sessionMap.clear();
     }

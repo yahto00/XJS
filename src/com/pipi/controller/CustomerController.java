@@ -1,9 +1,11 @@
 package com.pipi.controller;
 
+import com.pipi.common.constant.SystemConstant;
 import com.pipi.common.exception.BusinessException;
 import com.pipi.entity.Customer;
 import com.pipi.service.iservice.ICustomerService;
 import com.pipi.util.ObjectUtil;
+import com.pipi.vo.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,11 +33,20 @@ public class CustomerController extends BaseController {
      */
     @RequestMapping("customer_queryAllCustomer.ajax")
     @ResponseBody
-    public Map<String, Object> queryAllCustomer() {
+    public Map<String, Object> queryAllCustomer(Integer startPage,Integer pageSize) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            List<Customer> list = customerService.getAllCustomer();
+            if (startPage == null){
+                startPage = 1;
+            }
+            if (pageSize == null){
+                pageSize = SystemConstant.PAGE_SIZE;
+            }
+            Page page = new Page();
+            page.setStartPage(startPage);
+            page.setPageSize(pageSize);
+            List<Customer> list = customerService.getAllCustomer(page);
             map.put("list", list);
             map.put("data", true);
             map.put("msg", "操作成功");

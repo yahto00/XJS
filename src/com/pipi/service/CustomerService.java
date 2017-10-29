@@ -5,6 +5,7 @@ import com.pipi.common.aop.MyLog;
 import com.pipi.entity.Customer;
 import com.pipi.service.iservice.ICustomerService;
 import com.pipi.util.DSUtil;
+import com.pipi.vo.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +16,8 @@ import java.util.List;
 @Service
 public class CustomerService extends BaseService implements ICustomerService {
     @Override
-    public List<Customer> getAllCustomer() {
-        return (List<Customer>) queryAll(Customer.class);
+    public List<Customer> getAllCustomer(Page page) {
+        return (List<Customer>) baseDao.getAllObjectByPage(Customer.class,page);
     }
 
     @Override
