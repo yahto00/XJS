@@ -87,7 +87,7 @@ public class ProcessorController extends BaseController {
             Page page = new Page();
             page.setStartPage(startPage);
             page.setPageSize(pageSize);
-            List<ProcessSlate> processSlateList = (List<ProcessSlate>) processorService.queryProcessSlateByPage(getCurrentUser(request), page);
+            List<ProcessSlate> processSlateList = processorService.queryProcessSlateByPage(getCurrentUser(request), page);
             List<ProcessSlateVo> list = new ArrayList<ProcessSlateVo>();
             for (ProcessSlate processSlate : processSlateList) {
                 ProcessSlateVo processSlateVo = new ProcessSlateVo();
@@ -101,6 +101,7 @@ public class ProcessorController extends BaseController {
                 processSlateVo.setStabKindNum(processSlate.getStabKind().getNum());
                 list.add(processSlateVo);
             }
+            map.put("page", page);
             map.put("list", list);
             map.put("data", true);
             map.put("msg", "操作成功");

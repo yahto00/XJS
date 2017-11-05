@@ -17,6 +17,9 @@ import java.util.List;
 public class CustomerService extends BaseService implements ICustomerService {
     @Override
     public List<Customer> getAllCustomer(Page page) {
+        if (page.getTotalCount() == null || page.getTotalCount() == 0){
+            page.setTotalCount(baseDao.getObjectCount(Customer.class));
+        }
         return (List<Customer>) baseDao.getAllObjectByPage(Customer.class,page);
     }
 
