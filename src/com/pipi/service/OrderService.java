@@ -7,9 +7,12 @@ import com.pipi.entity.Development;
 import com.pipi.entity.Order;
 import com.pipi.entity.OrderItem;
 import com.pipi.entity.admin.User;
+import com.pipi.service.iservice.ICustomerService;
 import com.pipi.service.iservice.IOrderService;
 import com.pipi.vo.OrderVo;
+import com.pipi.vo.Page;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,26 +23,35 @@ import java.util.List;
  */
 @Service
 public class OrderService extends BaseService implements IOrderService {
+
     @Override
-    public List<Order> getAllOrder() {
-        return baseDao.getAllObjects(Order.class);
+    public List<Order> getAllOrder(Page page) {
+        if (page.getTotalCount() == null || page.getTotalCount() == 0) {
+            Integer totalCount = baseDao.getObjectCount(Order.class);
+            if (totalCount == null || totalCount == 0) {
+                page.setTotalCount(0);
+            } else {
+                page.setTotalCount(totalCount);
+            }
+        }
+        return (List<Order>) baseDao.getAllObjectByPage(Order.class, page);
     }
 
     @Override
     public void addOrder(Integer customerId, List<OrderVo> list, String orderNum, HttpServletRequest request) {
-        if (customerId == null || StringUtils.isEmpty(orderNum)){
+        if (customerId == null || StringUtils.isEmpty(orderNum)) {
             throw new BusinessException("请填写完整信息");
         }
         User currentUser = (User) request.getSession().getAttribute(SystemConstant.CURRENT_USER);
         if (currentUser == null) {
             throw new BusinessException("请先登录");
         }
-        if (list.size() == 0){
+        if (list.size() == 0) {
             throw new BusinessException("请选择下单的成品");
         }
         Order order = new Order();
-        Customer customer = (Customer) queryObjectByID(Customer.class,customerId);
-        if (customer == null){
+        Customer customer = (Customer) queryObjectByID(Customer.class, customerId);
+        if (customer == null) {
             throw new BusinessException("未指定客户");
         }
         order.setCustomer(customer);
@@ -70,5 +82,7 @@ public class OrderService extends BaseService implements IOrderService {
         }
         order.setPrice(totalPrice.floatValue());
         update(order);
+        customer.setLast_order(order);
+        update(customer);
     }
 }

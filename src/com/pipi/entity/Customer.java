@@ -38,7 +38,7 @@ public class Customer extends BaseEntity {
      */
     @Column(name = "CUS_LAST_ORDER_ID")
     @JsonIgnore
-    private Integer last_order_id;
+    private Order last_order;
 
     public Integer getId() {
         return id;
@@ -64,11 +64,11 @@ public class Customer extends BaseEntity {
         this.phone = phone;
     }
 
-    public Integer getLast_order_id() {
-        return last_order_id;
+    public Order getLast_order() {
+        return last_order;
     }
 
-    public void setLast_order_id(Integer last_order_id) {
-        this.last_order_id = last_order_id;
+    public void setLast_order(Order last_order) {
+        this.last_order = last_order;
     }
 }

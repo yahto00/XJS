@@ -3,10 +3,12 @@ package com.pipi.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.pipi.common.constant.SystemConstant;
 import com.pipi.common.exception.BusinessException;
 import com.pipi.entity.Order;
 import com.pipi.service.iservice.IOrderService;
 import com.pipi.vo.OrderVo;
+import com.pipi.vo.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,11 +37,21 @@ public class OrderController extends BaseController {
      */
     @RequestMapping("order_queryAllOrder.ajax")
     @ResponseBody
-    public Map<String, Object> queryAllOrder() {
+    public Map<String, Object> queryAllOrder(Integer startPage,Integer pageSize) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            List<Order> list = orderService.getAllOrder();
+            if (startPage == null){
+                startPage = 1;
+            }
+            if (pageSize == null){
+                pageSize = SystemConstant.PAGE_SIZE;
+            }
+            Page page = new Page();
+            page.setStartPage(startPage);
+            page.setPageSize(pageSize);
+            List<Order> list = orderService.getAllOrder(page);
+            map.put("page",page);
             map.put("list", list);
             map.put("data", true);
             map.put("msg", "操作成功");

@@ -79,7 +79,7 @@ public class SlateService extends BaseService implements ISlateService {
         if (list.size() < ids.length) {
             throw new BusinessException("指定的板材中已经有被出库的板材，请刷新重试");
         }
-        if (stabKind.getCurrentCount() <= list.size()){
+        if (stabKind.getCurrentCount() < list.size()){
             throw new BusinessException("当前扎中板材不够");
         }
         List<ProcessSlate> processSlates = new ArrayList<>(8);

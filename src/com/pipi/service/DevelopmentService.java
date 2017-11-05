@@ -42,7 +42,7 @@ public class DevelopmentService extends BaseService implements IDevelopmentServi
         }
         ProcessSlate processSlate = (ProcessSlate) queryObjectByID(ProcessSlate.class, processSlateId);
         Float currentAcreage = processSlate.getAcreage();
-        if (currentAcreage - getListAcreage(list) < 0) {
+        if (currentAcreage == null || currentAcreage - getListAcreage(list) < 0) {
             throw new BusinessException("加工间板材面积不够");
         }
         User user = (User) request.getSession().getAttribute(SystemConstant.CURRENT_USER);

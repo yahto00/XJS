@@ -2,6 +2,7 @@ package com.pipi.service.iservice;
 
 import com.pipi.entity.Order;
 import com.pipi.vo.OrderVo;
+import com.pipi.vo.Page;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -13,7 +14,7 @@ public interface IOrderService extends IBaseService {
     /**
      * 查询所有订单
      */
-    List<Order> getAllOrder();
+    List<Order> getAllOrder(Page page);
 
     /**
      * 添加订单
