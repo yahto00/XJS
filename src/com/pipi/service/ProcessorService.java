@@ -30,7 +30,7 @@ public class ProcessorService extends BaseService implements IProcessorService {
         StabKind stabKind = (StabKind) queryObjectByID(StabKind.class, stabKindId);
         ProcessSlate processSlate = (ProcessSlate) queryObjectByID(ProcessSlate.class, processSlateId);
         float originalAcreage = getAcreage(voList);
-        if (processSlate.getAcreage() < originalAcreage) {
+        if (processSlate.getAcreage() == null || processSlate.getAcreage() < originalAcreage) {
             throw new BusinessException("返库面积不能大于原板材面积");
         }
         processSlate.setAcreage(processSlate.getAcreage() - originalAcreage);
@@ -72,12 +72,22 @@ public class ProcessorService extends BaseService implements IProcessorService {
             //如果是超级管理员直接查询到所有的加工板材
             hql.append("from ProcessSlate where isDelete=0 ");
             countHql.append(" where isDelete=0");
-            page.setTotalCount(baseDao.getObjectCountByHql(countHql.toString()));
+            Integer totalCount = baseDao.getObjectCountByHql(countHql.toString());
+            if (totalCount == null || totalCount == 0) {
+                page.setTotalCount(0);
+            } else {
+                page.setTotalCount(totalCount);
+            }
             return (List<ProcessSlate>) baseDao.getAllObjectByPageHql(hql.toString(), page);
         } else {
             hql.append("from ProcessSlate where isDelete=0 and user.id = " + user.getId());
             countHql.append(" where isDelete=0 and user.id=" + user.getId());
-            page.setTotalCount(baseDao.getObjectCountByHql(hql.toString()));
+            Integer totalCount = baseDao.getObjectCountByHql(countHql.toString());
+            if (totalCount == null || totalCount == 0) {
+                page.setTotalCount(0);
+            } else {
+                page.setTotalCount(totalCount);
+            }
             return (List<ProcessSlate>) baseDao.getAllObjectByPageHql(hql.toString(), page);
         }
     }

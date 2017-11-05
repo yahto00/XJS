@@ -29,7 +29,7 @@ public interface IStabKindService extends IBaseService {
     /**
      * 根据种类Id查询所有扎种类
      */
-    List<StabKind> queryALLStabKindByKindId(Integer id, String num);
+    List<StabKind> queryALLStabKindByKindId(Integer id, String num,Page page);
 
     /**
      * 分页查询扎种类

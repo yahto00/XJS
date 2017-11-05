@@ -1,9 +1,11 @@
 package com.pipi.controller;
 
+import com.pipi.common.constant.SystemConstant;
 import com.pipi.common.exception.BusinessException;
 import com.pipi.entity.Kind;
 import com.pipi.service.iservice.IKindService;
 import com.pipi.util.ObjectUtil;
+import com.pipi.vo.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -139,11 +141,21 @@ public class KindController extends BaseController {
      */
     @RequestMapping("kind_queryAllKind.ajax")
     @ResponseBody
-    public Map<String, Object> queryAllKind() {
+    public Map<String, Object> queryAllKind(Integer startPage, Integer pageSize) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            List<Kind> list = (List<Kind>) kindService.queryAll(Kind.class);
+            if (startPage == null) {
+                startPage = 1;
+            }
+            if (pageSize == null) {
+                pageSize = SystemConstant.PAGE_SIZE;
+            }
+            Page page = new Page();
+            page.setStartPage(startPage);
+            page.setPageSize(pageSize);
+            List<Kind> list = kindService.queryAllKind(page);
+            map.put("page", page);
             map.put("list", list);
             map.put("msg", "操作成功");
             map.put("data", true);

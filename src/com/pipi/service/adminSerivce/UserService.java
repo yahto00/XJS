@@ -82,13 +82,12 @@ public class UserService extends BaseService implements IUserService {
         if (existUser == null) {
             throw new BusinessException("要修改的用户不存在,请重试");
         }
-        List<User> users = (List<User>) queryAll(User.class);
         if (StringUtils.isBlank(currentLoginName)) {
             throw new BusinessException("未接收到当前账号名");
         }
+        List<User> users = (List<User>) queryAll(User.class);
         if (!currentLoginName.equals(user.getLoginName())) {
-            for (User tempUser :
-                    users) {
+            for (User tempUser : users) {
                 if (user.getLoginName().equals(tempUser.getLoginName())) {
                     throw new BusinessException("该登录名已经被使用，请重试");
                 }

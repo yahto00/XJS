@@ -2,6 +2,7 @@ package com.pipi.service;
 
 import com.pipi.common.exception.BusinessException;
 import com.pipi.common.aop.MyLog;
+import com.pipi.entity.Kind;
 import com.pipi.entity.Slate;
 import com.pipi.entity.StabKind;
 import com.pipi.service.iservice.ISlateService;
@@ -74,25 +75,36 @@ public class StabKindService extends BaseService implements IStabKindService {
     }
 
     @Override
-    public List<StabKind> queryALLStabKindByKindId(Integer id, String num) {
+    public List<StabKind> queryALLStabKindByKindId(Integer id, String num, Page page) {
         if (id == null && StringUtils.isBlank(num)) {
             throw new BusinessException("没有填写查询条件");
         }
         StringBuilder hql = new StringBuilder("from StabKind where isDelete=0");
+        StringBuilder countHql = new StringBuilder("select count(*) from StabKind where isDelete=0");
         if (!StringUtils.isBlank(num)) {
             hql.append(" and num like '%" + num + "%'");
+            countHql.append(" and num like '%" + num + "%'");
         }
         if (id != null) {
             hql.append(" and kind.id=" + id);
+            countHql.append(" and kind.id=" + id);
         }
-        return (List<StabKind>) baseDao.getObjectListByNativeHql(hql.toString());
+        if (page.getTotalCount() == null || page.getTotalCount() == 0) {
+            page.setTotalCount(baseDao.getObjectCountByHql(countHql.toString()));
+        }
+        return (List<StabKind>) baseDao.getAllObjectByPageHql(hql.toString(), page);
     }
 
     @Override
     public List<StabKind> queryStabKindByPage(Page page) {
-        String hql = "select count(*) from StabKind where isDelete=0";
-        Long totalCount = queryTotalCount(hql, null);
-        page.setTotalCount(totalCount.intValue());
+        if (page.getTotalCount() == null || page.getTotalCount() == 0) {
+            Integer totalCount = baseDao.getObjectCount(StabKind.class);
+            if (totalCount == null || totalCount == 0){
+                page.setTotalCount(0);
+            }else {
+                page.setTotalCount(totalCount);
+            }
+        }
         return (List<StabKind>) baseDao.getAllObjectByPage(StabKind.class, page);
     }
 }

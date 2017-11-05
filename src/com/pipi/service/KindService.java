@@ -6,6 +6,7 @@ import com.pipi.entity.Kind;
 import com.pipi.entity.StabKind;
 import com.pipi.service.iservice.IKindService;
 import com.pipi.util.DSUtil;
+import com.pipi.vo.Page;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +33,18 @@ public class KindService extends BaseService implements IKindService {
         } else {
             delete(Kind.class, finalIds);
         }
+    }
+
+    @Override
+    public List<Kind> queryAllKind(Page page) {
+        if (page.getTotalCount() == null || page.getTotalCount() == 0){
+            Integer totalCount = baseDao.getObjectCount(Kind.class);
+            if (totalCount == null || totalCount == 0){
+                page.setTotalCount(0);
+            }else {
+                page.setTotalCount(totalCount);
+            }
+        }
+        return (List<Kind>) baseDao.getAllObjectByPage(Kind.class,page);
     }
 }

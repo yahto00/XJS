@@ -3,9 +3,9 @@ package com.pipi.service;
 import com.pipi.common.constant.SystemConstant;
 import com.pipi.common.exception.BusinessException;
 import com.pipi.common.aop.MyLog;
-import com.pipi.dao.idao.IProcessDao;
 import com.pipi.entity.*;
 import com.pipi.entity.admin.User;
+import com.pipi.service.adminSerivce.UserService;
 import com.pipi.service.iservice.ISlateService;
 import com.pipi.util.DSUtil;
 import org.apache.commons.collections.CollectionUtils;
@@ -23,12 +23,13 @@ import java.util.concurrent.*;
  */
 @Service
 public class SlateService extends BaseService implements ISlateService {
-    @Autowired
-    private IProcessDao processDao;
 
     private static final ExecutorService executorService = new ThreadPoolExecutor(1, 1, 5,
             TimeUnit.SECONDS, new
             ArrayBlockingQueue<Runnable>(10));
+
+    @Autowired
+    private UserService userService;
 
     @Override
     @MyLog(operationName = "添加板材", operationType = "add")
@@ -74,12 +75,16 @@ public class SlateService extends BaseService implements ISlateService {
         String finalIds = DSUtil.parseIntegerArr(ids);
         String hql = "from Slate where isDelete=0 and id in (" + finalIds + ")";
         List<Slate> list = (List<Slate>) queryObjectList(hql);
-        synchronized (list) {
-            Float outAcreage = 0f;
-            if (list.size() < ids.length) {
-                throw new BusinessException("指定的板材中已经有被出库的板材，请刷新重试");
-            }
-            List<ProcessSlate> processSlates = new ArrayList<>(8);
+        Float outAcreage = 0f;
+        if (list.size() < ids.length) {
+            throw new BusinessException("指定的板材中已经有被出库的板材，请刷新重试");
+        }
+        if (stabKind.getCurrentCount() <= list.size()){
+            throw new BusinessException("当前扎中板材不够");
+        }
+        List<ProcessSlate> processSlates = new ArrayList<>(8);
+        User user = userService.queryUserById(((User) request.getSession().getAttribute(SystemConstant.CURRENT_USER)).getId());
+        synchronized (list){
             for (Slate slate : list) {
                 outAcreage += slate.getLength() * slate.getHeight();
                 ProcessSlate processSlate = new ProcessSlate();
@@ -87,14 +92,16 @@ public class SlateService extends BaseService implements ISlateService {
                 processSlate.setAcreage(slate.getHeight() * slate.getLength());
                 processSlate.setProNum(String.valueOf(ids.length));
                 processSlate.setSlateName(slate.getSlateName());
-                processSlate.setUser((User) request.getSession().getAttribute(SystemConstant.CURRENT_USER));
+                processSlate.setUser(user);
                 processSlate.setPrice(slate.getPrice());
                 processSlate.setStabKind(slate.getStabKind());
                 processSlate.setKind(slate.getKind());
                 processSlates.add(processSlate);
             }
             //板材转到加工厂
-            processDao.addBatchProcessSlate(processSlates);
+            for (ProcessSlate processSlate : processSlates) {
+                add(processSlate);
+            }
             stabKind.setOut_time(new Date());//记录出库时间
             stabKind.setOutCount(ids.length);//记录出库数量
             stabKind.setOutAcreage(outAcreage);//记录出库面积
@@ -102,6 +109,8 @@ public class SlateService extends BaseService implements ISlateService {
             //如果出库面积大于当前扎的面积 将扎面积置为0
             if (stabKind.getCurrentAcreage() < outAcreage) {
                 stabKind.setCurrentAcreage(0f);
+                //删除扎
+                stabKind.setIsDelete(1);
             } else {
                 stabKind.setCurrentAcreage(stabKind.getCurrentAcreage() - outAcreage);
             }
@@ -109,7 +118,6 @@ public class SlateService extends BaseService implements ISlateService {
             update(stabKind);
             SlateOnChange slateOnChange = new SlateOnChange();
             slateOnChange.setOp_time(new Date());
-            User user = (User) (request.getSession().getAttribute(SystemConstant.CURRENT_USER));
             slateOnChange.setDescription("用户：" + user.getUserName() + " 删除板材 " + finalIds);
             slateOnChange.setUserId(user.getId());
             add(slateOnChange);

@@ -202,7 +202,7 @@ public class BaseDao extends HibernateDaoSupport implements IBaseDao {
 
     @Override
     public Integer getObjectCount(Class<?> clazz) {
-        String hql = "select count(*) from " + clazz.getName() + "where isDelte=0";
+        String hql = "select count(*) from " + clazz.getName() + " where isDelete=0";
         Query query = getHBSession().createQuery(hql);
         return Integer.valueOf(((Long) query.uniqueResult()).intValue());
     }

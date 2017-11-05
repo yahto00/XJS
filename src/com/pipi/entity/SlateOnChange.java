@@ -1,5 +1,8 @@
 package com.pipi.entity;
 
+import com.pipi.common.constant.SystemConstant;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -27,7 +30,9 @@ public class SlateOnChange extends BaseEntity {
     /**
      * 操作时间
      */
+    @Temporal(TemporalType.DATE)
     @Column(name = "OP_TIME")
+    @DateTimeFormat(pattern = SystemConstant.DATE_PATTEN)
     private Date op_time = new Date();
 
     /**

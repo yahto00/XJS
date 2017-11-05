@@ -228,6 +228,7 @@ public class StabKindAndSlateController extends BaseController {
             page.setStartPage(startPage);
             page.setPageSize(pageSize);
             List<StabKind> list = stabKindService.queryStabKindByPage(page);
+            map.put("page", page);
             map.put("list", list);
             map.put("msg", "操作成功");
             map.put("data", true);
@@ -247,11 +248,21 @@ public class StabKindAndSlateController extends BaseController {
      */
     @RequestMapping("stabKindAndSlate_queryStabKindByKindIdOrNum.ajax")
     @ResponseBody
-    public Map<String, Object> queryStabKindByKindIdOrNum(Integer id, String num) {
+    public Map<String, Object> queryStabKindByKindIdOrNum(Integer id, String num, Integer startPage, Integer pageSize) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data", false);
         try {
-            List<StabKind> list = stabKindService.queryALLStabKindByKindId(id, num);
+            if (startPage == null) {
+                startPage = 1;
+            }
+            if (pageSize == null) {
+                pageSize = SystemConstant.PAGE_SIZE;
+            }
+            Page page = new Page();
+            page.setPageSize(pageSize);
+            page.setStartPage(startPage);
+            List<StabKind> list = stabKindService.queryALLStabKindByKindId(id, num, page);
+            map.put("page", page);
             map.put("list", list);
             map.put("msg", "操作成功");
             map.put("data", true);
