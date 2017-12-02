@@ -9,7 +9,7 @@ import java.util.Set;
  * Created by yahto on 03/05/2017.
  */
 @Entity
-@Table(name = "T_ORDER_ITEM")
+@Table(name = "t_order_item")
 public class OrderItem extends BaseEntity {
     private static final long serialVersionUID = -19265530157645975L;
     /**
@@ -17,25 +17,25 @@ public class OrderItem extends BaseEntity {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "PK_ORDER_ITEM_ID")
+    @Column(name = "pk_order_item_id")
     private Integer id;
 
     /**
      * 条目名
      */
-    @Column(name = "ORDER_ITEM_NAME", length = 100)
+    @Column(name = "order_item_name", length = 100)
     private String slateName;
 
     /**
      * 条目单价
      */
-    @Column(name = "ORDER_ITEM_PRICE")
+    @Column(name = "order_item_price")
     private Double price;
 
     /**
      * 条目数量
      */
-    @Column(name = "ORDER_ITEM_COUNT")
+    @Column(name = "order_item_count")
     private Integer count;
 
     /**

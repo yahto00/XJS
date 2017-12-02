@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Created by yahto on 07/05/2017.
  */
 @Entity
-@Table(name = "T_CUSTOMER")
+@Table(name = "t_customer")
 public class Customer extends BaseEntity {
 
     private static final long serialVersionUID = 59265530157645L;
@@ -18,25 +18,25 @@ public class Customer extends BaseEntity {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "PK_CUS_ID")
+    @Column(name = "pk_cus_id")
     private Integer id;
 
     /**
      * 姓名
      */
-    @Column(name = "CUS_NAME")
+    @Column(name = "cus_name")
     private String name;
 
     /**
      * 联系方式
      */
-    @Column(name = "CUS_PHONE")
+    @Column(name = "cus_phone")
     private String phone;
 
     /**
      * 最近的订单
      */
-    @Column(name = "CUS_LAST_ORDER_ID")
+    @Column(name = "cus_last_order_id")
     @JsonIgnore
     private Order last_order;
 

@@ -10,7 +10,7 @@ import java.util.Date;
  * Created by yantong on 24/04/2017.
  */
 @Entity
-@Table(name = "T_STAB_KIND")
+@Table(name = "t_stab_kind")
 public class StabKind extends BaseEntity {
 
     private static final long serialVersionUID = -8307364884116870179L;
@@ -19,84 +19,84 @@ public class StabKind extends BaseEntity {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "PK_STAB_KIND_ID")
+    @Column(name = "pk_stab_kind_id")
     private Integer id;
 
     /**
      * 扎编号
      */
-    @Column(name = "STAB_KIND_NUM", unique = true)
+    @Column(name = "stab_kind_num", unique = true)
     private String num;
 
     /**
      * 扎的入库时间
      */
     @Temporal(TemporalType.DATE)
-    @Column(name = "IN_TIME")
+    @Column(name = "in_time")
     @DateTimeFormat(pattern = SystemConstant.DATE_PATTEN)
     private Date in_time = new Date();
 
     /**
      * 扎入库的片数
      */
-    @Column(name = "ORIGINAL_COUNT")
+    @Column(name = "original_count")
     private Integer originalCount;
 
     /**
      * 扎入库的总面积
      */
-    @Column(name = "ORIGINAL_ACREAGE")
+    @Column(name = "original_acreage")
     private Float originalAcreage;
 
     /**
      * 扎在库的片数
      */
-    @Column(name = "CURRENT_COUNT")
+    @Column(name = "current_count")
     private Integer currentCount;
 
     /**
      * 扎在库的总面积
      */
-    @Column(name = "CURRENT_ACREAGE")
+    @Column(name = "current_acreage")
     private Float currentAcreage;
 
     /**
      * 备注
      */
-    @Column(name = "DESCRIPTION")
+    @Column(name = "description")
     private String description;
 
     /**
      * 出库时间 某一片出库后会动态更新 需要提供set方法
      */
     @Temporal(TemporalType.DATE)
-    @Column(name = "OUT_TIME")
+    @Column(name = "out_time")
     @DateTimeFormat(pattern = SystemConstant.DATE_PATTEN)
     private Date out_time;
 
     /**
      * 出库片数
      */
-    @Column(name = "OUT_COUNT")
+    @Column(name = "out_count")
     private Integer outCount;
 
     /**
      * 返库片数
      */
-    @Column(name = "BACK_COUNT")
+    @Column(name = "back_count")
     private Integer backCount;
 
     /**
      * 出库平方数
      */
-    @Column(name = "OUT_ACREAGE")
+    @Column(name = "out_acreage")
     private Float outAcreage;
 
     /**
      * 关联所属的种类
      */
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "FK_KIND_ID")
+    @JoinColumn(name = "fk_kind_id")
     private Kind kind;
 
     public Integer getId() {

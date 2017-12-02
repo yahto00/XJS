@@ -16,7 +16,7 @@ import javax.persistence.Table;
  * Created by yahto on 07/05/2017.
  */
 @Entity
-@Table(name = "T_USER_ROLE")
+@Table(name = "t_user_role")
 public class UserRole implements Serializable {
 
     private static final long serialVersionUID = -4892332844254013966L;
@@ -26,21 +26,21 @@ public class UserRole implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "PK_USER_ROLE_REF_ID")
+    @Column(name = "pk_user_role_ref_id")
     private Integer id;
 
     /**
      * 用户外键
      */
     @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "FK_USER_ID")
+    @JoinColumn(name = "fk_user_id")
     private User user;
 
     /**
      * 角色外键
      */
     @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "FK_ROLE_ID")
+    @JoinColumn(name = "fk_role_id")
     private Role role;
 
     public Integer getId() {

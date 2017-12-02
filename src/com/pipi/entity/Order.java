@@ -13,7 +13,7 @@ import java.util.Set;
  * Created by yahto on 03/05/2017.
  */
 @Entity
-@Table(name = "T_ORDER")
+@Table(name = "t_order")
 public class Order extends BaseEntity {
     private static final long serialVersionUID = 5926553015764565L;
     /**
@@ -21,32 +21,32 @@ public class Order extends BaseEntity {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "PK_ORDER_ID")
+    @Column(name = "pk_order_id")
     private Integer id;
 
     /**
      * 订单编号
      */
-    @Column(name = "ORDER_NUM", length = 100)
+    @Column(name = "order_num", length = 100)
     private String orderNum;
 
     /**
      * 订单条目总数量
      */
-    @Column(name = "ORDER_TOTAL_COUNT")
+    @Column(name = "order_total_count")
     private Integer totalCount;
 
     /**
      * 订单金额
      */
-    @Column(name = "ORDER_TOTAL_PRICE")
+    @Column(name = "order_total_price")
     private float price;
 
     /**
      * 客户
      */
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "FK_CUSTOMER_ID")
+    @JoinColumn(name = "fk_customer_id")
     private Customer customer;
     /**
      * 生成订单时间
@@ -66,7 +66,7 @@ public class Order extends BaseEntity {
      * 订单操作人
      */
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "FK_OPERATE_USER_ID")
+    @JoinColumn(name = "fk_operate_user_id")
     private User user;
 
 

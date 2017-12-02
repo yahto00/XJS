@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Created by yantong on 24/04/2017.
  */
 @Entity
-@Table(name = "T_SLATE")
+@Table(name = "t_slate")
 public class Slate extends BaseEntity {
 
     private static final long serialVersionUID = 5926553015764597895L;
@@ -18,38 +18,38 @@ public class Slate extends BaseEntity {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "PK_SLATE_ID")
+    @Column(name = "pk_slate_id")
     private Integer id;
 
     /**
      * 石材名
      */
-    @Column(name = "SLATE_NAME", length = 100)
+    @Column(name = "slate_name", length = 100)
     private String slateName;
 
     /**
      * 石材单价
      */
-    @Column(name = "SLATE_PRICE")
+    @Column(name = "slate_price")
     private Double price;
 
     /**
      * 石材的长度
      */
-    @Column(name = "SLATE_LENGTH")
+    @Column(name = "slate_length")
     private float length;
 
     /**
      * 石材的宽度
      */
-    @Column(name = "SLATE_HEIGHT")
+    @Column(name = "slate_height")
     private float height;
 
     /**
      * 关联所属的扎
      */
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "FK_STAB_KIND_ID")
+    @JoinColumn(name = "fk_stab_kind_id")
     @JsonIgnore
     private StabKind stabKind;
 
@@ -57,7 +57,7 @@ public class Slate extends BaseEntity {
      * 关联所属的种类
      */
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "FK_KIND_ID")
+    @JoinColumn(name = "fk_kind_id")
     @JsonIgnore
     private Kind kind;
 

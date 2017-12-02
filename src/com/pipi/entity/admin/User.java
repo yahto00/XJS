@@ -19,7 +19,7 @@ import com.pipi.entity.BaseEntity;
  * Created by yahto on 07/05/2017.
  */
 @Entity
-@Table(name = "T_USER")
+@Table(name = "t_user")
 public class User extends BaseEntity {
 
     private static final long serialVersionUID = 487092737452798527L;
@@ -29,26 +29,26 @@ public class User extends BaseEntity {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "PK_USER_ID")
+    @Column(name = "pk_user_id")
     private Integer id;
 
     /**
      * 用户名
      */
-    @Column(name = "USER_NAME", length = 100)
+    @Column(name = "user_name", length = 100)
     private String userName;
 
     /**
      * 登录名
      */
-    @Column(name = "LOGIN_NAME", length = 50, nullable = false, unique = true)
+    @Column(name = "login_name", length = 50, nullable = false, unique = true)
     private String loginName;
 
 
     /**
      * 密码
      */
-    @Column(name = "PASSWORD", length = 50, nullable = false)
+    @Column(name = "password", length = 50, nullable = false)
     @JsonIgnore
     //@Size(min=5,max=16,message="密码长度为5到16位")
     private String password;

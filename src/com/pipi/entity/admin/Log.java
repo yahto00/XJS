@@ -19,7 +19,7 @@ import com.pipi.entity.BaseEntity;
  * Created by yahto on 07/05/2017.
  */
 @Entity
-@Table(name = "T_LOG")
+@Table(name = "t_log")
 public class Log extends BaseEntity {
 
     private static final long serialVersionUID = 6920412063790353593L;
@@ -29,25 +29,25 @@ public class Log extends BaseEntity {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "PK_LOG_ID")
+    @Column(name = "pk_log_id")
     private Integer id;
 
     /**
      * 操作内容
      */
-    @Column(name = "CONTENT", length = 2000, nullable = false)
+    @Column(name = "content", length = 2000, nullable = false)
     private String content;
 
     /**
      * 操作的IP地址
      */
-    @Column(name = "LOG_IP", length = 50, nullable = false)
+    @Column(name = "log_ip", length = 50, nullable = false)
     private String ip;
 
     /**
      * 操作的时间
      */
-    @Column(name = "SUBMIT_DATE")
+    @Column(name = "submit_date")
     @DateTimeFormat(pattern = SystemConstant.TIME_PATTEN)
     private Date submitDate;
 

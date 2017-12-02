@@ -9,7 +9,7 @@ import javax.persistence.*;
  * Created by yantong on 24/04/2017.
  */
 @Entity
-@Table(name = "T_PROCESS_SLATE")
+@Table(name = "t_process_slate")
 public class ProcessSlate extends BaseEntity {
     private static final long serialVersionUID = -7732329958431149263L;
 
@@ -18,19 +18,19 @@ public class ProcessSlate extends BaseEntity {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "PK_PROCESS_SLATE_ID")
+    @Column(name = "pk_process_slate_id")
     private Integer id;
 
     /**
      * 用户名
      */
-    @Column(name = "SLATE_NAME", length = 100)
+    @Column(name = "slate_name", length = 100)
     private String slateName;
 
     /**
      * 石材单价
      */
-    @Column(name = "SLATE_PRICE")
+    @Column(name = "slate_price")
     private Double price;
 
 //    /** 石材的长度*/
@@ -45,27 +45,27 @@ public class ProcessSlate extends BaseEntity {
     /**
      * 板材面积
      */
-    @Column(name = "SLATE_ACREAGE")
+    @Column(name = "slate_acreage")
     private Float acreage;
 
     /**
      * 石材所属的加工单编号
      */
-    @Column(name = "SLATE_PRO_NUM")
+    @Column(name = "slate_pro_num")
     private String proNum;
 
     /**
      * 石材加工单操作人
      */
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "FK_OPERATE_USER_ID")
+    @JoinColumn(name = "fk_operate_user_id")
     private User user;
 
     /**
      * 关联所属的扎
      */
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "FK_STAB_KIND_ID")
+    @JoinColumn(name = "fk_stab_kind_id")
     @JsonIgnore
     private StabKind stabKind;
 
@@ -73,7 +73,7 @@ public class ProcessSlate extends BaseEntity {
      * 关联所属的种类
      */
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "FK_KIND_ID")
+    @JoinColumn(name = "fk_kind_id")
     @JsonIgnore
     private Kind kind;
 

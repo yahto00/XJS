@@ -16,7 +16,7 @@ import com.pipi.entity.BaseEntity;
  * Created by yahto on 07/05/2017.
  */
 @Entity
-@Table(name = "T_ROLE")
+@Table(name = "t_role")
 public class Role extends BaseEntity {
 
     private static final long serialVersionUID = -1717004778758331004L;
@@ -26,19 +26,19 @@ public class Role extends BaseEntity {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "PK_ROLE_ID")
+    @Column(name = "pk_role_id")
     private Integer id;
 
     /**
      * 角色名
      */
-    @Column(name = "ROLE_NAME", length = 50, unique = true, nullable = false)
+    @Column(name = "role_name", length = 50, unique = true, nullable = false)
     private String roleName;
 
     /**
      * 角色描述
      */
-    @Column(name = "DESCRIPTION", length = 300)
+    @Column(name = "description", length = 300)
     private String description;
 
     /**

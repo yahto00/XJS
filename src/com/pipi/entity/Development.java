@@ -9,7 +9,7 @@ import javax.persistence.*;
  * Created by yahto on 03/05/2017.
  */
 @Entity
-@Table(name = "T_DEVELOPMENT")
+@Table(name = "t_development")
 public class Development extends BaseEntity {
     private static final long serialVersionUID = 59265530157645975L;
 
@@ -18,50 +18,50 @@ public class Development extends BaseEntity {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "PK_DEVELOPMENT_ID")
+    @Column(name = "pk_development_id")
     private Integer id;
 
     /**
      * 成品名
      */
-    @Column(name = "SLATE_NAME", length = 100)
+    @Column(name = "slate_name", length = 100)
     private String slateName;
 
     /**
      * 成品单价
      */
-    @Column(name = "SLATE_PRICE")
+    @Column(name = "slate_price")
     private Double price;
 
     /**
      * 成品的长度
      */
-    @Column(name = "SLATE_LENGTH")
+    @Column(name = "slate_length")
     private float length;
 
     /**
      * 成品的宽度
      */
-    @Column(name = "SLATE_HEIGHT")
+    @Column(name = "slate_height")
     private float height;
     /**
      * 成品数量
      */
-    @Column(name = "SLATE_COUNT")
+    @Column(name = "slate_count")
     private Integer count;
 
     /**
      * 石材加工单操作人
      */
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "FK_OPERATE_USER_ID")
+    @JoinColumn(name = "fk_operate_user_id")
     private User user;
 
     /**
      * 成品的来源
      */
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "FK_PROCESS_SLATE_ID")
+    @JoinColumn(name = "fk_process_slate_id")
     @JsonIgnore
     private ProcessSlate processSlate;
 

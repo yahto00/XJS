@@ -18,7 +18,7 @@ public class BaseEntity implements Serializable {
     /**
      * 是否删除: 0 不删除，1 删除
      */
-    @Column(name = "ISDELETE", length = 2, nullable = false, columnDefinition = "INT default 0")
+    @Column(name = "isdelete", length = 2, nullable = false, columnDefinition = "INT default 0")
     @JsonIgnore
     private int isDelete = 0;
 

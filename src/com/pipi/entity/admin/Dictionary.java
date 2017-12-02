@@ -19,7 +19,7 @@ import com.pipi.entity.BaseEntity;
  * Created by yahto on 07/05/2017.
  */
 @Entity
-@Table(name = "T_DICTIONARY")
+@Table(name = "t_dictionary")
 public class Dictionary extends BaseEntity {
 
     private static final long serialVersionUID = -4843286092042358897L;
@@ -29,62 +29,62 @@ public class Dictionary extends BaseEntity {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "PK_DICTIONARY_ID")
+    @Column(name = "pk_dictionary_id")
     private Integer id;
 
     /**
      * 名称
      */
-    @Column(name = "NAME", length = 200)
+    @Column(name = "name", length = 200)
     private String name;
 
     /**
      * 编码，在XML文件中配置
      */
-    @Column(name = "CODE", length = 200)
+    @Column(name = "code", length = 200)
     private String code;
 
     /**
      * 排序或等级
      */
-    @Column(name = "SORT")
+    @Column(name = "sort")
     private Integer sort;
 
     /**
      * 操作的时间
      */
-    @Column(name = "SUBMIT_DATE")
+    @Column(name = "submit_date")
     @DateTimeFormat(pattern = SystemConstant.TIME_PATTEN)
     private Date submitDate;
 
     /**
      * 备注：网点号
      */
-    @Column(name = "REMARKS", length = 200)
+    @Column(name = "remarks", length = 200)
     private String remarks;
 
     /**
      * 备注2
      */
-    @Column(name = "REMARKS2", length = 200)
+    @Column(name = "remarks2", length = 200)
     private String remarks2;
 
     /**
      * 备注3
      */
-    @Column(name = "REMARKS3", length = 200)
+    @Column(name = "remarks3", length = 200)
     private String remarks3;
 
     /**
      * 备注4
      */
-    @Column(name = "REMARKS4", length = 200)
+    @Column(name = "remarks4", length = 200)
     private String remarks4;
 
     /**
      * 备注5
      */
-    @Column(name = "REMARKS5", length = 200)
+    @Column(name = "remarks5", length = 200)
     private String remarks5;
 
     public Integer getId() {
